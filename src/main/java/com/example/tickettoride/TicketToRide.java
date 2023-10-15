@@ -30,9 +30,16 @@ public class TicketToRide extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-
-        StackPane stackPane = new StackPane();
         BorderPane borderPane = new BorderPane();
+
+        Board board = new Board();
+        ImageView ticketToRideImage = board.getTicketToRideImage();
+
+        // Wrap the ImageView in a StackPane to apply padding
+        StackPane imageContainer = new StackPane();
+        imageContainer.getChildren().add(ticketToRideImage);
+        // Add the padded image container to the center of the BorderPane
+        borderPane.setCenter(imageContainer);
 
         //setup of borderPane displays titles
         borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
