@@ -41,6 +41,7 @@ public class TicketToRide extends Application
         // Add the padded image container to the center of the BorderPane
         borderPane.setCenter(imageContainer);
 
+
         //setup of borderPane displays titles
         borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
         borderPane.setRight(new LabelPane("Draw & Discard area!"));
@@ -48,13 +49,12 @@ public class TicketToRide extends Application
         borderPane.setLeft(new LabelPane("Displays players in turn order with points!"));
 
 
-
         FXMLLoader fxmlLoader = new FXMLLoader(TicketToRide.class.getResource("hello-view.fxml"));
         //Scene set to width of a 720p screen
         //Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
 
         //set scene to borderpane with 720p screen size
-        Scene scene = new Scene(borderPane, 1280, 720);
+        Scene scene = new Scene(borderPane, 1000, 800);
 
         //Title of Game
         stage.setTitle("Ticket to Ride");
@@ -67,7 +67,7 @@ public class TicketToRide extends Application
         public LabelPane(String title) {
             getChildren().add(new Label(title));
             setStyle("-fx-border-color: blue");
-            setPadding(new Insets(35, 35,35,35));
+            setPadding(new Insets(20, 30,50,30));
         }
     }
 

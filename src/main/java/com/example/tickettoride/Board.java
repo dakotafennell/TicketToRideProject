@@ -15,9 +15,9 @@ public class Board extends StackPane {
         ImageView ticketToRideImageView = new ImageView();
         try {
             // Load the image from a file
-            File imageFile = new File("resources/TicketToRide.png");
+            File imageFile = new File("/Users/jlemois/IdeaProjects/TicketToRideProject/src/main/resources/com/example/tickettoride/IMG_0394.PNG");
             String imageUrl = imageFile.toURI().toURL().toString();
-            Image ticketToRideImage = new Image(imageUrl);
+            Image ticketToRideImage = new Image(imageUrl,450,600,false,false);
 
             // Set the image in the ImageView
             ticketToRideImageView.setImage(ticketToRideImage);
