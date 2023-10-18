@@ -1,15 +1,19 @@
 package com.example.tickettoride;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,27 +24,150 @@ import java.io.IOException;
  */
 public class TicketToRide extends Application
 {
-
     //Border and Stack panes setup with similar naming conventions ~JCL
     BorderPane borderPane;
     StackPane stackPane;
-
     Canvas canvas;
 
+    //Contains the number of players
+    private int numPlayers;
+
     @Override
-    public void start(Stage stage) throws IOException
+    public void start(Stage primaryStage) throws IOException
     {
+        //Creates a new StackPane for the splash screen
+        StackPane splashScreen = new StackPane();
+        //Sets the background color of the splash screen
+        splashScreen.setStyle("-fx-background-color: lightgray;");
+
+        // Create a label with the game title
+        Label titleLabel = new Label("Ticket to Ride: New York");
+        titleLabel.setStyle("-fx-font-size: 32pt;");
+
+        Label authorsLabel = new Label("By: Austin, Joseph, and Louis!");
+        authorsLabel.setStyle("-fx-font-size: 20;");
+        authorsLabel.setPadding(new Insets(100, 0, 0, 0));
+
+        //Creates a label for the "Click here to begin!" text
+        Label clickToBeginLabel = new Label("Please click here to begin");
+        clickToBeginLabel.setStyle("-fx-font-size: 20;");
+
+        //Adds the labels to the splash screen
+        splashScreen.getChildren().addAll(titleLabel, authorsLabel, clickToBeginLabel);
+        //Centers the labels vertically
+        StackPane.setAlignment(titleLabel, Pos.CENTER);
+
+        VBox clickToBeginLabelBox = new VBox();
+        clickToBeginLabelBox.getChildren().add(clickToBeginLabel);
+
+        //Modifies the style of the clickToBeginLabelBox adding a gap between the labels
+        clickToBeginLabelBox.setStyle("-fx-padding: 100;");
+        //Adds the clickToBeginLabelBox to the splash screen
+        splashScreen.getChildren().add(clickToBeginLabelBox);
+
+        clickToBeginLabelBox.setAlignment(Pos.BOTTOM_CENTER);
+
+        //Creates a scene for the splash screen
+        Scene splashScene = new Scene(splashScreen, 1000, 800);
+
+        //Sets the programs icon
+        Display.ChangeIcon(primaryStage);
+
+        //Initialize the scene
+        primaryStage.setTitle("Ticket to Ride: New York");
+        primaryStage.setScene(splashScene);
+        primaryStage.show();
+
+        //Handle the click event to close the splash screen
+        clickToBeginLabel.setOnMouseClicked(event ->
+        {
+            //Closes the splash screen
+            primaryStage.close();
+
+            //Displays the player selection screen
+            Stage playerSelectStage = new Stage();
+            createPlayerSelection(playerSelectStage);
+        });
+    }
+
+    //sets up border and allows text to be displayed
+    class LabelPane extends StackPane
+    {
+        public LabelPane(String title)
+        {
+            getChildren().add(new Label(title));
+            setStyle("-fx-border-color: blue");
+            setPadding(new Insets(20, 30,50,30));
+        }
+    }
+
+    //Method that will display the player count and selection screen
+    private void createPlayerSelection(Stage playerSelectStage)
+    {
+        //Creates a label with the games title
+        Label titleLabel = new Label("Ticket to Ride: New York");
+        //Sets the font size of the title label
+        titleLabel.setStyle("-fx-font-size: 32pt;");
+
+        //Creates a label with the games authors
+        Label authorsLabel = new Label("By: Austin, Joseph, and Louis!");
+        //Sets the font size of the authors label
+        authorsLabel.setStyle("-fx-font-size: 20;");
+        //Sets the padding of the authors label
+        authorsLabel.setPadding(new Insets(20, 0, 20, 0));
+
+        //Creates the ComboBox for selecting the number of players
+        ComboBox<Integer> playerComboBox = new ComboBox<>();
+        playerComboBox.getItems().addAll(2, 3, 4);
+
+        //Sets the default value of the ComboBox to 2
+        playerComboBox.setValue(2);
+
+        // Create the Confirm button
+        Button confirmButton = new Button("Confirm");
+
+        confirmButton.setOnAction(e -> {
+            numPlayers = playerComboBox.getValue();
+            playerSelectStage.close(); // Close the initial window
+            //Creates the game interface and shows it
+            Stage primaryStage = new Stage();
+            createGameInterface(primaryStage);
+        });
+
+        // Create a VBox to arrange the UI elements
+        VBox layout = new VBox(10);
+        //Add the title and authors labels to the layout
+        layout.getChildren().addAll(titleLabel, authorsLabel);
+        layout.getChildren().addAll(playerComboBox, confirmButton);
+        layout.setStyle("-fx-alignment: center; -fx-padding: 20px;");
+
+        // Create the initial scene
+        Scene scene = new Scene(layout, 1000, 800);
+
+        //Set's the programs icon
+        Display.ChangeIcon(playerSelectStage);
+
+        //Sets the title of the player selection screen
+        playerSelectStage.setTitle("Ticket to Ride - Select Players");
+        playerSelectStage.setScene(scene);
+        playerSelectStage.show();
+    }
+
+    private void createGameInterface(Stage primaryStage)
+    {
+        //Creates a new borderPane
         BorderPane borderPane = new BorderPane();
 
+        //Creates a new board object then gets the map image from the board class
         Board board = new Board();
-        ImageView ticketToRideImage = board.getTicketToRideImage();
+        ImageView ticketToRideNYMap = board.getTicketToRideImage();
 
         // Wrap the ImageView in a StackPane to apply padding
         StackPane imageContainer = new StackPane();
-        imageContainer.getChildren().add(ticketToRideImage);
-        // Add the padded image container to the center of the BorderPane
+        //Adds the ticketToRideNYMap to the imageContainer
+        imageContainer.getChildren().add(ticketToRideNYMap);
+        //Adds the image container to the center of the borderPane
         borderPane.setCenter(imageContainer);
-
 
         //setup of borderPane displays titles
         borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
@@ -48,27 +175,13 @@ public class TicketToRide extends Application
         borderPane.setBottom(new LabelPane("Displays current players hand!"));
         borderPane.setLeft(new LabelPane("Displays players in turn order with points!"));
 
-
-        FXMLLoader fxmlLoader = new FXMLLoader(TicketToRide.class.getResource("hello-view.fxml"));
-        //Scene set to width of a 720p screen
-        //Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-
-        //set scene to borderpane with 720p screen size
+        //Initializes the scene
         Scene scene = new Scene(borderPane, 1000, 800);
 
-        //Title of Game
-        stage.setTitle("Ticket to Ride");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    //sets up border and allows text to be displayed
-    class LabelPane extends StackPane {
-        public LabelPane(String title) {
-            getChildren().add(new Label(title));
-            setStyle("-fx-border-color: blue");
-            setPadding(new Insets(20, 30,50,30));
-        }
+        Display.ChangeIcon(primaryStage); //Sets the programs icon
+        primaryStage.setTitle("Ticket to Ride"); //Title of Game
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public static void main(String[] args)
