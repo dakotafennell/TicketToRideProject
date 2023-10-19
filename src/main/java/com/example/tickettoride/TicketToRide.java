@@ -12,11 +12,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.*;
 
 /**
  * TicketToRide class
@@ -32,6 +35,11 @@ public class TicketToRide extends Application
     //Contains the number of players
     private int numPlayers;
 
+    private List<Player> players = new ArrayList<>(); //Stores Player objects in a list
+
+    private static final String TITLE = "Ticket to Ride: New York";
+    private static final String AUTHORS = "By: Austin, Joseph, and Louis";
+
     @Override
     public void start(Stage primaryStage) throws IOException
     {
@@ -41,15 +49,15 @@ public class TicketToRide extends Application
         splashScreen.setStyle("-fx-background-color: lightgray;");
 
         // Create a label with the game title
-        Label titleLabel = new Label("Ticket to Ride: New York");
+        Label titleLabel = new Label(TITLE);
         titleLabel.setStyle("-fx-font-size: 32pt;");
 
-        Label authorsLabel = new Label("By: Austin, Joseph, and Louis!");
+        Label authorsLabel = new Label(AUTHORS);
         authorsLabel.setStyle("-fx-font-size: 20;");
         authorsLabel.setPadding(new Insets(100, 0, 0, 0));
 
         //Creates a label for the "Click here to begin!" text
-        Label clickToBeginLabel = new Label("Please click here to begin");
+        Label clickToBeginLabel = new Label("Click anywhere to begin!");
         clickToBeginLabel.setStyle("-fx-font-size: 20;");
 
         //Adds the labels to the splash screen
@@ -74,12 +82,14 @@ public class TicketToRide extends Application
         Display.ChangeIcon(primaryStage);
 
         //Initialize the scene
-        primaryStage.setTitle("Ticket to Ride: New York");
+        primaryStage.setTitle(TITLE);
         primaryStage.setScene(splashScene);
+        //Disables resizing the window
+        primaryStage.setResizable(false);
         primaryStage.show();
 
         //Handle the click event to close the splash screen
-        clickToBeginLabel.setOnMouseClicked(event ->
+        splashScene.setOnMouseClicked(event ->
         {
             //Closes the splash screen
             primaryStage.close();
@@ -105,20 +115,36 @@ public class TicketToRide extends Application
     private void createPlayerSelection(Stage playerSelectStage)
     {
         //Creates a label with the games title
-        Label titleLabel = new Label("Ticket to Ride: New York");
+        Label titleLabel = new Label(TITLE);
         //Sets the font size of the title label
         titleLabel.setStyle("-fx-font-size: 32pt;");
 
         //Creates a label with the games authors
-        Label authorsLabel = new Label("By: Austin, Joseph, and Louis!");
+        Label authorsLabel = new Label(AUTHORS);
         //Sets the font size of the authors label
         authorsLabel.setStyle("-fx-font-size: 20;");
         //Sets the padding of the authors label
         authorsLabel.setPadding(new Insets(20, 0, 20, 0));
 
+        //text area for player names
+        Label playerLabel = new Label("Player Names:");
+        TextArea taPlayer = new TextArea();
+        taPlayer.setPrefColumnCount(20);
+        taPlayer.setPromptText("Enter player names here");
+        taPlayer.visibleProperty().setValue(false);
+        //Creates a button for adding players
+        Button btnAddPlayer = new Button("Add Player");
+        btnAddPlayer.visibleProperty().setValue(false);
+
+        //Creates the ComboBox for selecting the player color
+        ComboBox<String> colorComboBox = new ComboBox<>();
+        colorComboBox.getItems().addAll("Blue", "Green", "Black", "Pink", "Red", "Yellow");
+        colorComboBox.visibleProperty().setValue(false);
+
         //Creates the ComboBox for selecting the number of players
         ComboBox<Integer> playerComboBox = new ComboBox<>();
         playerComboBox.getItems().addAll(2, 3, 4);
+        playerComboBox.setPromptText("Select the number of players");
 
         //Sets the default value of the ComboBox to 2
         playerComboBox.setValue(2);
@@ -126,12 +152,42 @@ public class TicketToRide extends Application
         // Create the Confirm button
         Button confirmButton = new Button("Confirm");
 
-        confirmButton.setOnAction(e -> {
+        confirmButton.setOnAction(e ->
+        {
+            int selectedNumPlayers = playerComboBox.getValue();
+
+            // Create Player objects based on the selected number of players
+            for (int i = 0; i < selectedNumPlayers; i++) {
+                Player player = new Player("Player " + (i + 1));
+                players.add(player); // Add each player to the list
+            }
+
+            // Now, you have a list of Player objects for the selected number of players
+            int numPlayers = players.size();
+            //Sets the number of players to the value of the ComboBox
+
             numPlayers = playerComboBox.getValue();
-            playerSelectStage.close(); // Close the initial window
-            //Creates the game interface and shows it
-            Stage primaryStage = new Stage();
-            createGameInterface(primaryStage);
+
+            Player.setNumPlayers(numPlayers);
+
+            colorComboBox.visibleProperty().setValue(true);
+            taPlayer.visibleProperty().setValue(true);
+            btnAddPlayer.visibleProperty().setValue(true);
+
+            btnAddPlayer.setOnAction(event ->
+            {
+                //Adds the player to the list of players
+                players.add(new Player(taPlayer.getText()));
+                //Clears the text area
+                taPlayer.clear();
+                //Displays the color selection ComboBox
+                colorComboBox.visibleProperty().setValue(true);
+
+                playerSelectStage.close(); //Closes the initial window
+                //Creates the game interface and shows it
+                Stage primaryStage = new Stage();
+                createGameInterface(primaryStage);
+            });
         });
 
         // Create a VBox to arrange the UI elements
@@ -139,7 +195,13 @@ public class TicketToRide extends Application
         //Add the title and authors labels to the layout
         layout.getChildren().addAll(titleLabel, authorsLabel);
         layout.getChildren().addAll(playerComboBox, confirmButton);
+
         layout.setStyle("-fx-alignment: center; -fx-padding: 20px;");
+
+        VBox layout2 = new VBox(10);
+        layout2.getChildren().addAll(colorComboBox,btnAddPlayer, taPlayer);
+        layout2.setAlignment(Pos.BASELINE_RIGHT);
+        layout.getChildren().add(layout2);
 
         // Create the initial scene
         Scene scene = new Scene(layout, 1000, 800);
@@ -149,6 +211,8 @@ public class TicketToRide extends Application
 
         //Sets the title of the player selection screen
         playerSelectStage.setTitle("Ticket to Ride - Select Players");
+        //Disables resizing the window
+        playerSelectStage.setResizable(false);
         playerSelectStage.setScene(scene);
         playerSelectStage.show();
     }
@@ -169,9 +233,12 @@ public class TicketToRide extends Application
         //Adds the image container to the center of the borderPane
         borderPane.setCenter(imageContainer);
 
+        LabelPane lblEast = new LabelPane("Draw & Discard area!");
+        lblEast.setPadding(new Insets(50));
+
         //setup of borderPane displays titles
-        borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
-        borderPane.setRight(new LabelPane("Draw & Discard area!"));
+        //borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
+        borderPane.setRight(lblEast);
         borderPane.setBottom(new LabelPane("Displays current players hand!"));
         borderPane.setLeft(new LabelPane("Displays players in turn order with points!"));
 
@@ -180,6 +247,8 @@ public class TicketToRide extends Application
 
         Display.ChangeIcon(primaryStage); //Sets the programs icon
         primaryStage.setTitle("Ticket to Ride"); //Title of Game
+        //Disables resizing the window
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

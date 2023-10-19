@@ -19,7 +19,8 @@ public class Board extends StackPane
             // Load the image from a file
             File imageFile = new File("src/main/resources/com/example/tickettoride/GameMap.PNG");
             String imageUrl = imageFile.toURI().toURL().toString();
-            Image ticketToRideImage = new Image(imageUrl,450,600,false,false);
+            Image ticketToRideImageTest = new Image(imageUrl);
+            Image ticketToRideImage = new Image(imageUrl,500,700,false,false);
 
             // Set the image in the ImageView
             ticketToRideImageView.setImage(ticketToRideImage);

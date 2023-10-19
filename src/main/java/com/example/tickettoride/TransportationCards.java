@@ -44,7 +44,7 @@ public class TransportationCards extends Application {
 
         Button btnRandomCard = new Button("Random Card");
 
-        HBox hbox = new HBox(20); // spacing = 10 (pixels)
+        HBox hbox = new HBox(20); //Spacing = 10 (pixels)
 
         btnRandomCard.setOnMouseClicked(event ->
         {
