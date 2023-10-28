@@ -27,7 +27,7 @@ public class TransportationCards extends Application {
     public static final String[] cardImagePaths = {
             "/com/example/tickettoride/BlueTransportationCard.jpeg",
             "/com/example/tickettoride/GreenTransportationCard.jpeg",
-            "src/main/resources/com/example/tickettoride/BlackTransportationCard.jpeg",
+            "/com/example/tickettoride/BlackTransportationCard.jpeg",
             "/com/example/tickettoride/PinkTransportationCard.jpeg",
             "/com/example/tickettoride/RedTransportationCard.jpeg",
             "/com/example/tickettoride/YellowTransportationCard.jpeg",

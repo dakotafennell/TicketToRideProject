@@ -9,16 +9,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
-import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -64,22 +60,21 @@ public class TicketToRide extends Application
         // Set the imageView as the background
         splashScreen.getChildren().add(imageView);
 
-
         // Create a label with the game title
         Label titleLabel = new Label(TITLE);
-        titleLabel.setFont(Font.font("Verdana", 40));
+        titleLabel.setFont(Font.font("San-serif", 40));
         titleLabel.setTextFill(Color.BLACK);
 
-
-
-
+        //Create labels for Authors
         Label authorsLabel = new Label(AUTHORS);
-        authorsLabel.setStyle("-fx-font-size: 20;");
-        authorsLabel.setPadding(new Insets(100, 0, 0, 0));
+        authorsLabel.setFont(Font.font("San-serif", 25));
+        authorsLabel.setTextFill(Color.BLACK);
+        authorsLabel.setPadding(new Insets(125, 0, 0, 0));
 
         //Creates a label for the "Click here to begin!" text
         Label clickToBeginLabel = new Label("Click anywhere to begin!");
-        clickToBeginLabel.setStyle("-fx-font-size: 20;");
+        clickToBeginLabel.setTextFill(Color.BLACK);
+        clickToBeginLabel.setFont(Font.font("San-serif", 20));
 
         //Adds the labels to the splash screen
         splashScreen.getChildren().addAll(titleLabel, authorsLabel, clickToBeginLabel);
@@ -131,6 +126,7 @@ public class TicketToRide extends Application
             setPadding(new Insets(20, 30,50,30));
         }
     }
+
 
     //Method that will display the player count and selection screen
     private void createPlayerSelection(Stage playerSelectStage)
