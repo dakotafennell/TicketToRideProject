@@ -9,15 +9,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -45,12 +46,32 @@ public class TicketToRide extends Application
     {
         //Creates a new StackPane for the splash screen
         StackPane splashScreen = new StackPane();
-        //Sets the background color of the splash screen
-        splashScreen.setStyle("-fx-background-color: lightgray;");
+
+        // Set random card image as background of splashscreen.
+        Image cardImage = getRandomCardImage();
+        ImageView imageView = new ImageView(cardImage);
+
+        //Set up Image Size.
+        // Width of the splash screen
+        imageView.setFitWidth(900);
+
+        // Height of the splash screen
+        imageView.setFitHeight(1000);
+
+        // Rotate the image 90 degrees
+        imageView.setRotate(90);
+
+        // Set the imageView as the background
+        splashScreen.getChildren().add(imageView);
+
 
         // Create a label with the game title
         Label titleLabel = new Label(TITLE);
-        titleLabel.setStyle("-fx-font-size: 32pt;");
+        titleLabel.setFont(Font.font("Verdana", 40));
+        titleLabel.setTextFill(Color.BLACK);
+
+
+
 
         Label authorsLabel = new Label(AUTHORS);
         authorsLabel.setStyle("-fx-font-size: 20;");
@@ -251,6 +272,12 @@ public class TicketToRide extends Application
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    public Image getRandomCardImage() {
+        Random random = new Random();
+        int cardIndex = random.nextInt(TransportationCards.cardImagePaths.length);
+        String selectedCardImagePath = TransportationCards.cardImagePaths[cardIndex];
+        return new Image(getClass().getResource(selectedCardImagePath).toExternalForm());
     }
 
     public static void main(String[] args)

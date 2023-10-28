@@ -23,7 +23,8 @@ import java.util.Random;
 
 public class TransportationCards extends Application {
     private ImageView cardImageView = new ImageView();
-    private String[] cardImagePaths = {
+
+    public static final String[] cardImagePaths = {
             "/com/example/tickettoride/BlueTransportationCard.jpeg",
             "/com/example/tickettoride/GreenTransportationCard.jpeg",
             "src/main/resources/com/example/tickettoride/BlackTransportationCard.jpeg",
