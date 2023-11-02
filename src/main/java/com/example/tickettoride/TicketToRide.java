@@ -60,16 +60,35 @@ public class TicketToRide extends Application
         // Set the imageView as the background
         splashScreen.getChildren().add(imageView);
 
+        // Create a border for the title and authors
+        Border border = new Border(new BorderStroke(
+                Color.BLACK,
+                BorderStrokeStyle.SOLID,
+                //Corner radius
+                new CornerRadii(10),
+                //Boarder thickness
+                new BorderWidths(3)
+        ));
+
         // Create a label with the game title
         Label titleLabel = new Label(TITLE);
-        titleLabel.setFont(Font.font("San-serif", 40));
         titleLabel.setTextFill(Color.BLACK);
+        titleLabel.setStyle("-fx-font-size: 35pt; -fx-background-color: rgba(255, 255, 255, 0.75);");
+
+        // Set the border for the title
+        titleLabel.setBorder(border);
+        titleLabel.setPadding(new Insets(10));
+
 
         //Create labels for Authors
         Label authorsLabel = new Label(AUTHORS);
-        authorsLabel.setFont(Font.font("San-serif", 25));
-        authorsLabel.setTextFill(Color.BLACK);
+        authorsLabel.setFont(Font.font("San-serif", 30));
+        authorsLabel.setTextFill(Color.WHITESMOKE);
         authorsLabel.setPadding(new Insets(125, 0, 0, 0));
+
+
+
+
 
         //Creates a label for the "Click here to begin!" text
         Label clickToBeginLabel = new Label("Click anywhere to begin!");
