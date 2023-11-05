@@ -2,6 +2,7 @@ package com.example.tickettoride;
 
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.scene.layout.BackgroundImage;
 
 import java.io.File;
 
@@ -17,4 +18,5 @@ public class Display
         String iconUrl = iconFile.toURI().toString();
         primaryStage.getIcons().add(new Image(iconUrl));
     }
+
 }

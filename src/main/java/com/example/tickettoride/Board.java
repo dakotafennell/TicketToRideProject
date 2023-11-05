@@ -6,27 +6,22 @@ import java.io.File;
 
 /**
  * Board class
- * This class contains the logic for displaying and/or updating the board and map of the game
+ * This class will contain logic for displaying and/or updating the board and map of the game
+ *
  */
-public class Board extends StackPane
-{
-    //ImageView
-    public ImageView getTicketToRideImage()
-    {
+public class Board extends StackPane {
+    // Board display logic
+    public ImageView getTicketToRideImage() {
         ImageView ticketToRideImageView = new ImageView();
-        try
-        {
+        try {
             // Load the image from a file
             File imageFile = new File("src/main/resources/com/example/tickettoride/GameMap.PNG");
             String imageUrl = imageFile.toURI().toURL().toString();
-            Image ticketToRideImageTest = new Image(imageUrl);
             Image ticketToRideImage = new Image(imageUrl,500,700,false,false);
 
             // Set the image in the ImageView
             ticketToRideImageView.setImage(ticketToRideImage);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ticketToRideImageView;
