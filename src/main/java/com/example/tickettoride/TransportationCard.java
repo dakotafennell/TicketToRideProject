@@ -23,9 +23,9 @@ import java.util.Random;
 
 public class TransportationCard extends Application
 {
-    private ImageView cardImageView = new ImageView();
-    private ImageView transportationDeckImageView = new ImageView();
-    private String[] cardImagePaths = {
+    private final ImageView cardImageView = new ImageView();
+    private final ImageView transportationDeckImageView = new ImageView();
+    private final String[] CARDIMAGEPATHS = {
             "/com/example/tickettoride/BlueTransportationCard.jpeg",
             "/com/example/tickettoride/GreenTransportationCard.jpeg",
             "/com/example/tickettoride/BlackTransportationCard.jpeg",
@@ -34,7 +34,7 @@ public class TransportationCard extends Application
             "/com/example/tickettoride/YellowTransportationCard.jpeg",
             "/com/example/tickettoride/TaxiTransportationCard.jpeg"
     };
-    private String deckBack = "com/example/tickettoride/RemadeCardImages/TransportationCardBack.png";
+    private final String deckBack = "com/example/tickettoride/RemadeCardImages/TransportationCardBack.png";
 
     public static void main(String[] args)
     {
@@ -96,8 +96,8 @@ public class TransportationCard extends Application
     public void selectRandomCard()
     {
         Random random = new Random();
-        int cardIndex = random.nextInt(cardImagePaths.length);
-        String selectedCardImagePath = cardImagePaths[cardIndex];
+        int cardIndex = random.nextInt(CARDIMAGEPATHS.length);
+        String selectedCardImagePath = CARDIMAGEPATHS[cardIndex];
 
         // Use ClassLoader to load the image resources from the resources directory
         Image selectedCardImage = new Image(getClass().getResource(selectedCardImagePath).toExternalForm(),
