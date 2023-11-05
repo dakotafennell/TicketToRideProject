@@ -349,7 +349,7 @@ public class TicketToRide extends Application
                                       Ticket to Ride: New York
                                       
                                       By: Austin Bradley,
-                                          Louis Fennel II,
+                                          Louis Fennell III,
                                           Joseph Lemois
                                       __________________________
                                       """);

@@ -22,9 +22,9 @@ import javafx.stage.Stage;
 import java.util.Random;
 
 public class TransportationCards extends Application {
-    private ImageView cardImageView = new ImageView();
+    public static final ImageView cardImageView = new ImageView();
 
-    private String[] cardImagePaths = {
+    public static final String[] cardImagePaths = {
             "/com/example/tickettoride/BlueTransportationCard.jpeg",
             "/com/example/tickettoride/GreenTransportationCard.jpeg",
             "com/example/tickettoride/BlackTransportationCard.jpeg",
