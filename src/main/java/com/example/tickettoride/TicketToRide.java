@@ -50,7 +50,9 @@ public class TicketToRide extends Application
 
         // Create a label with the game title
         Label titleLabel = new Label(TITLE);
-        titleLabel.setStyle("-fx-font-size: 32pt;");
+        titleLabel.setStyle("");
+        //Sets the style of the titleLabel with a background color and 50% opacity
+        titleLabel.setStyle("-fx-font-size: 32pt; -fx-background-color: rgba(255, 255, 255, 0.75);");
 
         Label authorsLabel = new Label(AUTHORS);
         authorsLabel.setStyle("-fx-font-size: 20;");
@@ -163,12 +165,12 @@ public class TicketToRide extends Application
             }
 
             // Now, you have a list of Player objects for the selected number of players
-            int numPlayers = players.size();
+            int currentNumPlayers = players.size();
             //Sets the number of players to the value of the ComboBox
 
-            numPlayers = playerComboBox.getValue();
+            currentNumPlayers = playerComboBox.getValue();
 
-            Player.setNumPlayers(numPlayers);
+            //Player.setNumPlayers(currentNumPlayers);
 
             colorComboBox.visibleProperty().setValue(true);
             taPlayer.visibleProperty().setValue(true);

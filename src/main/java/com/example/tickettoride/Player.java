@@ -4,7 +4,8 @@ package com.example.tickettoride;
  * Player class
  * This class will contain logic for the player and/or the player's hand
  */
-public class Player {
+public class Player
+{
     // Player attributes
     private int numPlayers;
     private String name;
@@ -22,11 +23,11 @@ public class Player {
         this.numGamePieces = 0;
     }
 
-    public static void setNumPlayers(int numPlayers)
+    protected void setNumPlayers(int numPlayers)
     {
         if (numPlayers >= 2 && numPlayers <= 5)
         {
-            numPlayers = numPlayers;
+            this.numPlayers = numPlayers;
         }
     }
 
