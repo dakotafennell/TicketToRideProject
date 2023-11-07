@@ -25,13 +25,13 @@ public class TransportationCards extends Application {
     public static final ImageView cardImageView = new ImageView();
 
     public static final String[] cardImagePaths = {
-            "/com/example/tickettoride/BlueTransportationCard.jpeg",
-            "/com/example/tickettoride/GreenTransportationCard.jpeg",
-            "com/example/tickettoride/BlackTransportationCard.jpeg",
-            "/com/example/tickettoride/PinkTransportationCard.jpeg",
-            "/com/example/tickettoride/RedTransportationCard.jpeg",
-            "/com/example/tickettoride/YellowTransportationCard.jpeg",
-            "/com/example/tickettoride/TaxiTransportationCard.jpeg"
+            "/com/example/tickettoride/RemadeCardImages/BlueTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/GreenTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/BlackTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/PinkTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/RedTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/YellowTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/TaxiTransportationCard.png"
     };
 
     public static void main(String[] args) {
@@ -41,11 +41,17 @@ public class TransportationCards extends Application {
     @Override
     public void start(Stage primaryStage) {
         StackPane root = new StackPane();
-        Scene scene = new Scene(root, 720, 480);
+
+        Scene scene = new Scene(root, 1280, 720);
 
         Button btnRandomCard = new Button("Random Card");
 
         HBox hbox = new HBox(20); //Spacing = 10 (pixels)
+
+        primaryStage.setOnShowing(event ->
+        {
+            selectRandomCard();
+        });
 
         btnRandomCard.setOnMouseClicked(event ->
         {
@@ -56,7 +62,6 @@ public class TransportationCards extends Application {
 
         hbox.setPadding(new javafx.geometry.Insets(15, 12, 15, 12));
         hbox.setAlignment(Pos.CENTER);
-
 
         root.getChildren().add(hbox);
 
@@ -73,7 +78,7 @@ public class TransportationCards extends Application {
 
         // Use ClassLoader to load the image resources from the resources directory
         Image selectedCardImage = new Image(getClass().getResource(selectedCardImagePath).toExternalForm(),
-                100, 150, false, false);
+                300, 200, true, false);
 
         cardImageView.setImage(selectedCardImage);
     }

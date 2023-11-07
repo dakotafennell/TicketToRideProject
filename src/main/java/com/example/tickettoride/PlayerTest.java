@@ -3,7 +3,8 @@ package com.example.tickettoride;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerTest {
+public class PlayerTest
+{
     // Player attributes
     private String name;
     private int score;
@@ -11,7 +12,8 @@ public class PlayerTest {
     private List<DestinationCard> destinationCards;
     private int numGamePieces;
 
-    public PlayerTest(String name) {
+    public PlayerTest()
+    {
         this.name = name;
         this.score = 0;
         this.transportationCards = new ArrayList<>();
@@ -19,31 +21,19 @@ public class PlayerTest {
         this.numGamePieces = 0;
     }
 
+    public PlayerTest(String name, int score, List<TransportationCard> transportationCards, List<DestinationCard> destinationCards, int numGamePieces)
+    {
+        this.name = name;
+        this.score = score;
+        this.transportationCards = transportationCards;
+        this.destinationCards = destinationCards;
+        this.numGamePieces = numGamePieces;
+    }
+
     public String getName()
     {
         return name;
     }
-
-    public int getScore()
-    {
-        return score;
-    }
-
-    public List<TransportationCard> getTransportationCards()
-    {
-        return transportationCards;
-    }
-
-    public List<DestinationCard> getDestinationCards()
-    {
-        return destinationCards;
-    }
-
-    public int getNumGamePieces()
-    {
-        return numGamePieces;
-    }
-
     public void setName(String name)
     {
         if (name != null) {
@@ -51,21 +41,37 @@ public class PlayerTest {
         }
     }
 
+    public int getScore()
+    {
+        return score;
+    }
     public void setScore(int score)
     {
         this.score = score;
     }
 
+    public List<TransportationCard> getTransportationCards()
+    {
+        return transportationCards;
+    }
     public void addTransportationCard(TransportationCard card)
     {
         transportationCards.add(card);
     }
 
+    public List<DestinationCard> getDestinationCards()
+    {
+        return destinationCards;
+    }
     public void addDestinationCard(DestinationCard card)
     {
         destinationCards.add(card);
     }
 
+    public int getNumGamePieces()
+    {
+        return numGamePieces;
+    }
     public void setNumGamePieces(int numGamePieces)
     {
         if (numGamePieces >= 0) {

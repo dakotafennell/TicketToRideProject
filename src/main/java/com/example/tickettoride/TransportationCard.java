@@ -1,13 +1,13 @@
 package com.example.tickettoride;
 
 /*
-"com/example/tickettoride/RemadeCardImages/BlueTransportationCard.png",
-"com/example/tickettoride/RemadeCardImages/GreenTransportationCard.png",
-"com/example/tickettoride/RemadeCardImages/BlackTransportationCard.png",
-"com/example/tickettoride/RemadeCardImages/PinkTransportationCard.png",
-"com/example/tickettoride/RemadeCardImages/RedTransportationCard.png",
-"com/example/tickettoride/RemadeCardImages/YellowTransportationCard.png",
-"com/example/tickettoride/RemadeCardImages/TaxiTransportationCard.png"
+"/com/example/tickettoride/OLD_CardImages/BlueTransportationCard.jpeg",
+"/com/example/tickettoride/OLD_CardImages/GreenTransportationCard.jpeg",
+"/com/example/tickettoride/OLD_CardImages/BlackTransportationCard.jpeg",
+"/com/example/tickettoride/OLD_CardImages/PinkTransportationCard.jpeg",
+"/com/example/tickettoride/OLD_CardImages/RedTransportationCard.jpeg",
+"/com/example/tickettoride/OLD_CardImages/YellowTransportationCard.jpeg",
+"/com/example/tickettoride/OLD_CardImages/TaxiTransportationCard.jpeg"
  */
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -25,14 +25,14 @@ public class TransportationCard extends Application
 {
     private final ImageView cardImageView = new ImageView();
     private final ImageView transportationDeckImageView = new ImageView();
-    private final String[] CARDIMAGEPATHS = {
-            "/com/example/tickettoride/BlueTransportationCard.jpeg",
-            "/com/example/tickettoride/GreenTransportationCard.jpeg",
-            "/com/example/tickettoride/BlackTransportationCard.jpeg",
-            "/com/example/tickettoride/PinkTransportationCard.jpeg",
-            "/com/example/tickettoride/RedTransportationCard.jpeg",
-            "/com/example/tickettoride/YellowTransportationCard.jpeg",
-            "/com/example/tickettoride/TaxiTransportationCard.jpeg"
+    public static final String[] CARDIMAGEPATHS = {
+            "/com/example/tickettoride/RemadeCardImages/BlueTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/GreenTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/BlackTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/PinkTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/RedTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/YellowTransportationCard.png",
+            "/com/example/tickettoride/RemadeCardImages/TaxiTransportationCard.png"
     };
     private final String deckBack = "com/example/tickettoride/RemadeCardImages/TransportationCardBack.png";
 
@@ -54,17 +54,12 @@ public class TransportationCard extends Application
         HBox hbox = new HBox(20); //Spacing = 10 (pixels)
 
         // Initialize the transportationDeckImageView here
-       // transportationDeckImageView.setImage(new Image(getClass().getResource(deckBack).toExternalForm(),150, 200, true, false));
+        //transportationDeckImageView.setImage(new Image(getClass().getResource(deckBack).toExternalForm(),150, 200, true, false));
 
         primaryStage.setOnShowing(event ->
         {
             selectRandomCard();
         });
-
-        //transportationDeckImageView.setOnMouseClicked(event ->
-        //{
-        //    selectRandomCard();
-        //});
 
         btnRandomCard.setOnMouseClicked(event ->
         {
@@ -75,7 +70,6 @@ public class TransportationCard extends Application
 
         hbox.getChildren().addAll(btnRandomCard, cardImageView);
 
-        deckPane.setRotate(90); // Rotate the StackPane, not the ImageView
         deckPane.getChildren().add(transportationDeckImageView);
 
         cardPane.setRotate(90); // Rotate the StackPane, not the ImageView
@@ -93,16 +87,24 @@ public class TransportationCard extends Application
         primaryStage.show();
     }
 
-    public void selectRandomCard()
+    public Image selectRandomCard()
     {
         Random random = new Random();
+        // Get a random card index
         int cardIndex = random.nextInt(CARDIMAGEPATHS.length);
+        // Get the selected card image path
         String selectedCardImagePath = CARDIMAGEPATHS[cardIndex];
 
-        // Use ClassLoader to load the image resources from the resources directory
-        Image selectedCardImage = new Image(getClass().getResource(selectedCardImagePath).toExternalForm(),
-                400, 600, true, false);
+        // Load the image using ClassLoader
+        final int imageWidth = 1000;
+        final int imageHeight = 800;
 
+        Image selectedCardImage = new Image(getClass().getResource(selectedCardImagePath).toExternalForm(),
+                imageWidth, imageHeight, true, false);
+
+        // Set the selected card image to the cardImageView
         cardImageView.setImage(selectedCardImage);
+
+        return selectedCardImage;
     }
 }

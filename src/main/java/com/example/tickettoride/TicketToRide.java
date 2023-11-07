@@ -1,20 +1,17 @@
 package com.example.tickettoride;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.canvas.Canvas;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -23,67 +20,53 @@ import java.util.*;
  */
 public class TicketToRide extends Application
 {
-    //Border and Stack panes setup with similar naming conventions ~JCL
-    BorderPane borderPane;
-    StackPane stackPane;
-    Canvas canvas;
-
     //Contains the number of players
-    private int numPlayers;
+    private int currentNumPlayers;
 
-    private List<Player> players = new ArrayList<>(); //Stores Player objects in a list
+    private List<Player> currentPlayers = new ArrayList<>(); //Stores Player objects in a list
 
-    private static final String TITLE = "Ticket to Ride: New York";
-    private static final String AUTHORS = "By: Austin, Joseph, and Louis";
+    public static final String TITLE = "Ticket to Ride: New York";
+    public static final String AUTHORS = "By: Austin, Joseph, and Louis";
 
     @Override
-    public void start(Stage primaryStage) throws IOException
+    public void start(Stage primaryStage)
     {
         //Creates a new StackPane for the splash screen
         StackPane splashScreen = new StackPane();
 
-        // Set random card image as background of splashscreen.
-        Image cardImage = getRandomCardImage();
+        //Get the image from the TransportationCard class
+        TransportationCard transportationCard = new TransportationCard();
+        Image cardImage = transportationCard.selectRandomCard();
+
+        //Create an ImageView for the splash screen
         ImageView imageView = new ImageView(cardImage);
 
         //Set up Image Size.
-        // Width of the splash screen
-        imageView.setFitWidth(900);
+        //Width of the splash screen
+        imageView.setFitWidth(1000);
 
-        // Height of the splash screen
-        imageView.setFitHeight(1000);
-
-        // Rotate the image 90 degrees
-        imageView.setRotate(90);
+        //Height of the splash screen
+        imageView.setFitHeight(800);
 
         // Set the imageView as the background
         splashScreen.getChildren().add(imageView);
 
-        // Create a border for the title and authors
-        Border border = new Border(new BorderStroke(
-                Color.BLACK,
-                BorderStrokeStyle.SOLID,
-                //Corner radius
-                new CornerRadii(10),
-                //Boarder thickness
-                new BorderWidths(3)
-        ));
-
         // Create a label with the game title
         Label titleLabel = new Label(TITLE);
         titleLabel.setTextFill(Color.BLACK);
-        //Sets the style of the titleLabel with a background color and 50% opacity
-        titleLabel.setStyle("-fx-font-size: 35pt; -fx-background-color: rgba(255, 255, 255, 0.75);");
+        //Sets the style of the titleLabel with a background color and 50% opacity with rounded corners, a black border
+        //set to 3 pixels wide, and a font size of 50px and San-serif font.
+        titleLabel.setStyle("-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 10; " +
+                "-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-font: 50px \"San-serif\";");
+        //Increases the spacing between the titleLabel and the authorsLabel
+        titleLabel.setPadding(new Insets(0, 0, 50, 0));
 
-        // Set the border for the title
-        titleLabel.setBorder(border);
-        titleLabel.setPadding(new Insets(10));
 
         //Create labels for Authors
         Label authorsLabel = new Label(AUTHORS);
         authorsLabel.setFont(Font.font("San-serif", 30));
         authorsLabel.setTextFill(Color.WHITESMOKE);
-        authorsLabel.setPadding(new Insets(125, 0, 0, 0));
+        authorsLabel.setPadding(new Insets(150, 0, 0, 0));
 
         //Creates a label for the "Click here to begin!" text
         Label clickToBeginLabel = new Label("Click anywhere to begin!");
@@ -94,6 +77,7 @@ public class TicketToRide extends Application
         splashScreen.getChildren().addAll(titleLabel, authorsLabel, clickToBeginLabel);
         //Centers the labels vertically
         StackPane.setAlignment(titleLabel, Pos.CENTER);
+        titleLabel.setPadding(new Insets(10));
 
         VBox clickToBeginLabelBox = new VBox();
         clickToBeginLabelBox.getChildren().add(clickToBeginLabel);
@@ -189,25 +173,39 @@ public class TicketToRide extends Application
             // Create Player objects based on the selected number of players
             for (int i = 0; i < selectedNumPlayers; i++) {
                 Player player = new Player("Player " + (i + 1));
-                players.add(player); // Add each player to the list
+                currentPlayers.add(player); // Add each player to the list
             }
 
-            // Now, you have a list of Player objects for the selected number of players
-            int currentNumPlayers = players.size();
+            PlayerTest playerTest0 = new PlayerTest("Dakota", 0, new ArrayList<TransportationCard>(),
+                    new ArrayList<DestinationCard>(), 15);
+
+            PlayerTest playerTest1 = new PlayerTest("Austin", 0, new ArrayList<TransportationCard>(),
+                    new ArrayList<DestinationCard>(), 15);
+
+            PlayerTest playerTest2 = new PlayerTest("Joseph", 0, new ArrayList<TransportationCard>(),
+                    new ArrayList<DestinationCard>(), 15);
+
+            //Now, you have a list of Player objects for the selected number of players
+            //int currentNumPlayers = currentPlayers.size();
             //Sets the number of players to the value of the ComboBox
 
             currentNumPlayers = playerComboBox.getValue();
 
             //Player.setNumPlayers(currentNumPlayers);
 
-            colorComboBox.visibleProperty().setValue(true);
-            taPlayer.visibleProperty().setValue(true);
-            btnAddPlayer.visibleProperty().setValue(true);
+            if (currentNumPlayers == 2)
+            {
+                colorComboBox.visibleProperty().setValue(true);
+                taPlayer.visibleProperty().setValue(true);
+                btnAddPlayer.visibleProperty().setValue(true);
+            }
+
+
 
             btnAddPlayer.setOnAction(event ->
             {
                 //Adds the player to the list of players
-                players.add(new Player(taPlayer.getText()));
+                currentPlayers.add(new Player(taPlayer.getText()));
                 //Clears the text area
                 taPlayer.clear();
                 //Displays the color selection ComboBox
@@ -274,88 +272,81 @@ public class TicketToRide extends Application
         hBox.getChildren().addAll(rules, score, about, save, load);
 
         //Create the event and text for the buttons listed above
-        rules.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Dialog<String> dialog = new Dialog<String>();
-                dialog.setTitle("The Rules");
-                ButtonType buttonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-                dialog.setContentText("""
-                        The Game Turn consists of doing one of the following three actions: draw Transportation cards
-                        claim a Route, or draw Destination Ticket cards.
-                        __________________________
-                        Draw Transportation Cards
-                        -Transportation Cards match route colors on the board.
-                        -Taxis are multicolored and act as wild cards.
-                        -You may have any number of Transport cards in your hand.
-                        -You can draw up to Two cards.
-                        -This can be from the deck or take any one of the five face up cards.
-                        -If your taking a face up taxi card, you cannot draw any other card.
-                        __________________________
-                        Claim a Route
-                        -A route is the set of spaces of same color that link adjacent Locations.
-                        -To claim a route, you must have the same amount of color matched cards as the route.
-                        -Gray routes are available to any color of Transportation Cards.
-                        -You can claim any open Route on the board, even if it is not connected to a Route you previously
-                        claimed. You cannot claim more than one route per turn.
-                        ____________________________
-                        Draw Destination Ticket Cards
-                        -Each Destination Ticket Card shows the two points, starting and stopping, and a point value.
-                        -To complete a Destination Ticket card, you must connect the two locations on the card by creating
-                        a continuous path. You may have any number of Destination tickets.
-                        -You can draw two cards from the deck, you must keep at least one.
-                        """);
-                dialog.getDialogPane().getButtonTypes().add(buttonType);
-                dialog.showAndWait();
-            }
+        rules.setOnAction(actionEvent -> {
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("The Rules");
+            ButtonType buttonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+            dialog.setContentText("""
+                    The Game Turn consists of doing one of the following three actions: draw Transportation cards
+                    claim a Route, or draw Destination Ticket cards.
+                    __________________________
+                    Draw Transportation Cards
+                    -Transportation Cards match route colors on the board.
+                    -Taxis are multicolored and act as wild cards.
+                    -You may have any number of Transport cards in your hand.
+                    -You can draw up to Two cards.
+                    -This can be from the deck or take any one of the five face up cards.
+                    -If your taking a face up taxi card, you cannot draw any other card.
+                    __________________________
+                    Claim a Route
+                    -A route is the set of spaces of same color that link adjacent Locations.
+                    -To claim a route, you must have the same amount of color matched cards as the route.
+                    -Gray routes are available to any color of Transportation Cards.
+                    -You can claim any open Route on the board, even if it is not connected to a Route you previously
+                    claimed. You cannot claim more than one route per turn.
+                    ____________________________
+                    Draw Destination Ticket Cards
+                    -Each Destination Ticket Card shows the two points, starting and stopping, and a point value.
+                    -To complete a Destination Ticket card, you must connect the two locations on the card by creating
+                    a continuous path. You may have any number of Destination tickets.
+                    -You can draw two cards from the deck, you must keep at least one.
+                    """);
+            dialog.getDialogPane().getButtonTypes().add(buttonType);
+            dialog.showAndWait();
         });
 
-        score.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Dialog<String> dialog = new Dialog<String>();
-                dialog.setTitle("The Scoring");
-                ButtonType buttonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-                dialog.setContentText("""
-                                      The Scoring of the Game
-                                      _______________________
-                                      
-                                      When a player has two or fewer Taxis left in their supply, each player, including
-                                      that player, gets one last turn. Then the game ends and players calculate their
-                                      final scores using the scorepad:
-                                      -First, each player scores points for each Route they claimed during the game
-                                      based on the route Scoring Table printed on the board.
-                                      -Then, each player reveals all their destination cards, adds the value of each
-                                      card they completed, and subtracts the value of any card they failed to complete.
-                                      -Finally, each player scores one points for each Tourist Attraction that is connected
-                                      to one or more of the Routes they claimed.
-                                      
-                                      The player with the most points wins. 
-                                      """);
-                dialog.getDialogPane().getButtonTypes().add(buttonType);
-                dialog.showAndWait();
-            }
+        //Creates the event and text for the scoring button
+        score.setOnAction(actionEvent -> {
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("The Scoring");
+            ButtonType buttonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+            dialog.setContentText("""
+                                  The Scoring of the Game
+                                  _______________________
+                                  
+                                  When a player has two or fewer Taxis left in their supply, each player, including
+                                  that player, gets one last turn. Then the game ends and players calculate their
+                                  final scores using the scorecard:
+                                  -First, each player scores points for each Route they claimed during the game
+                                  based on the route Scoring Table printed on the board.
+                                  -Then, each player reveals all their destination cards, adds the value of each
+                                  card they completed, and subtracts the value of any card they failed to complete.
+                                  -Finally, each player scores one points for each Tourist Attraction that is connected
+                                  to one or more of the Routes they claimed.
+                                  
+                                  The player with the most points wins.\s
+                    """);
+            dialog.getDialogPane().getButtonTypes().add(buttonType);
+            dialog.showAndWait();
         });
 
-        about.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Dialog<String> dialog = new Dialog<String>();
-                dialog.setTitle("About");
-                ButtonType buttonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-                dialog.setContentText("""
-                                      _________________________
-                                      CPT-231 Group Project:
-                                      Ticket to Ride: New York
-                                      
-                                      By: Austin Bradley,
-                                          Louis Fennell III,
-                                          Joseph Lemois
-                                      __________________________
-                                      """);
-                dialog.getDialogPane().getButtonTypes().add(buttonType);
-                dialog.showAndWait();
-            }
+        //Creates the event and text for the about button
+        about.setOnAction(actionEvent -> {
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("About");
+            ButtonType buttonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+            dialog.setContentText("""
+                                  _________________________
+                                  CPT-231 Group Project:
+                                  Ticket to Ride: New York
+                                  
+                                  By: Austin Bradley,
+                                      Louis Fennell III,
+                                      Joseph Lemois
+                                  __________________________
+                                  """);
+            dialog.getDialogPane().getButtonTypes().add(buttonType);
+            dialog.showAndWait();
         });
 
         LabelPane lblEast = new LabelPane("Draw & Discard area!");
@@ -372,13 +363,16 @@ public class TicketToRide extends Application
         Scene scene = new Scene(borderPane, 1000, 800);
 
         Display.ChangeIcon(primaryStage); //Sets the programs icon
-        primaryStage.setTitle("Ticket to Ride"); //Title of Game
+        primaryStage.setTitle(TITLE); //Title of Game
         //Disables resizing the window
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public Image getRandomCardImage() {
+
+    //Method to get a random card image
+    public Image getRandomCardImage()
+    {
         Random random = new Random();
         int cardIndex = random.nextInt(TransportationCards.cardImagePaths.length);
         String selectedCardImagePath = TransportationCards.cardImagePaths[cardIndex];
