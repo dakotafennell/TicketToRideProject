@@ -120,7 +120,11 @@ public class TicketToRide extends Application
         public LabelPane(String title)
         {
             getChildren().add(new Label(title));
-            setStyle("-fx-border-color: blue");
+            setStyle("-fx-border-style: groove;"
+                    +"-fx-border-width: 3;"
+                    +"-fx-border-radius: 4;"
+                    +"-fx-border-color: gray;"
+            );
             setPadding(new Insets(20, 30,50,30));
         }
     }
@@ -311,18 +315,21 @@ public class TicketToRide extends Application
             dialog.setTitle("The Scoring");
             ButtonType buttonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
             dialog.setContentText("""
-                                  The Scoring of the Game
-                                  _______________________
+                                          The Scoring of the Game
+                                         _______________________
                                   
-                                  When a player has two or fewer Taxis left in their supply, each player, including
-                                  that player, gets one last turn. Then the game ends and players calculate their
-                                  final scores using the scorecard:
-                                  -First, each player scores points for each Route they claimed during the game
-                                  based on the route Scoring Table printed on the board.
-                                  -Then, each player reveals all their destination cards, adds the value of each
-                                  card they completed, and subtracts the value of any card they failed to complete.
-                                  -Finally, each player scores one points for each Tourist Attraction that is connected
-                                  to one or more of the Routes they claimed.
+                    When a player has two or fewer Taxis left in their supply, each player, including
+                    that player, gets one last turn. Then the game ends and players calculate their
+                    final scores using the scorecard:
+                    
+                    -First, each player scores points for each Route they claimed during the game
+                     based on the route Scoring Table printed on the board.
+                     
+                    -Then, each player reveals all their destination cards, adds the value of each
+                     card they completed, and subtracts the value of any card they failed to complete.
+                     
+                    -Finally, each player scores one points for each Tourist Attraction that is connected
+                     to one or more of the Routes they claimed.
                                   
                                   The player with the most points wins.\s
                     """);
@@ -341,8 +348,8 @@ public class TicketToRide extends Application
                                   Ticket to Ride: New York
                                   
                                   By: Austin Bradley,
-                                      Louis Fennell III,
-                                      Joseph Lemois
+                                         Louis Fennell III,
+                                         Joseph Lemois
                                   __________________________
                                   """);
             dialog.getDialogPane().getButtonTypes().add(buttonType);
