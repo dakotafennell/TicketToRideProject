@@ -23,6 +23,8 @@ public class TicketToRide extends Application
     //Contains the number of players
     private int currentNumPlayers;
 
+    Board board = new Board();
+
     private List<Player> currentPlayers = new ArrayList<>(); //Stores Player objects in a list
 
     public static final String TITLE = "Ticket to Ride: New York";
@@ -43,10 +45,10 @@ public class TicketToRide extends Application
 
         //Set up Image Size.
         //Width of the splash screen
-        imageView.setFitWidth(1000);
+        imageView.setFitWidth(1200);
 
         //Height of the splash screen
-        imageView.setFitHeight(800);
+        imageView.setFitHeight(1000);
 
         // Set the imageView as the background
         splashScreen.getChildren().add(imageView);
@@ -120,10 +122,11 @@ public class TicketToRide extends Application
         public LabelPane(String title)
         {
             getChildren().add(new Label(title));
-            setStyle("-fx-border-style: groove;"
+            setStyle(
+                    "-fx-border-style: solid inside;"
                     +"-fx-border-width: 3;"
                     +"-fx-border-radius: 4;"
-                    +"-fx-border-color: gray;"
+                    +"-fx-border-color: GRAY;"
             );
             setPadding(new Insets(20, 30,50,30));
         }
@@ -262,21 +265,56 @@ public class TicketToRide extends Application
         StackPane imageContainer = new StackPane();
         //Adds the ticketToRideNYMap to the imageContainer
         imageContainer.getChildren().add(ticketToRideNYMap);
+
+        Board.HighlightRectanglesOnImage(imageContainer);
+
         //Adds the image container to the center of the borderPane
         borderPane.setCenter(imageContainer);
 
         //Create HBox and buttons for top of game
         //This will have the rules, scoring, about, save, and load buttons
         HBox hBox = new HBox(5);
-        Button rules = new Button("Rules");
-        Button score = new Button("Scoring");
-        Button about = new Button("About");
-        Button save = new Button("Save");
-        Button load = new Button("Load");
-        hBox.getChildren().addAll(rules, score, about, save, load);
 
-        //Create the event and text for the buttons listed above
-        rules.setOnAction(actionEvent -> {
+        //Creates a new menu bar
+        MenuBar menuBar = new MenuBar();
+        //Creates a new File menu
+        Menu fileMenu = new Menu("File");
+        //Creates a new About Menu
+        Menu aboutMenu = new Menu("About");
+
+        //Creates a new saveMenuItem for the File menu
+        MenuItem saveMenuItem = new MenuItem("Save");
+        //Creates a new loadMenuItem for the File menu
+        MenuItem loadMenuItem = new MenuItem("Load");
+        //Creates a new exitMenuItem for the File menu
+        MenuItem exitMenuItem = new MenuItem("Exit");
+
+        //Adds the menu items to the File menu
+        fileMenu.getItems().addAll(saveMenuItem, loadMenuItem, exitMenuItem);
+
+        //Creates a new rulesMenuItem for the About menu
+        MenuItem rulesMenuItem = new MenuItem("Rules");
+        //Creates a new scoringMenuItem for the About menu
+        MenuItem scoringMenuItem = new MenuItem("Scoring");
+        //Creates a new item for the About menu
+        MenuItem aboutMenuItem = new MenuItem("About");
+
+        //Adds the menu items to the About menu
+        aboutMenu.getItems().addAll(rulesMenuItem, scoringMenuItem, aboutMenuItem);
+
+        menuBar.getMenus().addAll(fileMenu, aboutMenu);
+        hBox.getChildren().addAll(menuBar);
+
+        //Event for the exitMenuItem
+        exitMenuItem.setOnAction(actionEvent ->
+        {
+            //Closes the program
+            primaryStage.close();
+        });
+
+        //Creates the event and text for the rules button
+        rulesMenuItem.setOnAction(actionEvent ->
+        {
             Dialog<String> dialog = new Dialog<>();
             dialog.setTitle("The Rules");
             ButtonType buttonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
@@ -310,7 +348,8 @@ public class TicketToRide extends Application
         });
 
         //Creates the event and text for the scoring button
-        score.setOnAction(actionEvent -> {
+        scoringMenuItem.setOnAction(actionEvent ->
+        {
             Dialog<String> dialog = new Dialog<>();
             dialog.setTitle("The Scoring");
             ButtonType buttonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
@@ -338,7 +377,8 @@ public class TicketToRide extends Application
         });
 
         //Creates the event and text for the about button
-        about.setOnAction(actionEvent -> {
+        aboutMenuItem.setOnAction(actionEvent ->
+        {
             Dialog<String> dialog = new Dialog<>();
             dialog.setTitle("About");
             ButtonType buttonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
@@ -367,7 +407,7 @@ public class TicketToRide extends Application
         borderPane.setLeft(new LabelPane("Displays players in turn order with points!"));
 
         //Initializes the scene
-        Scene scene = new Scene(borderPane, 1000, 800);
+        Scene scene = new Scene(borderPane, 1200, 1000);
 
         Display.ChangeIcon(primaryStage); //Sets the programs icon
         primaryStage.setTitle(TITLE); //Title of Game
@@ -375,15 +415,6 @@ public class TicketToRide extends Application
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    //Method to get a random card image
-    public Image getRandomCardImage()
-    {
-        Random random = new Random();
-        int cardIndex = random.nextInt(TransportationCards.cardImagePaths.length);
-        String selectedCardImagePath = TransportationCards.cardImagePaths[cardIndex];
-        return new Image(getClass().getResource(selectedCardImagePath).toExternalForm());
     }
 
     public static void main(String[] args)

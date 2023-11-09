@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.Random;
@@ -35,6 +36,26 @@ public class TransportationCard extends Application
             "/com/example/tickettoride/RemadeCardImages/TaxiTransportationCard.png"
     };
     private final String deckBack = "com/example/tickettoride/RemadeCardImages/TransportationCardBack.png";
+
+    //Colors for the cards
+    private final Color[] colors = {Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.YELLOW, Color.ORANGE,};
+
+    //Card values
+    private Color blueTransportationCard = colors[0];
+
+    private Color greenTransportationCard = colors[1];
+
+    private Color blackTransportationCard = colors[2];
+
+    private Color pinkTransportationCard = colors[3];
+
+    private Color redTransportationCard = colors[4];
+
+    private Color yellowTransportationCard = colors[5];
+
+    private Color orangeTransportationCard = colors[6];
+
+    //Set taxi card to all available colors
 
     public static void main(String[] args)
     {
@@ -72,7 +93,6 @@ public class TransportationCard extends Application
 
         deckPane.getChildren().add(transportationDeckImageView);
 
-        cardPane.setRotate(90); // Rotate the StackPane, not the ImageView
         cardPane.getChildren().add(cardImageView);
 
         //dd cardPane to the HBox

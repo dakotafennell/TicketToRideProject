@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import com.example.tickettoride.TicketToRide?>
+
+<StackPane alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <ImageView fx:id="imageView"> <!-- Set the fx:id attribute to "imageView" -->
+        <fitWidth>1000</fitWidth>
+        <fitHeight>800</fitHeight>
+    </ImageView>
+   <GridPane>
+     <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+     </columnConstraints>
+     <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+     </rowConstraints>
+      <children>
+          <Label alignment="CENTER" text="Click anywhere to begin!" textFill="BLACK" GridPane.columnIndex="1" GridPane.rowIndex="3">
+              <padding>
+                  <Insets bottom="50" />
+              </padding>
+          </Label>
+          <Label fx:id="AUTHORS" textFill="WHITESMOKE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <padding>
+                  <Insets top="150" />
+              </padding>
+          </Label>
+          <Label text="${TicketToRide.TITLE}" alignment="CENTER_RIGHT" contentDisplay="RIGHT" textFill="BLACK" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <style>
+            -fx-background-color: rgba(255, 255, 255, 0.5);
+            -fx-background-radius: 10;
+            -fx-border-color: black;
+            -fx-border-radius: 10;
+            -fx-border-width: 3;
+            -fx-font: 50px 'San-serif';
+        </style>
+          </Label>
+      </children>
+   </GridPane>
+</StackPane>

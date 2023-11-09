@@ -1,50 +1,46 @@
 package com.example.tickettoride;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
 
 import java.io.File;
 
-/**
- * Board class
- * This class will contain logic for displaying and/or updating the board and map of the game
- *
- */
-public class Board extends StackPane
+public class HighlightRectanglesOnImage extends Application
 {
-    // Board display logic
+    //Route rectangles
+    //Lincoln Center to Midtown West
+    Rectangle LCtoMW = new Rectangle();
+    //Lincoln Center to Times Square Green route
+    Rectangle LCtoTS0 = new Rectangle();
+    //Lincoln Center to Times Square Blue route
+    Rectangle LCtoTS1 = new Rectangle();
+    //Lincoln Center to Central Park Orange route
+    Rectangle LCtoCP = new Rectangle();
+    //Midtown West to Times Square
+    Rectangle MWtoTS = new Rectangle();
+    //Midtown West to Chelsea
+    Rectangle MWtoC = new Rectangle();
+    //Midtown West to Empire State Building
+    Rectangle MWtoESB = new Rectangle();
+    //Times Square to Empire State Building
+    Rectangle TStoESB = new Rectangle();
+    //Times Square to United Nations
+    Rectangle TStoUN = new Rectangle();
+    //United Nations to Empire State Building
+    Rectangle UNtoESB = new Rectangle();
+    //United Nations to Gramercy Park
+    Rectangle UNtoGP = new Rectangle();
 
-    //Constants for display width and height
-    private static final int BOARD_WIDTH = 1000;
-    private static final int BOARD_HEIGHT = 800;
-
-    public ImageView getTicketToRideImage()
+    @Override
+    public void start(Stage primaryStage)
     {
-        ImageView ticketToRideImageView = new ImageView();
-        try
-        {
-            // Load the image from a file
-            File imageFile = new File("src/main/resources/com/example/tickettoride/GameMap.PNG");
-            String imageUrl = imageFile.toURI().toURL().toString();
-            Image ticketToRideImage = new Image(imageUrl, BOARD_WIDTH, BOARD_HEIGHT, true, false);
-
-            // Set the image in the ImageView
-            ticketToRideImageView.setImage(ticketToRideImage);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return ticketToRideImageView;
-    }
-
-    //Testing Board highlighting
-    public static Pane HighlightRectanglesOnImage(StackPane imageContainer)
-    {
-        StackPane stackPane = null;
         try
         {
             // Load the image from a file
@@ -90,16 +86,28 @@ public class Board extends StackPane
             overlayPane.getChildren().addAll(LCtoTS, LCtoCP);
 
             // Stack the image view and overlay pane
-            stackPane = new StackPane(imageView, overlayPane);
+            StackPane stackPane = new StackPane(imageView, overlayPane);
 
+            // Create a scene
+            Scene scene = new Scene(stackPane);
 
+            //Disable resizing of the window
+            primaryStage.setResizable(false);
+
+            // Set the scene and show the stage
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Ticket To Ride: New York");
+            primaryStage.show();
         }
         catch (Exception e)
         {
             e.printStackTrace();
             System.out.println("Could not load image");
         }
-        return stackPane;
     }
-    //Testing Board highlighting
+
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
 }
