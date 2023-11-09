@@ -59,21 +59,26 @@ public class TicketToRide extends Application
         //Sets the style of the titleLabel with a background color and 50% opacity with rounded corners, a black border
         //set to 3 pixels wide, and a font size of 50px and San-serif font.
         titleLabel.setStyle("-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 10; " +
-                "-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-font: 50px \"San-serif\";");
+                "-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-font: 50px \"serif\"; -fx-font-weight: bold");
         //Increases the spacing between the titleLabel and the authorsLabel
         titleLabel.setPadding(new Insets(0, 0, 50, 0));
 
 
         //Create labels for Authors
         Label authorsLabel = new Label(AUTHORS);
-        authorsLabel.setFont(Font.font("San-serif", 30));
-        authorsLabel.setTextFill(Color.WHITESMOKE);
+        // Authors label
+        //Font size: 25px
+        //Text Color: white
+        //Font Weight: BOLD
+        authorsLabel.setStyle("-fx-font: 25px \"serif\"; " +
+                "-fx-text-fill: WHITE;" +
+                "-fx-font-weight: BOLD");
         authorsLabel.setPadding(new Insets(150, 0, 0, 0));
 
         //Creates a label for the "Click here to begin!" text
         Label clickToBeginLabel = new Label("Click anywhere to begin!");
         clickToBeginLabel.setTextFill(Color.BLACK);
-        clickToBeginLabel.setFont(Font.font("San-serif", 20));
+        clickToBeginLabel.setFont(Font.font("serif", 20));
 
         //Adds the labels to the splash screen
         splashScreen.getChildren().addAll(titleLabel, authorsLabel, clickToBeginLabel);
@@ -396,13 +401,55 @@ public class TicketToRide extends Application
             dialog.showAndWait();
         });
 
+        //Create Button to select random card.
+        TransportationCards transportationCard = new TransportationCards();
+
+        // Create ImageView to display the selected card image
+        ImageView cardImage = new ImageView();
+        // Set height and width of card image.
+        cardImage.setFitWidth(250);
+        cardImage.setFitHeight(200);
+
+        // Create Button to select random card
+        Button btnRandomCard = new Button("Please Select A Card");
+
+        // Define the URL for the button background image
+        String imageUrl = getClass().getResource("/com/example/tickettoride/RemadeCardImages/TransportationCardBack.png").toExternalForm();
+        // Set the button's background to the image
+        btnRandomCard.setStyle("-fx-background-image: url('" + imageUrl + "'); " +
+                "-fx-background-position: center; " +
+                "-fx-background-repeat: no-repeat; " +
+                "-fx-background-size: cover; " +
+                "-fx-font: 22px \"PLUSH\"; " +
+                "-fx-text-fill: RED;" +
+                "-fx-font-weight: BOLD;"
+        );
+        //Set height and width of button
+        btnRandomCard.setPrefHeight(150);
+        btnRandomCard.setPrefWidth(250);
+
+
+
+        // Set Button Action
+        btnRandomCard.setOnAction(event -> {
+            // Use the instance of selectRandomCard
+            transportationCard.selectRandomCard();
+            // Update the ImageView with the new card image
+            cardImage.setImage(TransportationCards.cardImageView.getImage());
+        });
+
+        // Add Button and ImageView to Right Side
+        VBox rightVBox = new VBox(); // Create a VBox for layout
+        // Add the button and ImageView to the VBox
+        rightVBox.getChildren().addAll(btnRandomCard, cardImage);
+        borderPane.setRight(rightVBox);
+
         LabelPane lblEast = new LabelPane("Draw & Discard area!");
         lblEast.setPadding(new Insets(50));
 
         //setup of borderPane displays titles
         //borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
         borderPane.setTop(hBox);
-        borderPane.setRight(lblEast);
         borderPane.setBottom(new LabelPane("Displays current players hand!"));
         borderPane.setLeft(new LabelPane("Displays players in turn order with points!"));
 
