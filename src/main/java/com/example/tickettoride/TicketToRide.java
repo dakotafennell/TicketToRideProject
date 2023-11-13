@@ -1,5 +1,6 @@
 package com.example.tickettoride;
 
+import com.almasb.fxgl.core.collection.Array;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -164,7 +165,7 @@ public class TicketToRide extends Application
 
         //Creates the ComboBox for selecting the player color
         ComboBox<String> colorComboBox = new ComboBox<>();
-        colorComboBox.getItems().addAll("Blue", "Green", "Black", "Pink", "Red", "Yellow");
+        colorComboBox.getItems().addAll(String.valueOf(Color.BLUE), String.valueOf(Color.GREEN), String.valueOf(Color.BLACK), String.valueOf(Color.PINK), String.valueOf(Color.RED), String.valueOf(Color.YELLOW));
         colorComboBox.visibleProperty().setValue(false);
 
         //Creates the ComboBox for selecting the number of players
@@ -188,14 +189,11 @@ public class TicketToRide extends Application
                 currentPlayers.add(player); // Add each player to the list
             }
 
-            PlayerTest playerTest0 = new PlayerTest("Dakota", 0, new ArrayList<TransportationCard>(),
-                    new ArrayList<DestinationCard>(), 15);
+            //PlayerTest playerTest0 = new PlayerTest("Dakota", 0, new ArrayList<TransportationCard>(), new ArrayList<DestinationCard>(), 15, Color.RED);
 
-            PlayerTest playerTest1 = new PlayerTest("Austin", 0, new ArrayList<TransportationCard>(),
-                    new ArrayList<DestinationCard>(), 15);
+            //PlayerTest playerTest1 = new PlayerTest("Austin", 0, new ArrayList<TransportationCard>(), new ArrayList<DestinationCard>(), 15, Color.BLUE);
 
-            PlayerTest playerTest2 = new PlayerTest("Joseph", 0, new ArrayList<TransportationCard>(),
-                    new ArrayList<DestinationCard>(), 15);
+            //PlayerTest playerTest2 = new PlayerTest("Joseph", 0, new ArrayList<TransportationCard>(), new ArrayList<DestinationCard>(), 15, Color.GREEN);
 
             //Now, you have a list of Player objects for the selected number of players
             //int currentNumPlayers = currentPlayers.size();
@@ -212,14 +210,40 @@ public class TicketToRide extends Application
                 btnAddPlayer.visibleProperty().setValue(true);
             }
 
+            btnAddPlayer.setOnAction(event -> {
+                // Validate that the player name and color are selected
+                if (!taPlayer.getText().isEmpty() && colorComboBox.getValue() != null) {
+                    Player playerInfo = new Player(taPlayer.getText(), 0, 0, 0, new ArrayList<TransportationCard>(), new ArrayList<DestinationCard>(), 15,  Color.valueOf(colorComboBox.getValue()));
+                    Array<Player> playerList = new Array<>();
+
+                    currentPlayers.add(playerInfo);
+                    // Create a Player instance
+                    Player player = new Player(playerInfo.getName());
+                    player.setColor(playerInfo.getColor());
+
+                    // Update the Player instance with additional information if needed
+                    // For example: player.setScore(initialScore);
+
+                    currentPlayers.add(player);
+
+                    taPlayer.clear();
+                    colorComboBox.getSelectionModel().clearSelection();
+                } else {
+                    // Display an error message or take appropriate action
+                    System.out.println("Please enter player name and select color.");
+                }
+            });
 
 
             btnAddPlayer.setOnAction(event ->
             {
+                Player player0 = new Player(taPlayer.getText(), 0, 0, 0, new ArrayList<TransportationCard>(), new ArrayList<DestinationCard>(), 15, Color.RED);
+
                 //Adds the player to the list of players
-                currentPlayers.add(new Player(taPlayer.getText()));
+                currentPlayers.add(player0);
                 //Clears the text area
                 taPlayer.clear();
+
                 //Displays the color selection ComboBox
                 colorComboBox.visibleProperty().setValue(true);
 

@@ -1,5 +1,7 @@
 package com.example.tickettoride;
 
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class PlayerTest
     private List<TransportationCard> transportationCards;
     private List<DestinationCard> destinationCards;
     private int numGamePieces;
+    private Color color;
 
     public PlayerTest()
     {
@@ -19,15 +22,17 @@ public class PlayerTest
         this.transportationCards = new ArrayList<>();
         this.destinationCards = new ArrayList<>();
         this.numGamePieces = 0;
+        this.color = color;
     }
 
-    public PlayerTest(String name, int score, List<TransportationCard> transportationCards, List<DestinationCard> destinationCards, int numGamePieces)
+    public PlayerTest(String name, int score, List<TransportationCard> transportationCards, List<DestinationCard> destinationCards, int numGamePieces, Color color)
     {
         this.name = name;
         this.score = score;
         this.transportationCards = transportationCards;
         this.destinationCards = destinationCards;
         this.numGamePieces = numGamePieces;
+        this.color = color;
     }
 
     public String getName()

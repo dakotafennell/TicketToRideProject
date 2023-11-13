@@ -1,5 +1,10 @@
 package com.example.tickettoride;
 
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Player class
  * This class will contain logic for the player and/or the player's hand
@@ -13,6 +18,9 @@ public class Player
     private int numTransportationCards;
     private int numDestinationCards;
     private int numGamePieces;
+    private List<TransportationCard> transportationCards;
+    private List<DestinationCard> destinationCards;
+    private Color color;
 
     public Player(String name)
     {
@@ -21,6 +29,21 @@ public class Player
         this.numTransportationCards = 0;
         this.numDestinationCards = 0;
         this.numGamePieces = 0;
+        this.transportationCards = new ArrayList<TransportationCard>();
+        this.destinationCards = new ArrayList<DestinationCard>();
+        this.color = color;
+    }
+
+    public Player(String name, int score, int numTransportationCards, int numDestinationCards, List<TransportationCard> transportationCards, List<DestinationCard> destinationCards, int numGamePieces, Color color)
+    {
+        this.name = name;
+        this.score = score;
+        this.numTransportationCards = numTransportationCards;
+        this.numDestinationCards = numDestinationCards;
+        this.numGamePieces = numGamePieces;
+        this.transportationCards = new ArrayList<TransportationCard>();
+        this.destinationCards = new ArrayList<DestinationCard>();
+        this.color = color;
     }
 
     protected void setNumPlayers(int numPlayers)
@@ -96,6 +119,22 @@ public class Player
         {
             this.numGamePieces = numGamePieces;
         }
+    }
+
+    public Color getColor()
+    {
+        return color;
+    }
+
+    public void setColor(Color color)
+    {
+        this.color = color;
+    }
+
+    public void setNameAndColor(String name, Color color)
+    {
+        setName(name);
+        setColor(color);
     }
 
     //Method to draw cards from the deck
