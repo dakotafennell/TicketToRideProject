@@ -109,8 +109,8 @@ public class TransportationCard extends Application
         String selectedCardImagePath = CARDIMAGEPATHS[cardIndex];
 
         // Load the image using ClassLoader
-        final int imageWidth = 1000;
-        final int imageHeight = 800;
+        final int imageWidth = 1200;
+        final int imageHeight = 1000;
 
         Image selectedCardImage = new Image(getClass().getResource(selectedCardImagePath).toExternalForm(),
                 imageWidth, imageHeight, true, false);

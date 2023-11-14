@@ -21,7 +21,8 @@ import javafx.stage.Stage;
 
 import java.util.Random;
 
-public class TransportationCards extends Application {
+public class TransportationCards extends Application
+{
     public static final ImageView cardImageView = new ImageView();
 
     public static final String[] cardImagePaths = {
