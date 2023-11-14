@@ -27,7 +27,7 @@ public class Board extends StackPane
         try
         {
             // Load the image from a file
-            File imageFile = new File("src/main/resources/com/example/tickettoride/GameMap.PNG");
+            File imageFile = new File("src/main/resources/com/example/tickettoride/Game_Map_v2.png");
             String imageUrl = imageFile.toURI().toURL().toString();
             Image ticketToRideImage = new Image(imageUrl, BOARD_WIDTH, BOARD_HEIGHT, true, false);
 
@@ -54,7 +54,7 @@ public class Board extends StackPane
                     true, false);
 
             //Load the image
-            //Image image = new Image("src/main/resources/com/example/tickettoride/GameMap.PNG");
+            //Image image = new Image("src/main/resources/com/example/tickettoride/Game_Map_v2.png");
             ImageView imageView = new ImageView(ticketToRideImage);
 
             // Create an overlay pane

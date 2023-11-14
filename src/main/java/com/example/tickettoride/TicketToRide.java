@@ -1,7 +1,8 @@
 package com.example.tickettoride;
 
-import com.almasb.fxgl.core.collection.Array;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.geometry.Insets;
@@ -13,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 import java.util.*;
 
 /**
@@ -21,15 +23,16 @@ import java.util.*;
  */
 public class TicketToRide extends Application
 {
+    public static final String TITLE = "Ticket to Ride: New York";
+    public static final String AUTHORS = "By: Austin, Joseph, and Louis";
+    public static final int HEIGHT = 1000;
+    public static final int WIDTH = 1200;
+
     //Contains the number of players
     private int currentNumPlayers;
 
-    Board board = new Board();
-
-    private List<Player> currentPlayers = new ArrayList<>(); //Stores Player objects in a list
-
-    public static final String TITLE = "Ticket to Ride: New York";
-    public static final String AUTHORS = "By: Austin, Joseph, and Louis";
+    //Stores Player objects in a list
+    private ObservableList<Player> currentPlayers = FXCollections.observableArrayList();
 
     @Override
     public void start(Stage primaryStage)
@@ -46,10 +49,11 @@ public class TicketToRide extends Application
 
         //Set up Image Size.
         //Width of the splash screen
-        imageView.setFitWidth(1200);
-
+        imageView.setFitWidth(WIDTH);
         //Height of the splash screen
-        imageView.setFitHeight(1000);
+        imageView.setFitHeight(HEIGHT);
+        //Preserve the ratio of the image
+        imageView.setPreserveRatio(true);
 
         // Set the imageView as the background
         splashScreen.getChildren().add(imageView);
@@ -98,7 +102,7 @@ public class TicketToRide extends Application
         clickToBeginLabelBox.setAlignment(Pos.BOTTOM_CENTER);
 
         //Creates a scene for the splash screen
-        Scene splashScene = new Scene(splashScreen, 1000, 800);
+        Scene splashScene = new Scene(splashScreen, WIDTH, HEIGHT);
 
         //Sets the programs icon
         Display.ChangeIcon(primaryStage);
@@ -120,6 +124,12 @@ public class TicketToRide extends Application
             Stage playerSelectStage = new Stage();
             createPlayerSelection(playerSelectStage);
         });
+    }
+
+    //Returns the current number of players
+    public ObservableList<Player> getCurrentPlayers()
+    {
+        return currentPlayers;
     }
 
     //sets up border and allows text to be displayed
@@ -156,101 +166,85 @@ public class TicketToRide extends Application
         //text area for player names
         Label playerLabel = new Label("Player Names:");
         TextArea taPlayer = new TextArea();
-        taPlayer.setPrefColumnCount(20);
-        taPlayer.setPromptText("Enter player names here");
+        //Sets the width of the text area
+        taPlayer.setPrefColumnCount(10);
+        //Sets the maximum width of the text area
+        taPlayer.setMaxWidth(150);
+        //Sets the maximum height of the text area
+        taPlayer.setMaxHeight(50);
+        taPlayer.setPromptText("Enter player name here");
         taPlayer.visibleProperty().setValue(false);
         //Creates a button for adding players
         Button btnAddPlayer = new Button("Add Player");
+        //Creates a label for the color combobox
+        Label colorLabel = new Label("Player Color:");
+        //Creates a label for the Player name text area
+        Label playerNameLabel = new Label("Player Name:");
         btnAddPlayer.visibleProperty().setValue(false);
+        colorLabel.visibleProperty().setValue(false);
+        playerNameLabel.visibleProperty().setValue(false);
 
         //Creates the ComboBox for selecting the player color
         ComboBox<String> colorComboBox = new ComboBox<>();
-        colorComboBox.getItems().addAll(String.valueOf(Color.BLUE), String.valueOf(Color.GREEN), String.valueOf(Color.BLACK), String.valueOf(Color.PINK), String.valueOf(Color.RED), String.valueOf(Color.YELLOW));
+        //Adds the available player colors to the ComboBox (White, Blue, Purple, and Yellow) displaying the colors name
+        //and the color itself so that when the color is selected the value of the Color object is returned
+        colorComboBox.getItems().addAll("WHITE", "BLUE", "PURPLE", "YELLOW");
+        //Sets the prompt text for the ComboBox
         colorComboBox.visibleProperty().setValue(false);
 
         //Creates the ComboBox for selecting the number of players
         ComboBox<Integer> playerComboBox = new ComboBox<>();
         playerComboBox.getItems().addAll(2, 3, 4);
-        playerComboBox.setPromptText("Select the number of players");
+        playerComboBox.setPromptText("Number of players");
 
-        //Sets the default value of the ComboBox to 2
-        playerComboBox.setValue(2);
+        //Sets the default value of the ComboBox to blank
+        playerComboBox.setValue(null);
 
-        // Create the Confirm button
+        //Creates the Confirm button
         Button confirmButton = new Button("Confirm");
 
         confirmButton.setOnAction(e ->
         {
-            int selectedNumPlayers = playerComboBox.getValue();
-
-            // Create Player objects based on the selected number of players
-            for (int i = 0; i < selectedNumPlayers; i++) {
-                Player player = new Player("Player " + (i + 1));
-                currentPlayers.add(player); // Add each player to the list
-            }
-
-            //PlayerTest playerTest0 = new PlayerTest("Dakota", 0, new ArrayList<TransportationCard>(), new ArrayList<DestinationCard>(), 15, Color.RED);
-
-            //PlayerTest playerTest1 = new PlayerTest("Austin", 0, new ArrayList<TransportationCard>(), new ArrayList<DestinationCard>(), 15, Color.BLUE);
-
-            //PlayerTest playerTest2 = new PlayerTest("Joseph", 0, new ArrayList<TransportationCard>(), new ArrayList<DestinationCard>(), 15, Color.GREEN);
-
-            //Now, you have a list of Player objects for the selected number of players
-            //int currentNumPlayers = currentPlayers.size();
             //Sets the number of players to the value of the ComboBox
+            int currentNumPlayers = playerComboBox.getValue();
 
-            currentNumPlayers = playerComboBox.getValue();
-
-            //Player.setNumPlayers(currentNumPlayers);
-
-            if (currentNumPlayers == 2)
-            {
-                colorComboBox.visibleProperty().setValue(true);
-                taPlayer.visibleProperty().setValue(true);
-                btnAddPlayer.visibleProperty().setValue(true);
-            }
-
-            btnAddPlayer.setOnAction(event -> {
-                // Validate that the player name and color are selected
-                if (!taPlayer.getText().isEmpty() && colorComboBox.getValue() != null) {
-                    Player playerInfo = new Player(taPlayer.getText(), 0, 0, 0, new ArrayList<TransportationCard>(), new ArrayList<DestinationCard>(), 15,  Color.valueOf(colorComboBox.getValue()));
-                    Array<Player> playerList = new Array<>();
-
-                    currentPlayers.add(playerInfo);
-                    // Create a Player instance
-                    Player player = new Player(playerInfo.getName());
-                    player.setColor(playerInfo.getColor());
-
-                    // Update the Player instance with additional information if needed
-                    // For example: player.setScore(initialScore);
-
-                    currentPlayers.add(player);
-
-                    taPlayer.clear();
-                    colorComboBox.getSelectionModel().clearSelection();
-                } else {
-                    // Display an error message or take appropriate action
-                    System.out.println("Please enter player name and select color.");
-                }
-            });
-
+            colorComboBox.visibleProperty().setValue(true);
+            taPlayer.visibleProperty().setValue(true);
+            btnAddPlayer.visibleProperty().setValue(true);
 
             btnAddPlayer.setOnAction(event ->
             {
-                Player player0 = new Player(taPlayer.getText(), 0, 0, 0, new ArrayList<TransportationCard>(), new ArrayList<DestinationCard>(), 15, Color.RED);
+                if (!taPlayer.getText().isEmpty() && colorComboBox.getValue() != null)
+                {
+                    Player playerInfo = createPlayer(taPlayer.getText(), Color.valueOf(colorComboBox.getValue()));
+                    currentPlayers.add(playerInfo);
+                    taPlayer.clear();
 
-                //Adds the player to the list of players
-                currentPlayers.add(player0);
-                //Clears the text area
-                taPlayer.clear();
+                    // Remove the selected color only if it exists in the ComboBox
+                    if (colorComboBox.getItems().contains(colorComboBox.getValue()))
+                    {
+                        colorComboBox.getItems().remove(colorComboBox.getValue());
+                    }
 
-                //Displays the color selection ComboBox
-                colorComboBox.visibleProperty().setValue(true);
+                    System.out.println(currentPlayers.size());
 
-                playerSelectStage.close(); //Closes the initial window
-                //Creates the game interface and shows it
-                Stage primaryStage = new Stage();
-                createGameInterface(primaryStage);
+                    if (currentPlayers.size() == currentNumPlayers)
+                    {
+                        //Prints the name and color of each player to the console
+                        for (Player player : currentPlayers)
+                        {
+                            System.out.println(player.getName() + " " + String.valueOf(player.getColor()));
+                        }
+                        //Opens the game interface
+                        playerSelectStage.close();
+                        Stage primaryStage = new Stage();
+                        createGameInterface(primaryStage);
+                    }
+                }
+                else
+                {
+                    System.out.println("Please enter player name and select color.");
+                }
             });
         });
 
@@ -263,12 +257,12 @@ public class TicketToRide extends Application
         layout.setStyle("-fx-alignment: center; -fx-padding: 20px;");
 
         VBox layout2 = new VBox(10);
-        layout2.getChildren().addAll(colorComboBox,btnAddPlayer, taPlayer);
-        layout2.setAlignment(Pos.BASELINE_RIGHT);
+        layout2.getChildren().addAll(colorComboBox, taPlayer, btnAddPlayer);
+        layout2.setAlignment(Pos.BOTTOM_CENTER);
         layout.getChildren().add(layout2);
 
         // Create the initial scene
-        Scene scene = new Scene(layout, 1000, 800);
+        Scene scene = new Scene(layout, WIDTH, HEIGHT);
 
         //Set's the programs icon
         Display.ChangeIcon(playerSelectStage);
@@ -290,12 +284,25 @@ public class TicketToRide extends Application
         Board board = new Board();
         ImageView ticketToRideNYMap = board.getTicketToRideImage();
 
+        //Creates a VBox for the left side of the borderPane to display the players in turn order
+        VBox leftPlayersVBox = new VBox();
+
         // Wrap the ImageView in a StackPane to apply padding
         StackPane imageContainer = new StackPane();
         //Adds the ticketToRideNYMap to the imageContainer
         imageContainer.getChildren().add(ticketToRideNYMap);
 
-        Board.HighlightRectanglesOnImage(imageContainer);
+        HighlightRectanglesOnImageTest highlightRectangles = new HighlightRectanglesOnImageTest();
+        Pane overlayPane = highlightRectangles.getOverlayPane();
+
+        if(overlayPane != null)
+        {
+            imageContainer.getChildren().add(overlayPane);
+        }
+        else
+        {
+            System.out.println("Overlay Pane is null");
+        }
 
         //Adds the image container to the center of the borderPane
         borderPane.setCenter(imageContainer);
@@ -438,9 +445,10 @@ public class TicketToRide extends Application
         Button btnRandomCard = new Button("Please Select A Card");
 
         // Define the URL for the button background image
-        String imageUrl = getClass().getResource("/com/example/tickettoride/RemadeCardImages/TransportationCardBack.png").toExternalForm();
+        String imageUrl = getClass().getResource("/com/example/tickettoride/TransportCards/BackTransportationCard.png").toExternalForm();
         // Set the button's background to the image
-        btnRandomCard.setStyle("-fx-background-image: url('" + imageUrl + "'); " +
+        btnRandomCard.setStyle(
+                "-fx-background-image: url('" + imageUrl + "'); " +
                 "-fx-background-position: center; " +
                 "-fx-background-repeat: no-repeat; " +
                 "-fx-background-size: cover; " +
@@ -448,14 +456,14 @@ public class TicketToRide extends Application
                 "-fx-text-fill: RED;" +
                 "-fx-font-weight: BOLD;"
         );
+
         //Set height and width of button
-        btnRandomCard.setPrefHeight(150);
-        btnRandomCard.setPrefWidth(250);
+        btnRandomCard.setPrefHeight(100);
+        btnRandomCard.setPrefWidth(150);
 
-
-
-        // Set Button Action
-        btnRandomCard.setOnAction(event -> {
+        //Set Button Action
+        btnRandomCard.setOnAction(event ->
+        {
             // Use the instance of selectRandomCard
             transportationCard.selectRandomCard();
             // Update the ImageView with the new card image
@@ -468,17 +476,22 @@ public class TicketToRide extends Application
         rightVBox.getChildren().addAll(btnRandomCard, cardImage);
         borderPane.setRight(rightVBox);
 
-        LabelPane lblEast = new LabelPane("Draw & Discard area!");
-        lblEast.setPadding(new Insets(50));
+        Display display = new Display();
+
+        //Label containing the first Player's name
+        VBox playerVBox = display.getPlayerInfoVBox();
+
+        //Adds the first Player's information to the leftPlayersVBox
+        leftPlayersVBox.getChildren().add(playerVBox);
 
         //setup of borderPane displays titles
         //borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
         borderPane.setTop(hBox);
         borderPane.setBottom(new LabelPane("Displays current players hand!"));
-        borderPane.setLeft(new LabelPane("Displays players in turn order with points!"));
+        borderPane.setLeft(leftPlayersVBox);
 
         //Initializes the scene
-        Scene scene = new Scene(borderPane, 1200, 1000);
+        Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
 
         Display.ChangeIcon(primaryStage); //Sets the programs icon
         primaryStage.setTitle(TITLE); //Title of Game
@@ -486,6 +499,12 @@ public class TicketToRide extends Application
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    //Separate method for creating a player object
+    private Player createPlayer(String playerName, Color color)
+    {
+        return new Player(playerName, 0, 0, 0, new ArrayList<>(), new ArrayList<>(), 15, color);
     }
 
     public static void main(String[] args)

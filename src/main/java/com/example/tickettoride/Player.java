@@ -137,15 +137,79 @@ public class Player
         setColor(color);
     }
 
-    //Method to draw cards from the deck
-    public void drawCard()
+    public void addTransportationCard(TransportationCard card)
     {
-        //Draws a card from the deck
+        transportationCards.add(card);
     }
 
-    //Method to place cards in the discard pile
-    public void discardCard()
+    public void addDestinationCard(DestinationCard card)
     {
-        //Places a card in the discard pile
+        destinationCards.add(card);
+    }
+
+    public void removeTransportationCard(TransportationCard card)
+    {
+        transportationCards.remove(card);
+    }
+
+    public void removeDestinationCard(DestinationCard card)
+    {
+        destinationCards.remove(card);
+    }
+
+    public List<TransportationCard> getTransportationCards()
+    {
+        return transportationCards;
+    }
+
+    public List<DestinationCard> getDestinationCards()
+    {
+        return destinationCards;
+    }
+
+    public void setTransportationCards(List<TransportationCard> transportationCards)
+    {
+        this.transportationCards = transportationCards;
+    }
+
+    public void setDestinationCards(List<DestinationCard> destinationCards)
+    {
+        this.destinationCards = destinationCards;
+    }
+
+    public void incrementScore(int score)
+    {
+        this.score += score;
+    }
+
+    public void decrementScore(int score)
+    {
+        this.score -= score;
+    }
+
+    public void incrementNumTransportationCards(int numTransportationCards)
+    {
+        this.numTransportationCards += numTransportationCards;
+    }
+
+    public void decrementNumTransportationCards(int numTransportationCards)
+    {
+        this.numTransportationCards -= numTransportationCards;
+    }
+
+    public void incrementNumDestinationCards(int numDestinationCards)
+    {
+        this.numDestinationCards += numDestinationCards;
+    }
+
+    public void decrementNumDestinationCards(int numDestinationCards)
+    {
+        this.numDestinationCards -= numDestinationCards;
+    }
+
+
+    public void decrementNumGamePieces(int numGamePieces)
+    {
+        this.numGamePieces -= numGamePieces;
     }
 }

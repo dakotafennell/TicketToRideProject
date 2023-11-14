@@ -27,18 +27,18 @@ public class TransportationCard extends Application
     private final ImageView cardImageView = new ImageView();
     private final ImageView transportationDeckImageView = new ImageView();
     public static final String[] CARDIMAGEPATHS = {
-            "/com/example/tickettoride/RemadeCardImages/BlueTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/GreenTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/BlackTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/PinkTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/RedTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/YellowTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/TaxiTransportationCard.png"
+            "/com/example/tickettoride/TransportCards/BlueTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/GreenTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/BlackTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/PinkTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/RedTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/YellowTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/TaxiTransportationCard.png"
     };
-    private final String deckBack = "com/example/tickettoride/RemadeCardImages/TransportationCardBack.png";
+    private final String deckBack = "com/example/tickettoride/TransportCards/BackTransportationCard.png";
 
     //Colors for the cards
-    private final Color[] colors = {Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.YELLOW, Color.ORANGE,};
+    private final Color[] colors = {Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.YELLOW, Color.ORANGE, Color.WHITE};
 
     //Card values
     private Color blueTransportationCard = colors[0];
@@ -56,11 +56,7 @@ public class TransportationCard extends Application
     private Color orangeTransportationCard = colors[6];
 
     //Set taxi card to all available colors
-
-    public static void main(String[] args)
-    {
-        launch(args);
-    }
+    private Color taxiTransportationCard = colors[7];
 
     @Override
     public void start(Stage primaryStage)
@@ -73,9 +69,6 @@ public class TransportationCard extends Application
         Button btnRandomCard = new Button("Random Card");
         ImageView transportationDeckImageView = new ImageView();
         HBox hbox = new HBox(20); //Spacing = 10 (pixels)
-
-        // Initialize the transportationDeckImageView here
-        //transportationDeckImageView.setImage(new Image(getClass().getResource(deckBack).toExternalForm(),150, 200, true, false));
 
         primaryStage.setOnShowing(event ->
         {
@@ -126,5 +119,10 @@ public class TransportationCard extends Application
         cardImageView.setImage(selectedCardImage);
 
         return selectedCardImage;
+    }
+
+    public static void main(String[] args)
+    {
+        launch(args);
     }
 }

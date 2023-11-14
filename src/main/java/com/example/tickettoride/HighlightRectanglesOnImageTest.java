@@ -23,6 +23,8 @@ public class HighlightRectanglesOnImageTest extends Application
     public static final Duration ANIMATION_DURATION = Duration.seconds(2);
     public static double rotationAngle;
 
+    private Pane overlayPane;
+
     private Rectangle[] initializeRouteRectangles(double[][] positions)
     {
         Rectangle[] routes = new Rectangle[positions.length];
@@ -74,6 +76,8 @@ public class HighlightRectanglesOnImageTest extends Application
     {
         try
         {
+            overlayPane = new Pane();
+
             File imageFile = new File("src/main/resources/com/example/tickettoride/Game_Map_v2.PNG");
             String imageUrl = imageFile.toURI().toURL().toString();
             Image ticketToRideImage = new Image(imageUrl, 1200, 1000, true, false);
@@ -121,6 +125,10 @@ public class HighlightRectanglesOnImageTest extends Application
             e.printStackTrace();
             System.out.println("Could not load image");
         }
+    }
+
+    public Pane getOverlayPane() {
+        return overlayPane;
     }
 
     public static void main(String[] args)

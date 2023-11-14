@@ -25,13 +25,13 @@ public class TransportationCards extends Application {
     public static final ImageView cardImageView = new ImageView();
 
     public static final String[] cardImagePaths = {
-            "/com/example/tickettoride/RemadeCardImages/BlueTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/GreenTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/BlackTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/PinkTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/RedTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/YellowTransportationCard.png",
-            "/com/example/tickettoride/RemadeCardImages/TaxiTransportationCard.png"
+            "/com/example/tickettoride/TransportCards/BlueTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/GreenTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/BlackTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/PinkTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/RedTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/YellowTransportationCard.png",
+            "/com/example/tickettoride/TransportCards/TaxiTransportationCard.png"
     };
 
     public static void main(String[] args) {
