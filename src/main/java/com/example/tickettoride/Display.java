@@ -6,7 +6,6 @@ import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.layout.BackgroundImage;
 
 import java.io.File;
 
@@ -14,7 +13,6 @@ import java.io.File;
 public class Display
 {
     TicketToRide game = new TicketToRide();
-    private final ObservableList<Player> currentPlayers = game.getCurrentPlayers();
 
     //This class will contain logic for displaying the game window and each of the game's components.
 
@@ -27,15 +25,24 @@ public class Display
         primaryStage.getIcons().add(new Image(iconUrl));
     }
 
+    private final ObservableList<Player> Players;
+
+    // Constructor that takes the current players list
+    public Display(ObservableList<Player> currentPlayers)
+    {
+        this.Players = currentPlayers;
+    }
+
     //Method that will create a VBox for the player information
     //This method will be called when the game is started and when a player's information changes
     //This method calls the players information from the ObservableList currentPlayers
     public VBox getPlayerInfoVBox()
     {
         // Check if the list of current players is empty
-        if (currentPlayers.isEmpty())
+        if (Players.isEmpty())
         {
             System.out.println("No players have been added.");
+            //returns nothing if the list is empty
             return null;
         }
         else
@@ -48,7 +55,7 @@ public class Display
             playersVBox.getChildren().add(firstSeparator);
 
             //Iterates through each player in the currentPlayers list
-            for (Player player : currentPlayers)
+            for (Player player : Players)
             {
                 //Creates labels for player information
                 Label playerLabel = new Label("Player: " + player.getName());

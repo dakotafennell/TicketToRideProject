@@ -32,7 +32,7 @@ public class TicketToRide extends Application
     private int currentNumPlayers;
 
     //Stores Player objects in a list
-    private ObservableList<Player> currentPlayers = FXCollections.observableArrayList();
+    public ObservableList<Player> currentPlayers = FXCollections.observableArrayList();
 
     @Override
     public void start(Stage primaryStage)
@@ -126,10 +126,10 @@ public class TicketToRide extends Application
         });
     }
 
-    //Returns the current number of players
-    public ObservableList<Player> getCurrentPlayers()
+    //Returns the current players
+    public ObservableList<Player> getCurrentPlayers(ObservableList<Player> currentPlayers)
     {
-        return currentPlayers;
+        return this.currentPlayers;
     }
 
     //sets up border and allows text to be displayed
@@ -205,47 +205,64 @@ public class TicketToRide extends Application
 
         confirmButton.setOnAction(e ->
         {
-            //Sets the number of players to the value of the ComboBox
-            int currentNumPlayers = playerComboBox.getValue();
-
-            colorComboBox.visibleProperty().setValue(true);
-            taPlayer.visibleProperty().setValue(true);
-            btnAddPlayer.visibleProperty().setValue(true);
-
-            btnAddPlayer.setOnAction(event ->
+            try
             {
-                if (!taPlayer.getText().isEmpty() && colorComboBox.getValue() != null)
+                //Sets the number of players to the value of the ComboBox
+                int currentNumPlayers = playerComboBox.getValue();
+
+                colorComboBox.visibleProperty().setValue(true);
+                taPlayer.visibleProperty().setValue(true);
+                btnAddPlayer.visibleProperty().setValue(true);
+
+                btnAddPlayer.setOnAction(event ->
                 {
-                    Player playerInfo = createPlayer(taPlayer.getText(), Color.valueOf(colorComboBox.getValue()));
-                    currentPlayers.add(playerInfo);
-                    taPlayer.clear();
-
-                    // Remove the selected color only if it exists in the ComboBox
-                    if (colorComboBox.getItems().contains(colorComboBox.getValue()))
+                    try
                     {
-                        colorComboBox.getItems().remove(colorComboBox.getValue());
-                    }
-
-                    System.out.println(currentPlayers.size());
-
-                    if (currentPlayers.size() == currentNumPlayers)
-                    {
-                        //Prints the name and color of each player to the console
-                        for (Player player : currentPlayers)
+                        if (!taPlayer.getText().isEmpty() && colorComboBox.getValue() != null)
                         {
-                            System.out.println(player.getName() + " " + String.valueOf(player.getColor()));
+                            Player playerInfo = createPlayer(taPlayer.getText(), Color.valueOf(colorComboBox.getValue()));
+                            currentPlayers.add(playerInfo);
+                            taPlayer.clear();
+
+                            // Remove the selected color only if it exists in the ComboBox
+                            if (colorComboBox.getItems().contains(colorComboBox.getValue()))
+                            {
+                                colorComboBox.getItems().remove(colorComboBox.getValue());
+                                //clears the current selection from the combobox
+                                colorComboBox.getSelectionModel().clearSelection();
+                            }
+
+                            System.out.println(currentPlayers.size());
+
+                            if (currentPlayers.size() == currentNumPlayers)
+                            {
+                                //Prints the name and color of each player to the console
+                                for (Player player : currentPlayers)
+                                {
+                                    System.out.println(player.getName() + " " + String.valueOf(player.getColor()));
+                                }
+                                //Opens the game interface
+                                playerSelectStage.close();
+                                Stage primaryStage = new Stage();
+                                createGameInterface(primaryStage);
+                            }
                         }
-                        //Opens the game interface
-                        playerSelectStage.close();
-                        Stage primaryStage = new Stage();
-                        createGameInterface(primaryStage);
+                        else
+                        {
+                            System.out.println("Please enter player name and select color.");
+                        }
                     }
-                }
-                else
-                {
-                    System.out.println("Please enter player name and select color.");
-                }
-            });
+                    catch (NullPointerException exception)
+                    {
+                        //displays the details of the null pointer exception
+                        System.out.println(exception.toString());
+                    }
+                });
+            }
+            catch (NullPointerException exception)
+            {
+                System.out.println("Please select the number of players.");
+            }
         });
 
         // Create a VBox to arrange the UI elements
@@ -476,7 +493,7 @@ public class TicketToRide extends Application
         rightVBox.getChildren().addAll(btnRandomCard, cardImage);
         borderPane.setRight(rightVBox);
 
-        Display display = new Display();
+        Display display = new Display(currentPlayers);
 
         //Label containing the first Player's name
         VBox playerVBox = display.getPlayerInfoVBox();
