@@ -20,9 +20,9 @@ public class Player
     private int numGamePieces;
     private List<TransportationCard> transportationCards;
     private List<DestinationCard> destinationCards;
-    private Color color;
+    private Color playerColor;
 
-    public Player(String name)
+    public Player()
     {
         this.name = name;
         this.score = 0;
@@ -31,10 +31,10 @@ public class Player
         this.numGamePieces = 0;
         this.transportationCards = new ArrayList<TransportationCard>();
         this.destinationCards = new ArrayList<DestinationCard>();
-        this.color = color;
+        this.playerColor = playerColor;
     }
 
-    public Player(String name, int score, int numTransportationCards, int numDestinationCards, List<TransportationCard> transportationCards, List<DestinationCard> destinationCards, int numGamePieces, Color color)
+    public Player(String name, int score, int numTransportationCards, int numDestinationCards, List<TransportationCard> transportationCards, List<DestinationCard> destinationCards, int numGamePieces, Color playerColor)
     {
         this.name = name;
         this.score = score;
@@ -43,7 +43,7 @@ public class Player
         this.numGamePieces = numGamePieces;
         this.transportationCards = new ArrayList<TransportationCard>();
         this.destinationCards = new ArrayList<DestinationCard>();
-        this.color = color;
+        this.playerColor = playerColor;
     }
 
     protected void setNumPlayers(int numPlayers)
@@ -121,20 +121,20 @@ public class Player
         }
     }
 
-    public Color getColor()
+    public Color getPlayerColor()
     {
-        return color;
+        return playerColor;
     }
 
-    public void setColor(Color color)
+    public void setPlayerColor(Color playerColor)
     {
-        this.color = color;
+        this.playerColor = playerColor;
     }
 
     public void setNameAndColor(String name, Color color)
     {
         setName(name);
-        setColor(color);
+        setPlayerColor(color);
     }
 
     public void addTransportationCard(TransportationCard card)

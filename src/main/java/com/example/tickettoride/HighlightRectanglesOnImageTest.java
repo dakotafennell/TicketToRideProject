@@ -113,9 +113,10 @@ public class HighlightRectanglesOnImageTest extends Application
 
             // Add rectangles to overlay pane
             overlayPane.getChildren().addAll(lincolnCenterRoutes);
+            Result result = new Result(imageView, overlayPane);
 
             // Stack the image view and overlay pane
-            primaryStage.setScene(new Scene(new javafx.scene.layout.StackPane(imageView, overlayPane)));
+            primaryStage.setScene(new Scene(new javafx.scene.layout.StackPane(result.imageView(), result.overlayPane())));
             primaryStage.setResizable(false);
             primaryStage.setTitle("Ticket To Ride: New York");
             primaryStage.show();
@@ -125,6 +126,9 @@ public class HighlightRectanglesOnImageTest extends Application
             e.printStackTrace();
             System.out.println("Could not load image");
         }
+    }
+
+    private record Result(ImageView imageView, Pane overlayPane) {
     }
 
     public Pane getOverlayPane() {

@@ -25,8 +25,8 @@ public class TicketToRide extends Application
 {
     public static final String TITLE = "Ticket to Ride: New York";
     public static final String AUTHORS = "By: Austin, Joseph, and Louis";
-    public static final int HEIGHT = 1000;
-    public static final int WIDTH = 1200;
+    public static final int HEIGHT = 1080;
+    public static final int WIDTH = 1440;
 
     //Contains the number of players
     private int currentNumPlayers;
@@ -239,7 +239,7 @@ public class TicketToRide extends Application
                                 //Prints the name and color of each player to the console
                                 for (Player player : currentPlayers)
                                 {
-                                    System.out.println(player.getName() + " " + String.valueOf(player.getColor()));
+                                    System.out.println(player.getName() + " " + String.valueOf(player.getPlayerColor()));
                                 }
                                 //Opens the game interface
                                 playerSelectStage.close();
@@ -299,6 +299,8 @@ public class TicketToRide extends Application
 
         //Creates a new board object then gets the map image from the board class
         Board board = new Board();
+
+        //Creates an ImageView for the map image
         ImageView ticketToRideNYMap = board.getTicketToRideImage();
 
         //Creates a VBox for the left side of the borderPane to display the players in turn order
@@ -493,9 +495,10 @@ public class TicketToRide extends Application
         rightVBox.getChildren().addAll(btnRandomCard, cardImage);
         borderPane.setRight(rightVBox);
 
+        //Creates a new Display object, passing the currentPlayers list to it
         Display display = new Display(currentPlayers);
 
-        //Label containing the first Player's name
+        //Creates the player name's display VBox using a method from the Display class
         VBox playerVBox = display.getPlayerInfoVBox();
 
         //Adds the first Player's information to the leftPlayersVBox

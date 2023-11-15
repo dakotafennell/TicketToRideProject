@@ -22,26 +22,26 @@ import java.io.File;
 
 public class HighlightRectanglesOnImage extends Application
 {
-    public static final double WIDTH = 62.5;
-    public static final double HEIGHT = 22;
+    public static final double WIDTH = 50;
+    public static final double HEIGHT = 15;
 
     //Route rectangles
     //Lincoln Center to Times Square Green route 0
-    Rectangle LCtoTS0 = new Rectangle(70, 20, WIDTH, HEIGHT);
+    Rectangle LCtoTS0 = new Rectangle(30, 20, WIDTH, HEIGHT);
     //Lincoln Center to Times Square Green route 1
-    Rectangle LCtoTS1 = new Rectangle(90, 40, WIDTH, HEIGHT);
+    Rectangle LCtoTS1 = new Rectangle(50, 40, WIDTH, HEIGHT);
     //Lincoln Center to Times Square Blue route 0
-    Rectangle LCtoTS2 = new Rectangle(190, 89, WIDTH, HEIGHT);
+    Rectangle LCtoTS2 = new Rectangle(150, 89, WIDTH, HEIGHT);
     //Lincoln Center to Times Square Blue route 1
-    Rectangle LCtoTS3 = new Rectangle(220, 147, WIDTH, HEIGHT);
+    Rectangle LCtoTS3 = new Rectangle(180, 147, WIDTH, HEIGHT);
     //Lincoln Center to Midtown West Red route 0
-    Rectangle LCtoMW0 = new Rectangle(130, 110, WIDTH, HEIGHT);
+    Rectangle LCtoMW0 = new Rectangle(90, 110, WIDTH, HEIGHT);
     //Lincoln Center to Midtown West Red route 1
-    Rectangle LCtoMW1 = new Rectangle(130, 175, WIDTH, HEIGHT);
+    Rectangle LCtoMW1 = new Rectangle(90, 175, WIDTH, HEIGHT);
     //Lincoln Center to Central Park Orange route 0
-    Rectangle LCtoCP0 = new Rectangle(205, 40, WIDTH, HEIGHT);
+    Rectangle LCtoCP0 = new Rectangle(165, 40, WIDTH, HEIGHT);
     //Lincoln Center to Central Park Orange route 1
-    Rectangle LCtoCP1 = new Rectangle(270, 40, WIDTH, HEIGHT);
+    Rectangle LCtoCP1 = new Rectangle(230, 40, WIDTH, HEIGHT);
 
     Rectangle[] LincolnCenterRoutes = {LCtoTS0, LCtoTS1, LCtoTS2, LCtoTS3,
             LCtoMW0, LCtoMW1, LCtoCP0, LCtoCP1};
@@ -95,11 +95,12 @@ public class HighlightRectanglesOnImage extends Application
             // Load the image from a file
             File imageFile = new File("src/main/resources/com/example/tickettoride/Game_Map_v2.PNG");
             String imageUrl = imageFile.toURI().toURL().toString();
-            Image ticketToRideImage = new Image(imageUrl, 1200, 1000,
-                    true, false);
+            Board board = new Board();
+
 
             //Load the image
-            ImageView imageView = new ImageView(ticketToRideImage);
+            ImageView ticketToRideImage = board.getTicketToRideImage();
+            //ImageView imageView = new ImageView(ticketToRideImage);
 
             // Create an overlay pane
             Pane overlayPane = new Pane();
@@ -254,7 +255,7 @@ public class HighlightRectanglesOnImage extends Application
             overlayPane.getChildren().addAll(LincolnCenterRoutes);
 
             // Stack the image view and overlay pane
-            StackPane stackPane = new StackPane(imageView, overlayPane);
+            StackPane stackPane = new StackPane(ticketToRideImage, overlayPane);
 
             // Create a scene
             Scene scene = new Scene(stackPane);

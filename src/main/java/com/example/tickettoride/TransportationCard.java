@@ -100,6 +100,11 @@ public class TransportationCard extends Application
         primaryStage.show();
     }
 
+    //Method to store the card color and enumerate the card to keep track of the number of each type of card the user has
+    //in their hand
+
+
+    //Method to select a random card from the deck
     public Image selectRandomCard()
     {
         Random random = new Random();
