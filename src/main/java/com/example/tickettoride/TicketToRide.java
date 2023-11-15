@@ -3,7 +3,6 @@ package com.example.tickettoride;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.geometry.Insets;
@@ -172,15 +171,14 @@ public class TicketToRide extends Application
                 "-fx-text-fill: White;" +
                 "-fx-font-weight: BOLD");
 
-        //text area for player names
+        //text field for player names
         TextField taPlayer = new TextField();
         //Sets the width of the text area
         taPlayer.setPrefColumnCount(10);
         //Sets the maximum width of the text area
-        taPlayer.setMaxWidth(200);
+        taPlayer.setMaxWidth(150);
         //Sets the maximum height of the text area
-        taPlayer.setMaxHeight(10);
-
+        taPlayer.setMaxHeight(50);
         taPlayer.setPromptText("Enter Player Name Here");
         taPlayer.visibleProperty().setValue(false);
         //Creates a button for adding players
@@ -212,6 +210,16 @@ public class TicketToRide extends Application
 
         //Creates the Confirm button
         Button confirmButton = new Button("Confirm");
+
+        Alert playerNameAlert = new Alert(Alert.AlertType.WARNING);
+        playerNameAlert.setTitle("Input Required");
+        playerNameAlert.setHeaderText(null); // No header text
+        playerNameAlert.setContentText("Please enter player name and select color.");
+
+        Alert playerSelectionAlert = new Alert(Alert.AlertType.WARNING);
+        playerSelectionAlert.setTitle("Selction Required");
+        playerSelectionAlert.setHeaderText(null); // No header text
+        playerSelectionAlert.setContentText("Please Enter Number Of Players.");
 
         //Event handler for the confirm button
         confirmButton.setOnAction(e ->
@@ -275,6 +283,8 @@ public class TicketToRide extends Application
                         else
                         {
                             System.out.println("Please enter player name and select color.");
+                            playerNameAlert.showAndWait();
+
                         }
                     }
                     catch (NullPointerException exception)
@@ -286,6 +296,7 @@ public class TicketToRide extends Application
             }
             catch (NullPointerException exception)
             {
+                playerSelectionAlert.showAndWait();
                 System.out.println("Please select the number of players.");
             }
         });
