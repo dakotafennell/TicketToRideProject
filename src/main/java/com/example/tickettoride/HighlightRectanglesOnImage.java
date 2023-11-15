@@ -20,8 +20,28 @@ import java.io.File;
 
 public class HighlightRectanglesOnImage extends Application
 {
-    public static final double WIDTH = 50;
+    //Rectangle height
     public static final double HEIGHT = 15;
+    //Rectangle width for 1 block routes
+    public static final double WIDTH = 50;
+
+    //Rectangle width for 2 block routes
+    public static final double WIDTH2 = 100;
+    //Rectangle width for 3 block routes
+    public static final double WIDTH3 = 150;
+    //Rectangle width for 4 block routes
+    public static final double WIDTH4 = 200;
+    //Rectangle for 2 block long routes
+    Rectangle twoBlockRoute = new Rectangle(WIDTH2, HEIGHT);
+    //Position information for the rectangle
+    double x = 0;
+    double y = 0;
+
+    //Rectangle for 3 block long routes
+    Rectangle threeBlockRoute = new Rectangle(WIDTH3, HEIGHT);
+
+    //Rectangle for 4 block long routes
+    Rectangle fourBlockRoute = new Rectangle(WIDTH4, HEIGHT);
 
     //Route rectangles
     //Lincoln Center to Times Square Green route 0
@@ -34,8 +54,9 @@ public class HighlightRectanglesOnImage extends Application
     Rectangle LCtoTSBlue1 = new Rectangle(180, 147, WIDTH, HEIGHT);
     //Lincoln Center to Midtown West Red route 0
     //Rectangle LCtoMW0 = new Rectangle(104, 90, WIDTH, HEIGHT);
+    Rectangle LCtoMWRed = new Rectangle(80, 115, WIDTH2, HEIGHT);
     //Lincoln Center to Midtown West Red route 1
-    Rectangle LCtoMW = new Rectangle(104, 140, 100, 15);
+    //Rectangle LCtoMW = new Rectangle(104, 140, 100, 15);
     //Lincoln Center to Central Park Orange route 0
     Rectangle LCtoCP0 = new Rectangle(165, 40, WIDTH, HEIGHT);
     //Lincoln Center to Central Park Orange route 1
@@ -148,7 +169,7 @@ public class HighlightRectanglesOnImage extends Application
 
     Rectangle[] allRoutes =
     {
-            LCtoCP0, LCtoCP1, LCtoMW, LCtoTSGreen0, LCtoTSGreen1, LCtoTSBlue0, LCtoTSBlue1,
+            LCtoCP0, LCtoCP1, LCtoMWRed, LCtoTSGreen0, LCtoTSGreen1, LCtoTSBlue0, LCtoTSBlue1,
             CPtoTSBlack0, CPtoTSBlack1, CPtoTSRed0, CPtoTSRed1, CPtoUN0, CPtoUN1, CPtoUN2, MWtoC0, MWtoC1, MWtoESB0,
             MWtoESB1, MWtoTS0, TStoESBOrange, TStoESBPink, TStoUN0, TStoUN1, UNtoESB, UNtoGP0, UNtoGP1, UNtoGP2, CtoS0,
             CtoS1, CtoS2, CtoS3, CtoGVGreen0, CtoGVGreen1, CtoGVGreen2, CtoGVRed0, CtoGVRed1, CtoGVRed2, CtoGP0, CtoGP1,
@@ -178,7 +199,7 @@ public class HighlightRectanglesOnImage extends Application
             Glow glow = new Glow(2);
 
             //Sets all rectangles in the array to fill yellow
-            for (Rectangle rectangle : LincolnCenterRoutes)
+            for (Rectangle rectangle : allRoutes)
             {
                 //Sets the rectangle fill to yellow
                 rectangle.setFill(Color.YELLOW);
@@ -188,9 +209,9 @@ public class HighlightRectanglesOnImage extends Application
             }
 
             //Sets the rectangle fill to yellow
-            LCtoMW.setFill(Color.YELLOW);
-            LCtoMW.rotateProperty().set(90);
-            LCtoMW.setEffect(glow);
+            twoBlockRoute.setFill(Color.YELLOW);
+            twoBlockRoute.rotateProperty().set(90);
+            LCtoMWRed.setEffect(glow);
 
             for (Rectangle rectangle : LCtoCP)
             {
@@ -287,7 +308,7 @@ public class HighlightRectanglesOnImage extends Application
             //if else for displaying the rectangles based on the cards the player has
 
             //Add the rectangles to the overlay pane
-            overlayPane.getChildren().addAll(LincolnCenterRoutes);
+            overlayPane.getChildren().addAll(twoBlockRoute, threeBlockRoute, fourBlockRoute);
             //overlayPane.getChildren().addAll(allRoutes);
 
             // Stack the image view and overlay pane
