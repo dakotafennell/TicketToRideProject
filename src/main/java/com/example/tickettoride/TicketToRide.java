@@ -227,9 +227,11 @@ public class TicketToRide extends Application
 
                 confirmButton.setDisable(true);
 
-                // Add an EventFilter to consume Enter key events
-                taPlayer.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-                    if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+                //Adds an EventFilter to consume Enter key events
+                taPlayer.addEventFilter(KeyEvent.KEY_PRESSED, event ->
+                {
+                    if (event.getCode() == javafx.scene.input.KeyCode.ENTER)
+                    {
                         //Clicks the add player button
                         btnAddPlayer.fire();
                     }
@@ -251,7 +253,7 @@ public class TicketToRide extends Application
                                 colorComboBox.getItems().remove(colorComboBox.getValue());
                                 //clears the current selection from the combobox
                                 colorComboBox.getSelectionModel().clearSelection();
-
+                                colorComboBox.setPromptText("Select Player Color");
                             }
 
                             System.out.println(currentPlayers.size());
@@ -297,12 +299,12 @@ public class TicketToRide extends Application
         layout.setStyle("-fx-alignment: center; -fx-padding: 20px;");
 
         VBox layout2 = new VBox(10);
-        //Center Background, No Repeat, Size 800 by 1085
+        //Center Background, No Repeat, Size 800 by 1080
         // Align Title, Authors and select options center, Padding 20px
         layout.setStyle("-fx-background-image: url('" + imageUrl + "'); " +
                 "-fx-background-position: center center; " +
                 "-fx-background-repeat: no-repeat; " +
-                "-fx-background-size: 800px 1085px;" +
+                "-fx-background-size: 800px 1080px;" +
                 "-fx-alignment: center; -fx-padding: 20px;");
         layout2.getChildren().addAll(colorComboBox, taPlayer, btnAddPlayer);
         layout2.setAlignment(Pos.BOTTOM_CENTER);
