@@ -63,8 +63,8 @@ public class TicketToRide extends Application
         titleLabel.setTextFill(Color.BLACK);
         //Sets the style of the titleLabel with a background color and 50% opacity with rounded corners, a black border
         //set to 3 pixels wide, and a font size of 50px and San-serif font.
-        titleLabel.setStyle("-fx-background-color: rgba(255, 255, 255, 0.75); -fx-background-radius: 10; " +
-                "-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-font: 50px \"serif\"; -fx-font-weight: bold");
+        titleLabel.setStyle("-fx-background-color: rgba(0, 0, 0, 0.50); -fx-background-radius: 10; " +
+                "-fx-border-color: black; -fx-border-radius: 10;-fx-text-fill: white; -fx-border-width: 3; -fx-font: 50px \"serif\"; -fx-font-weight: bold");
         //Increases the spacing between the titleLabel and the authorsLabel
         titleLabel.setPadding(new Insets(0, 0, 50, 0));
 
@@ -146,31 +146,39 @@ public class TicketToRide extends Application
     //Method that will display the player count and selection screen
     private void createPlayerSelection(Stage playerSelectStage)
     {
-        //Creates a label with the games title
-        Label titleLabel = new Label(TITLE);
-        //Sets the font size of the title label
-        titleLabel.setStyle("-fx-font-size: 32pt;");
+        //imageURL of table.png
+        String imageUrl = getClass().getResource("/com/example/tickettoride/Table.png").toExternalForm();
 
-        //Creates a label with the games authors
+        // Create a label with the game title
+        Label titleLabel = new Label(TITLE);
+        titleLabel.setTextFill(Color.BLACK);
+        //Sets the style of the titleLabel with a background color and 60% opacity with rounded corners, a black border
+        //set to 3 pixels wide, and a font size of 50px and San-serif font.
+        //Set text fill to white
+        titleLabel.setStyle("-fx-background-color: rgba(0, 0, 0, 0.60);  -fx-background-radius: 10; " +
+                "-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-text-fill: white;-fx-font: 50px \"serif\"; -fx-font-weight: bold ");
+
+        //Create labels for Authors
         Label authorsLabel = new Label(AUTHORS);
-        //Sets the font size of the authors label
-        authorsLabel.setStyle("-fx-font-size: 20;");
-        //Sets the padding of the authors label
-        authorsLabel.setPadding(new Insets(20, 0, 20, 0));
+        //Increases the spacing between the titleLabel and the authorsLabel
+        authorsLabel.setPadding(new Insets(0, 0, 50, 0));
+        // Authors label
+        //Font size: 25px
+        //Text Color: white
+        //Font Weight: BOLD
+        authorsLabel.setStyle("-fx-font: 25px \"serif\"; " +
+                "-fx-text-fill: White;" +
+                "-fx-font-weight: BOLD");
 
         //text area for player names
         TextArea taPlayer = new TextArea();
-        //Label placed directly to the left of the text area
-        Label playerLabel = new Label("Player Names:");
-        //Sets the playerLabel to the left of the text area
-        playerLabel.setLabelFor(taPlayer);
         //Sets the width of the text area
         taPlayer.setPrefColumnCount(10);
         //Sets the maximum width of the text area
-        taPlayer.setMaxWidth(200);
+        taPlayer.setMaxWidth(150);
         //Sets the maximum height of the text area
-        taPlayer.setMaxHeight(10);
-        taPlayer.setPromptText("Enter player name here");
+        taPlayer.setMaxHeight(50);
+        taPlayer.setPromptText("Enter Player Name Here");
         taPlayer.visibleProperty().setValue(false);
         //Creates a button for adding players
         Button btnAddPlayer = new Button("Add Player");
@@ -188,12 +196,13 @@ public class TicketToRide extends Application
         //and the color itself so that when the color is selected the value of the Color object is returned
         colorComboBox.getItems().addAll("WHITE", "BLUE", "PURPLE", "YELLOW");
         //Sets the prompt text for the ComboBox
+        colorComboBox.setPromptText("Select Player Color");
         colorComboBox.visibleProperty().setValue(false);
 
         //Creates the ComboBox for selecting the number of players
         ComboBox<Integer> playerComboBox = new ComboBox<>();
         playerComboBox.getItems().addAll(2, 3, 4);
-        playerComboBox.setPromptText("Number of players");
+        playerComboBox.setPromptText("Number Of Players");
 
         //Sets the default value of the ComboBox to blank
         playerComboBox.setValue(null);
@@ -231,6 +240,7 @@ public class TicketToRide extends Application
                                 colorComboBox.getItems().remove(colorComboBox.getValue());
                                 //clears the current selection from the combobox
                                 colorComboBox.getSelectionModel().clearSelection();
+
                             }
 
                             System.out.println(currentPlayers.size());
@@ -276,6 +286,13 @@ public class TicketToRide extends Application
         layout.setStyle("-fx-alignment: center; -fx-padding: 20px;");
 
         VBox layout2 = new VBox(10);
+        //Center Background, No Repeat, Size 800 by 1085
+        // Align Title, Authors and select options center, Padding 20px
+        layout.setStyle("-fx-background-image: url('" + imageUrl + "'); " +
+                "-fx-background-position: center center; " +
+                "-fx-background-repeat: no-repeat; " +
+                "-fx-background-size: 800px 1085px;" +
+                "-fx-alignment: center; -fx-padding: 20px;");
         layout2.getChildren().addAll(colorComboBox, taPlayer, btnAddPlayer);
         layout2.setAlignment(Pos.BOTTOM_CENTER);
         layout.getChildren().add(layout2);
@@ -484,6 +501,14 @@ public class TicketToRide extends Application
         //Set height and width of button
         btnRandomCard.setMinHeight(200);
         btnRandomCard.setMinWidth(250);
+
+        primaryStage.setOnShowing(event ->
+        {
+            // Use the instance of selectRandomCard
+            transportationCard.selectRandomCard();
+            // Update the ImageView with the new card image
+            cardImage.setImage(TransportationCard.cardImageView.getImage());
+        });
 
         //Set Button Action
         btnRandomCard.setOnAction(event ->
