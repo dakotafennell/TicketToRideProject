@@ -3,6 +3,7 @@ package com.example.tickettoride;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.geometry.Insets;
@@ -10,6 +11,7 @@ import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -171,13 +173,14 @@ public class TicketToRide extends Application
                 "-fx-font-weight: BOLD");
 
         //text area for player names
-        TextArea taPlayer = new TextArea();
+        TextField taPlayer = new TextField();
         //Sets the width of the text area
         taPlayer.setPrefColumnCount(10);
         //Sets the maximum width of the text area
         taPlayer.setMaxWidth(200);
         //Sets the maximum height of the text area
         taPlayer.setMaxHeight(10);
+
         taPlayer.setPromptText("Enter Player Name Here");
         taPlayer.visibleProperty().setValue(false);
         //Creates a button for adding players
@@ -223,6 +226,14 @@ public class TicketToRide extends Application
                 btnAddPlayer.visibleProperty().setValue(true);
 
                 confirmButton.setDisable(true);
+
+                // Add an EventFilter to consume Enter key events
+                taPlayer.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+                    if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+                        //Clicks the add player button
+                        btnAddPlayer.fire();
+                    }
+                });
 
                 btnAddPlayer.setOnAction(event ->
                 {
