@@ -175,9 +175,9 @@ public class TicketToRide extends Application
         //Sets the width of the text area
         taPlayer.setPrefColumnCount(10);
         //Sets the maximum width of the text area
-        taPlayer.setMaxWidth(150);
+        taPlayer.setMaxWidth(200);
         //Sets the maximum height of the text area
-        taPlayer.setMaxHeight(50);
+        taPlayer.setMaxHeight(10);
         taPlayer.setPromptText("Enter Player Name Here");
         taPlayer.visibleProperty().setValue(false);
         //Creates a button for adding players
