@@ -63,7 +63,7 @@ public class TicketToRide extends Application
         titleLabel.setTextFill(Color.BLACK);
         //Sets the style of the titleLabel with a background color and 50% opacity with rounded corners, a black border
         //set to 3 pixels wide, and a font size of 50px and San-serif font.
-        titleLabel.setStyle("-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 10; " +
+        titleLabel.setStyle("-fx-background-color: rgba(255, 255, 255, 0.75); -fx-background-radius: 10; " +
                 "-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-font: 50px \"serif\"; -fx-font-weight: bold");
         //Increases the spacing between the titleLabel and the authorsLabel
         titleLabel.setPadding(new Insets(0, 0, 50, 0));
@@ -138,13 +138,8 @@ public class TicketToRide extends Application
         public LabelPane(String title)
         {
             getChildren().add(new Label(title));
-            setStyle(
-                    "-fx-border-style: solid inside;"
-                    +"-fx-border-width: 3;"
-                    +"-fx-border-radius: 4;"
-                    +"-fx-border-color: GRAY;"
-            );
-            setPadding(new Insets(20, 30,50,30));
+            //setStyle("-fx-border-style: solid inside;" +"-fx-border-width: 3;" +"-fx-border-radius: 4;" +"-fx-border-color: GRAY;");
+            //setPadding(new Insets(20, 30,50,30));
         }
     }
 
@@ -203,6 +198,7 @@ public class TicketToRide extends Application
         //Creates the Confirm button
         Button confirmButton = new Button("Confirm");
 
+        //Event handler for the confirm button
         confirmButton.setOnAction(e ->
         {
             try
@@ -213,6 +209,8 @@ public class TicketToRide extends Application
                 colorComboBox.visibleProperty().setValue(true);
                 taPlayer.visibleProperty().setValue(true);
                 btnAddPlayer.visibleProperty().setValue(true);
+
+                confirmButton.setDisable(true);
 
                 btnAddPlayer.setOnAction(event ->
                 {
@@ -239,7 +237,8 @@ public class TicketToRide extends Application
                                 //Prints the name and color of each player to the console
                                 for (Player player : currentPlayers)
                                 {
-                                    System.out.println(player.getName() + " " + String.valueOf(player.getPlayerColor()));
+                                    //Prints out the Player's name and the plain text value of their chosen color from the combobox
+                                    System.out.println(player.getName() + " " + player.getPlayerColor().toString());
                                 }
                                 //Opens the game interface
                                 playerSelectStage.close();
@@ -325,6 +324,7 @@ public class TicketToRide extends Application
 
         //Adds the image container to the center of the borderPane
         borderPane.setCenter(imageContainer);
+        borderPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         //Create HBox and buttons for top of game
         //This will have the rules, scoring, about, save, and load buttons
@@ -359,6 +359,7 @@ public class TicketToRide extends Application
 
         menuBar.getMenus().addAll(fileMenu, aboutMenu);
         hBox.getChildren().addAll(menuBar);
+        hBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         //Event for the exitMenuItem
         exitMenuItem.setOnAction(actionEvent ->
@@ -452,13 +453,14 @@ public class TicketToRide extends Application
         });
 
         //Create Button to select random card.
-        TransportationCards transportationCard = new TransportationCards();
+        TransportationCard transportationCard = new TransportationCard();
 
         // Create ImageView to display the selected card image
         ImageView cardImage = new ImageView();
         // Set height and width of card image.
         cardImage.setFitWidth(250);
         cardImage.setFitHeight(200);
+        cardImage.setPreserveRatio(true);
 
         // Create Button to select random card
         Button btnRandomCard = new Button("Please Select A Card");
@@ -470,15 +472,23 @@ public class TicketToRide extends Application
                 "-fx-background-image: url('" + imageUrl + "'); " +
                 "-fx-background-position: center; " +
                 "-fx-background-repeat: no-repeat; " +
-                "-fx-background-size: cover; " +
+                "-fx-background-size: 250px 200px; " +
                 "-fx-font: 22px \"PLUSH\"; " +
                 "-fx-text-fill: RED;" +
                 "-fx-font-weight: BOLD;"
         );
 
         //Set height and width of button
-        btnRandomCard.setPrefHeight(100);
-        btnRandomCard.setPrefWidth(150);
+        btnRandomCard.setMinHeight(200);
+        btnRandomCard.setMinWidth(250);
+
+        primaryStage.setOnShowing(event ->
+        {
+            // Use the instance of selectRandomCard
+            transportationCard.selectRandomCard();
+            // Update the ImageView with the new card image
+            cardImage.setImage(TransportationCard.cardImageView.getImage());
+        });
 
         //Set Button Action
         btnRandomCard.setOnAction(event ->
@@ -486,11 +496,13 @@ public class TicketToRide extends Application
             // Use the instance of selectRandomCard
             transportationCard.selectRandomCard();
             // Update the ImageView with the new card image
-            cardImage.setImage(TransportationCards.cardImageView.getImage());
+            cardImage.setImage(TransportationCard.cardImageView.getImage());
         });
 
         // Add Button and ImageView to Right Side
-        VBox rightVBox = new VBox(); // Create a VBox for layout
+        VBox rightVBox = new VBox(); //Create a VBox for layout
+        rightVBox.setMinWidth(400); //Set the width of the VBox
+        rightVBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         // Add the button and ImageView to the VBox
         rightVBox.getChildren().addAll(btnRandomCard, cardImage);
         borderPane.setRight(rightVBox);
@@ -503,11 +515,17 @@ public class TicketToRide extends Application
 
         //Adds the first Player's information to the leftPlayersVBox
         leftPlayersVBox.getChildren().add(playerVBox);
+        leftPlayersVBox.setMinWidth(250);
+        leftPlayersVBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         //setup of borderPane displays titles
         //borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
         borderPane.setTop(hBox);
-        borderPane.setBottom(new LabelPane("Displays current players hand!"));
+        LabelPane bottomLabelPane = new LabelPane("Displays current players turn!");
+        bottomLabelPane.setMinHeight(200);
+        bottomLabelPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        borderPane.setBottom(bottomLabelPane);
+
         borderPane.setLeft(leftPlayersVBox);
 
         //Initializes the scene
