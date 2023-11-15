@@ -159,14 +159,17 @@ public class TicketToRide extends Application
         authorsLabel.setPadding(new Insets(20, 0, 20, 0));
 
         //text area for player names
-        Label playerLabel = new Label("Player Names:");
         TextArea taPlayer = new TextArea();
+        //Label placed directly to the left of the text area
+        Label playerLabel = new Label("Player Names:");
+        //Sets the playerLabel to the left of the text area
+        playerLabel.setLabelFor(taPlayer);
         //Sets the width of the text area
         taPlayer.setPrefColumnCount(10);
         //Sets the maximum width of the text area
-        taPlayer.setMaxWidth(150);
+        taPlayer.setMaxWidth(200);
         //Sets the maximum height of the text area
-        taPlayer.setMaxHeight(50);
+        taPlayer.setMaxHeight(10);
         taPlayer.setPromptText("Enter player name here");
         taPlayer.visibleProperty().setValue(false);
         //Creates a button for adding players
@@ -481,14 +484,6 @@ public class TicketToRide extends Application
         //Set height and width of button
         btnRandomCard.setMinHeight(200);
         btnRandomCard.setMinWidth(250);
-
-        primaryStage.setOnShowing(event ->
-        {
-            // Use the instance of selectRandomCard
-            transportationCard.selectRandomCard();
-            // Update the ImageView with the new card image
-            cardImage.setImage(TransportationCard.cardImageView.getImage());
-        });
 
         //Set Button Action
         btnRandomCard.setOnAction(event ->

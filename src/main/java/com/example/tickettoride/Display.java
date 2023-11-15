@@ -57,6 +57,7 @@ public class Display
             //Iterates through each player in the currentPlayers list
             for (Player player : Players)
             {
+
                 //Creates labels for player information
                 Label playerLabel = new Label("Player: " + player.getName());
                 Label scoreLabel = new Label("Score: " + player.getScore());
