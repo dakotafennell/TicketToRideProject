@@ -93,7 +93,6 @@ public class HighlightRectanglesOnImageTest extends Application
 
             rotationAngle = 63;
 
-
             // Initialize route rectangles
             Rectangle[] lincolnCenterRoutes = initializeRouteRectangles(lcPositions);
             Rectangle[] lcToTsg = initializeRouteRectangles(lCtoGPositions);

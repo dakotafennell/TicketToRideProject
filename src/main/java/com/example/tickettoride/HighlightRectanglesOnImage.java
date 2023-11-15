@@ -287,8 +287,8 @@ public class HighlightRectanglesOnImage extends Application
             //if else for displaying the rectangles based on the cards the player has
 
             //Add the rectangles to the overlay pane
-            //overlayPane.getChildren().addAll(LCtoCP0);
-            overlayPane.getChildren().addAll(allRoutes);
+            overlayPane.getChildren().addAll(LincolnCenterRoutes);
+            //overlayPane.getChildren().addAll(allRoutes);
 
             // Stack the image view and overlay pane
             StackPane stackPane = new StackPane(ticketToRideImage, overlayPane);
@@ -310,6 +310,8 @@ public class HighlightRectanglesOnImage extends Application
 
             //Disable resizing of the window
             primaryStage.setResizable(false);
+
+            initializeClickableRectangles(allRoutes);
 
             // Set the scene and show the stage
             primaryStage.setScene(scene);
@@ -373,6 +375,18 @@ public class HighlightRectanglesOnImage extends Application
 
         // Play the timeline
         timeline.play();
+    }
+
+    private void initializeClickableRectangles(Rectangle[] rectangles)
+    {
+        for (Rectangle rectangle : rectangles)
+        {
+            rectangle.setOnMouseClicked(event ->
+            {
+                //Handle click event for the rectangle
+                System.out.println("Clicked on a rectangle");
+            });
+        }
     }
 
     public static void main(String[] args)
