@@ -7,7 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -543,13 +544,73 @@ public class TicketToRide extends Application
             cardImage.setImage(TransportationCard.cardImageView.getImage());
         });
 
+        //--------------------------------------------------------------------------------
+
+        //Create Button to select random card.
+        DestinationCard destinationCard = new DestinationCard();
+
+        // Create ImageView to display the selected card image
+        ImageView destinationImage = new ImageView();
+        // Set height and width of card image.
+        destinationImage.setFitWidth(250);
+        destinationImage.setFitHeight(200);
+        destinationImage.setPreserveRatio(true);
+
+        // Create Button to select random card
+        Button btnDestinationCard = new Button("Please Select A Card");
+
+        // Define the URL for the button background image
+        String imageDestinationUrl = getClass().getResource("/com/example/tickettoride/DestinationCards/BackOfTransportationCard.png").toExternalForm();
+        // Set the button's background to the image
+        btnDestinationCard.setStyle(
+                "-fx-background-image: url('" + imageDestinationUrl + "'); " +
+                        "-fx-background-position: center; " +
+                        "-fx-background-repeat: no-repeat; " +
+                        "-fx-background-size: 250px 200px; " +
+                        "-fx-font: 22px \"PLUSH\"; " +
+                        "-fx-text-fill: RED;" +
+                        "-fx-font-weight: BOLD;"
+        );
+
+        //Set height and width of button
+        btnDestinationCard.setMinHeight(200);
+        btnDestinationCard.setMinWidth(250);
+
+        primaryStage.setOnShowing(event ->
+        {
+            // Use the instance of selectRandomCard
+            destinationCard.selectRandomCard();
+            // Update the ImageView with the new card image
+            destinationImage.setImage(DestinationCard.cardImageView.getImage());
+        });
+
+        //Set Button Action
+        btnDestinationCard.setOnAction(event ->
+        {
+            // Use the instance of selectRandomCard
+            destinationCard.selectRandomCard();
+            // Update the ImageView with the new card image
+            destinationImage.setImage(DestinationCard.cardImageView.getImage());
+        });
+
+
         // Add Button and ImageView to Right Side
         VBox rightVBox = new VBox(); //Create a VBox for layout
         rightVBox.setMinWidth(400); //Set the width of the VBox
         rightVBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         // Add the button and ImageView to the VBox
-        rightVBox.getChildren().addAll(btnRandomCard, cardImage);
+        rightVBox.getChildren().addAll(btnRandomCard, cardImage, btnDestinationCard, destinationImage);
         borderPane.setRight(rightVBox);
+
+        //add textoutput area set to bottom of left panes VBox
+        TextArea textOutput = new TextArea();
+        textOutput.setPrefColumnCount(10);
+        textOutput.setWrapText(true);
+        //textOutput.setPrefWidth(250);
+        textOutput.setPrefHeight(300);
+        textOutput.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        textOutput.setEditable(false);
+        textOutput.setScrollTop(5);
 
         //Creates a new Display object, passing the currentPlayers list to it
         Display display = new Display(currentPlayers);
@@ -558,7 +619,7 @@ public class TicketToRide extends Application
         VBox playerVBox = display.getPlayerInfoVBox();
 
         //Adds the first Player's information to the leftPlayersVBox
-        leftPlayersVBox.getChildren().add(playerVBox);
+        leftPlayersVBox.getChildren().addAll(playerVBox);
         leftPlayersVBox.setMinWidth(250);
         leftPlayersVBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
@@ -571,6 +632,7 @@ public class TicketToRide extends Application
         borderPane.setBottom(bottomLabelPane);
 
         borderPane.setLeft(leftPlayersVBox);
+
 
         //Initializes the scene
         Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
