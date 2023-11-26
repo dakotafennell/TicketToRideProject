@@ -491,6 +491,9 @@ public class TicketToRide extends Application
                                   By: Austin Bradley,
                                          Louis Fennell III,
                                          Joseph Lemois
+                                         
+                                  Artwork copied from original
+                                  game.
                                   __________________________
                                   """);
             dialog.getDialogPane().getButtonTypes().add(buttonType);
