@@ -127,4 +127,8 @@ public class DestinationCard extends Application
         launch(args);
     }
 
+    public void removeCardFromDeck()
+    {
+
+    }
 }

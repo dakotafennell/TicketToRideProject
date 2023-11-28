@@ -7,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -15,8 +14,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import java.io.File;
 import java.util.*;
 
 /**
@@ -347,6 +344,10 @@ public class TicketToRide extends Application
         //Creates an ImageView for the map image
         ImageView ticketToRideNYMap = board.getTicketToRideImage();
 
+        HighlightRoutes highlightRoutes = new HighlightRoutes();
+
+        highlightRoutes.highlightRectangles(ticketToRideNYMap);
+
         //Creates a VBox for the left side of the borderPane to display the players in turn order
         VBox leftPlayersVBox = new VBox();
 
@@ -559,14 +560,6 @@ public class TicketToRide extends Application
         btnDestinationCard.setMinHeight(200);
         btnDestinationCard.setMinWidth(250);
 
-        primaryStage.setOnShowing(event ->
-        {
-            // Use the instance of selectRandomCard
-            destinationCard.selectRandomCard();
-            // Update the ImageView with the new card image
-            destinationImage.setImage(DestinationCard.cardImageView.getImage());
-        });
-
         //Set Button Action
         btnDestinationCard.setOnAction(event ->
         {
@@ -574,6 +567,19 @@ public class TicketToRide extends Application
             destinationCard.selectRandomCard();
             // Update the ImageView with the new card image
             destinationImage.setImage(DestinationCard.cardImageView.getImage());
+
+            //Creates an event handler to store the selected card in the player's hand when the card is clicked
+            destinationImage.setOnMouseClicked(
+                event1 ->
+                {
+                    //Adds the selected card to the player's hand
+                    currentPlayers.get(0).addDestinationCard(destinationCard);
+                    //Removes the selected card from the deck
+                    destinationCard.removeCardFromDeck();
+                    //adds the selected card to the current player's list of destination cards
+                    currentPlayers.get(0).addDestinationCard(destinationCard);
+                }
+            );
         });
 
 

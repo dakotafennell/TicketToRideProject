@@ -1,20 +1,17 @@
 package com.example.tickettoride;
 import javafx.animation.*;
-import javafx.application.Application;
-import javafx.scene.Scene;
+
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.File;
-
-public class HighlightRoutes extends Application
+public class HighlightRoutes
 {
     public static final double HEIGHT = 15;
     public static final double WIDTH = 50;
@@ -116,21 +113,16 @@ public class HighlightRoutes extends Application
             ChinatownToBrooklynOrange, WallStreetToBrooklynBlue, WallStreetToBrooklynBlack, ChelseaToSoho
     };
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage)
+    public Pane highlightRectangles(ImageView overlay)
     {
         try {
             // Load the image from a file
-            File imageFile = new File("src/main/resources/com/example/tickettoride/Game_Map_v2.PNG");
-            String imageUrl = imageFile.toURI().toURL().toString();
-            Board board = new Board();
+            //File imageFile = new File("src/main/resources/com/example/tickettoride/Game_Map_v2.PNG");
+            //String imageUrl = imageFile.toURI().toURL().toString();
+            //Board board = new Board();
 
-            // Load the image
-            ImageView ticketToRideImage = board.getTicketToRideImage();
+            //Load the image
+            //ImageView ticketToRideImage = board.getTicketToRideImage();
 
             // Create an overlay pane
             Pane overlayPane = new Pane();
@@ -212,19 +204,14 @@ public class HighlightRoutes extends Application
             overlayPane.getChildren().addAll(threeBlockRoutes);
             overlayPane.getChildren().addAll(fourBlockRoutes);
 
-            // Create a scene
-            Scene scene = new Scene(new StackPane(ticketToRideImage, overlayPane));
-
             initializeClickableRectangles(allRectangles, timeline);
 
-            // Set the scene and show the stage
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Ticket To Ride: New York");
-            primaryStage.setResizable(false);
-            primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Could not load image");
+            return overlayPane;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error: " + e.getMessage());
+            return null;
         }
     }
 
@@ -275,7 +262,7 @@ public class HighlightRoutes extends Application
         }
 
         timeline.setAutoReverse(true);
-        // Set the timeline to repeat indefinitely
+        //Sets the timeline to repeat indefinitely
         timeline.setCycleCount(Animation.INDEFINITE);
 
         // Play the timeline
