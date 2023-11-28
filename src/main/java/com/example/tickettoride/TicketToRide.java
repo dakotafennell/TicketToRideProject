@@ -218,7 +218,7 @@ public class TicketToRide extends Application
         playerNameAlert.setContentText("Please enter player name and select color.");
 
         Alert playerSelectionAlert = new Alert(Alert.AlertType.WARNING);
-        playerSelectionAlert.setTitle("Selction Required");
+        playerSelectionAlert.setTitle("Selection Required");
         playerSelectionAlert.setHeaderText(null); // No header text
         playerSelectionAlert.setContentText("Please Enter Number Of Players.");
 
@@ -354,18 +354,6 @@ public class TicketToRide extends Application
         StackPane imageContainer = new StackPane();
         //Adds the ticketToRideNYMap to the imageContainer
         imageContainer.getChildren().add(ticketToRideNYMap);
-
-        HighlightRectanglesOnImageTest highlightRectangles = new HighlightRectanglesOnImageTest();
-        Pane overlayPane = highlightRectangles.getOverlayPane();
-
-        if(overlayPane != null)
-        {
-            imageContainer.getChildren().add(overlayPane);
-        }
-        else
-        {
-            System.out.println("Overlay Pane is null");
-        }
 
         //Adds the image container to the center of the borderPane
         borderPane.setCenter(imageContainer);
@@ -530,14 +518,6 @@ public class TicketToRide extends Application
         btnRandomCard.setMinHeight(200);
         btnRandomCard.setMinWidth(250);
 
-        primaryStage.setOnShowing(event ->
-        {
-            // Use the instance of selectRandomCard
-            transportationCard.selectRandomCard();
-            // Update the ImageView with the new card image
-            cardImage.setImage(TransportationCard.cardImageView.getImage());
-        });
-
         //Set Button Action
         btnRandomCard.setOnAction(event ->
         {
@@ -605,7 +585,7 @@ public class TicketToRide extends Application
         rightVBox.getChildren().addAll(btnRandomCard, cardImage, btnDestinationCard, destinationImage);
         borderPane.setRight(rightVBox);
 
-        //add textoutput area set to bottom of left panes VBox
+        //adds text output area set to bottom of left panes VBox
         TextArea textOutput = new TextArea();
         textOutput.setPrefColumnCount(10);
         textOutput.setWrapText(true);
