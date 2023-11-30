@@ -229,10 +229,20 @@ public class HighlightRoutes extends Application
 
     public Pane highlightRectangles(Pane overlay)
     {
-        try {
-            // Create an overlay pane
-            StackPane overlayPane = new StackPane();
+        try
+        {
+            //Initializes a new board object
+            Board board = new Board();
 
+            //Loads the image
+            ImageView ticketToRideNYMap = board.getTicketToRideImage();
+
+            // Create an overlay pane
+            Pane overlayPane = new Pane();
+
+            //Adds the image to the overlay pane
+            overlayPane.getChildren().add(ticketToRideNYMap);
+            //Creates a glow effect for the rectangles
             Glow glow = new Glow(2);
             //Set initial brightness
             ColorAdjust colorAdjust = new ColorAdjust();

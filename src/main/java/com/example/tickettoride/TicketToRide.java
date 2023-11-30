@@ -125,30 +125,13 @@ public class TicketToRide extends Application
         });
     }
 
-    //Returns the current players
-    public ObservableList<Player> getCurrentPlayers(ObservableList<Player> currentPlayers)
-    {
-        return this.currentPlayers;
-    }
-
-    //sets up border and allows text to be displayed
-    class LabelPane extends StackPane
-    {
-        public LabelPane(String title)
-        {
-            getChildren().add(new Label(title));
-            //setStyle("-fx-border-style: solid inside;" +"-fx-border-width: 3;" +"-fx-border-radius: 4;" +"-fx-border-color: GRAY;");
-            //setPadding(new Insets(20, 30,50,30));
-        }
-    }
-
     //Method that will display the player count and selection screen
     private void createPlayerSelection(Stage playerSelectStage)
     {
         //imageURL of table.png
         String imageUrl = getClass().getResource("/com/example/tickettoride/Table.png").toExternalForm();
 
-        // Create a label with the game title
+        //Creates a label with the game title
         Label titleLabel = new Label(TITLE);
         titleLabel.setTextFill(Color.BLACK);
         //Sets the style of the titleLabel with a background color and 60% opacity with rounded corners, a black border
@@ -340,16 +323,8 @@ public class TicketToRide extends Application
 
         Pane overlayPane = new Pane();
 
-        //Creates a new board object then gets the map image from the board class
-        Board board = new Board();
-
-        //Creates an ImageView for the map image
-        ImageView ticketToRideNYMap = board.getTicketToRideImage();
-
         //Creates a new HighlightRoutes object
         HighlightRoutes highlightRoutes = new HighlightRoutes();
-
-        //Overlay the highlight routes on the map
 
         //Creates a VBox for the left side of the borderPane to display the players in turn order
         VBox leftPlayersVBox = new VBox();
@@ -357,11 +332,11 @@ public class TicketToRide extends Application
         // Wrap the ImageView in a StackPane to apply padding
         StackPane imageContainer = new StackPane();
         //Adds the ticketToRideNYMap to the imageContainer
-        imageContainer.getChildren().add(ticketToRideNYMap);
+        //imageContainer.getChildren().add(ticketToRideNYMap);
 
         try
         {
-            imageContainer.getChildren().add(highlightRoutes.highlightRectangles(overlayPane));
+            imageContainer.getChildren().add(highlightRoutes.highlightRectangles(imageContainer));
         }
         catch (Exception e)
         {
@@ -369,11 +344,11 @@ public class TicketToRide extends Application
             e.printStackTrace();
         }
 
-        imageContainer.setMaxWidth(800);
-        imageContainer.setMaxHeight(1000);
+        imageContainer.setAlignment(Pos.CENTER);
 
         //Adds the image container to the center of the borderPane
         borderPane.setCenter(imageContainer);
+        borderPane.autosize();
         borderPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         //Create HBox and buttons for top of game
@@ -518,22 +493,28 @@ public class TicketToRide extends Application
         // Create Button to select random card
         Button btnRandomCard = new Button("Please Select A Card");
 
-        // Define the URL for the button background image
-        String imageUrl = getClass().getResource("/com/example/tickettoride/TransportCards/BackTransportationCard.png").toExternalForm();
-        // Set the button's background to the image
-        btnRandomCard.setStyle(
-                "-fx-background-image: url('" + imageUrl + "'); " +
-                "-fx-background-position: center; " +
-                "-fx-background-repeat: no-repeat; " +
-                "-fx-background-size: 250px 200px; " +
-                "-fx-font: 22px \"PLUSH\"; " +
-                "-fx-text-fill: RED;" +
-                "-fx-font-weight: BOLD;"
-        );
-
-        //Set height and width of button
-        btnRandomCard.setMinHeight(200);
-        btnRandomCard.setMinWidth(250);
+        try
+        {
+            // Define the URL for the button background image
+            String imageUrl = getClass().getResource("/com/example/tickettoride/TransportCards/BackTransportationCard.png").toExternalForm();
+            // Set the button's background to the image
+            btnRandomCard.setStyle(
+                    "-fx-background-image: url('" + imageUrl + "'); " +
+                            "-fx-background-position: center; " +
+                            "-fx-background-repeat: no-repeat; " +
+                            "-fx-background-size: 250px 200px; " +
+                            "-fx-font: 22px \"PLUSH\"; " +
+                            "-fx-text-fill: RED;" +
+                            "-fx-font-weight: BOLD;"
+            );
+            //Set height and width of button
+            btnRandomCard.setMinHeight(200);
+            btnRandomCard.setMinWidth(250);
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("The selected card image path is null.");
+        }
 
         //Set Button Action
         btnRandomCard.setOnAction(event ->
@@ -542,6 +523,8 @@ public class TicketToRide extends Application
             transportationCard.selectRandomCard();
             // Update the ImageView with the new card image
             cardImage.setImage(TransportationCard.cardImageView.getImage());
+            Player player = currentPlayers.get(0);
+            player.addTransportationCard(transportationCard);
         });
 
         //--------------------------------------------------------------------------------

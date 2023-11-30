@@ -21,13 +21,13 @@ public class TransportationCard extends Application
     private final ImageView transportationDeckImageView = new ImageView();
 
     //Card images
-    private static final String BLUECARD = "/com/example/tickettoride/TransportCards/BlueTransportationCard.png";
-    private static final String GREENCARD = "/com/example/tickettoride/TransportCards/GreenTransportationCard.png";
-    private static final String BLACKCARD = "/com/example/tickettoride/TransportCards/BlackTransportationCard.png";
-    private static final String PINKCARD = "/com/example/tickettoride/TransportCards/PinkTransportationCard.png";
-    private static final String REDCARD = "/com/example/tickettoride/TransportCards/RedTransportationCard.png";
-    private static final String YELLOWCARD = "/com/example/tickettoride/TransportCards/YellowTransportationCard.png";
-    private static final String TAXICARD = "/com/example/tickettoride/TransportCards/TaxiTransportationCard.png";
+    private static final String BLUECARD = "/com/example/tickettoride/TransportCards/BlueCard.png";
+    private static final String GREENCARD = "/com/example/tickettoride/TransportCards/GreenCard.png";
+    private static final String BLACKCARD = "/com/example/tickettoride/TransportCards/BlackCard.png";
+    private static final String PINKCARD = "/com/example/tickettoride/TransportCards/PinkCard.png";
+    private static final String REDCARD = "/com/example/tickettoride/TransportCards/RedCard.png";
+    private static final String YELLOWCARD = "/com/example/tickettoride/TransportCards/OrangeCard.png";
+    private static final String TAXICARD = "/com/example/tickettoride/TransportCards/RainbowCard.png";
 
 
     private static final String BACK = "com/example/tickettoride/TransportCards/BackTransportationCard.png";
@@ -120,13 +120,24 @@ public class TransportationCard extends Application
         final int imageWidth = 1000;
         final int imageHeight = 800;
 
-        Image selectedCardImage = new Image(getClass().getResource(selectedCardImagePath).toExternalForm(),
-                imageWidth, imageHeight, true, false);
+        try
+        {
+            Image selectedCardImage = new Image(getClass().getResource(selectedCardImagePath).toExternalForm(),
+                    imageWidth, imageHeight, true, false);
 
-        // Set the selected card image to the cardImageView
-        cardImageView.setImage(selectedCardImage);
+            // Set the selected card image to the cardImageView
+            cardImageView.setImage(selectedCardImage);
 
-        return selectedCardImage;
+            return selectedCardImage;
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
+            System.out.println("The selected card image path is null.");
+            //Prints out to the console the specific card image path that is null
+            System.out.println("The selected card image path is: " + selectedCardImagePath);
+        }
+        return null;
     }
 
     //Method to

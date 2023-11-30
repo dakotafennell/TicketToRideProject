@@ -59,11 +59,19 @@ public class Display
             //Creates a label for the current player's number of taxis
             Label currentPlayerTaxisLabel = new Label("Taxis: " + Players.get(0).getNumGamePieces());
 
-            //Adds the current player's information to the VBox
-            //.getChildren().addAll(currentPlayerNameLabel, currentPlayerScoreLabel, currentPlayerTaxisLabel);
+            //Prints out the number of each color Transportation Cards the player has
+            for (int i = 0; i < Players.get(0).getNumTransportationCards(); i++)
+            {
+                //Creates a label for the current player's number of taxis
+                Label currentPlayerTransportationCardsColorLabel =
+                        new Label("Transportation Cards: " + Players.get(0).getNumTransportationCards());
+            }
 
-            //Adds the current player's VBox to the HBox
-            //currentPlayerHBox.getChildren().add();
+            Label currentPlayerDestinationCardsLabel =
+                    new Label("Destination Cards: " + Players.get(0).getNumDestinationCards());
+
+            //Adds the current player's information to the VBox
+            currentPlayerHBox.getChildren().addAll(currentPlayerNameLabel, currentPlayerScoreLabel, currentPlayerTaxisLabel);
 
             //Returns the HBox containing the current player's information
             return currentPlayerHBox;
@@ -94,6 +102,10 @@ public class Display
             //Iterates through each player in the currentPlayers list
             for (Player player : Players)
             {
+                //Adds a margin to the left of the player's information
+                playersVBox.setMargin(playersVBox, new javafx.geometry.Insets(0, 0, 0, 10));
+                //Sets the font size for the player's information
+                playersVBox.setStyle("-fx-font-size: 20px;");
                 //Creates labels for player information
                 Label playerLabel = new Label("Player: " + player.getName());
                 Label scoreLabel = new Label("Score: " + player.getScore());

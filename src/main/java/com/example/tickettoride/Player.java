@@ -23,7 +23,7 @@ public class Player
     private Color playerColor;
 
 
-    String[][] testArray = {
+    public String[][] testArray = {
             {"Color.BLUE", "0"},
             {"Color.GREEN", "0"},
             {"Color.BLACK", "0"},
