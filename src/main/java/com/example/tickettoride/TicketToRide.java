@@ -623,6 +623,15 @@ public class TicketToRide extends Application
         //Creates the player name's display VBox using a method from the Display class
         VBox playerVBox = display.getPlayerInfoVBox();
 
+        //Displays the current player's turn
+        Display currentTurn = new Display(currentPlayers);
+
+        //Creates a new HBox for the current player's information
+        HBox currentPlayerHBox = new HBox();
+
+        //Adds the current player's information to the HBox
+        currentPlayerHBox.getChildren().add(currentTurn.getBottomPlayersInventoryHBox());
+
         //Adds the first Player's information to the leftPlayersVBox
         leftPlayersVBox.getChildren().addAll(playerVBox);
         leftPlayersVBox.setMinWidth(250);
@@ -632,6 +641,7 @@ public class TicketToRide extends Application
         //borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
         borderPane.setTop(hBox);
         LabelPane bottomLabelPane = new LabelPane("Displays current players turn!");
+
         bottomLabelPane.setMinHeight(200);
         bottomLabelPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         borderPane.setBottom(bottomLabelPane);
