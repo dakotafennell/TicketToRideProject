@@ -632,6 +632,9 @@ public class TicketToRide extends Application
         //Adds the current player's information to the HBox
         currentPlayerHBox.getChildren().add(currentTurn.getBottomPlayersInventoryHBox());
 
+        currentPlayerHBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        borderPane.setBottom(currentPlayerHBox);
+
         //Adds the first Player's information to the leftPlayersVBox
         leftPlayersVBox.getChildren().addAll(playerVBox);
         leftPlayersVBox.setMinWidth(250);
@@ -640,14 +643,9 @@ public class TicketToRide extends Application
         //setup of borderPane displays titles
         //borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
         borderPane.setTop(hBox);
-        LabelPane bottomLabelPane = new LabelPane("Displays current players turn!");
-
-        bottomLabelPane.setMinHeight(200);
-        bottomLabelPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        borderPane.setBottom(bottomLabelPane);
+        currentPlayerHBox.setMinHeight(200);
 
         borderPane.setLeft(leftPlayersVBox);
-
 
         //Initializes the scene
         Scene scene = new Scene(borderPane, WIDTH, HEIGHT);

@@ -35,7 +35,7 @@ public class Display
     }
 
     //Method that will create a HBox that will contain the current player's information
-    //This method will be called
+    //This method is ready for you to update Joseph Lemois
     public HBox getBottomPlayersInventoryHBox()
     {
         // Check if the list of current players is empty
