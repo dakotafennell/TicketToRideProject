@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.lang.reflect.Array;
 import java.util.Random;
 
 public class TransportationCard extends Application
@@ -28,30 +29,33 @@ public class TransportationCard extends Application
     private static final String YELLOWCARD = "/com/example/tickettoride/TransportCards/YellowTransportationCard.png";
     private static final String TAXICARD = "/com/example/tickettoride/TransportCards/TaxiTransportationCard.png";
 
-    //Array of card image paths
-    public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, YELLOWCARD, TAXICARD};
+
     private static final String BACK = "com/example/tickettoride/TransportCards/BackTransportationCard.png";
 
     //Colors for the cards
-    private final Color[] colors = {Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.YELLOW, Color.ORANGE, Color.WHITE};
+    private final Color[] colors = {
+            Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.YELLOW, Color.ORANGE, Color.WHITE
+    };
+
+    //public String[][] cards = {{"Color.BLUE", "0"}, {Color.GREEN, 0}, {Color.BLACK, 0}, {Color.PINK, 0}, {Color.RED, 0}, {Color.YELLOW, 0}, {Color.ORANGE, 0}, {Color.WHITE, 0}};
 
     //Card values
-    private final Color blueTransportationCard = colors[0];
+    private final Color blueCard = colors[0];
 
-    private final Color greenTransportationCard = colors[1];
+    private final Color greenCard = colors[1];
 
-    private final Color blackTransportationCard = colors[2];
+    private final Color blackCard = colors[2];
 
-    private final Color pinkTransportationCard = colors[3];
+    private final Color pinkCard = colors[3];
 
-    private final Color redTransportationCard = colors[4];
+    private final Color redCard = colors[4];
 
-    private final Color yellowTransportationCard = colors[5];
+    private final Color yellowCard = colors[5];
 
-    private final Color orangeTransportationCard = colors[6];
+    private final Color orangeCard = colors[6];
 
     //Set taxi card to all available colors
-    private final Color taxiTransportationCard = colors[7];
+    private final Color taxiCard = colors[7];
 
     @Override
     public void start(Stage primaryStage)
@@ -100,6 +104,9 @@ public class TransportationCard extends Application
         primaryStage.show();
     }
 
+    //Array of card image paths
+    public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, YELLOWCARD, TAXICARD};
+
     //Method to select a random card from the deck
     public Image selectRandomCard()
     {
@@ -121,6 +128,43 @@ public class TransportationCard extends Application
 
         return selectedCardImage;
     }
+
+    //Method to
+
+    /*
+    if (selectedCardImagePath.equals(BACK))
+        {
+            transportationDeckImageView.setImage(selectedCardImage);
+        }
+        else if (selectedCardImagePath.equals(BLUECARD))
+        {
+            BlueCards += 1;
+        }
+        else if (selectedCardImagePath.equals(GREENCARD))
+        {
+            GreenCards += 1;
+        }
+        else if (selectedCardImagePath.equals(BLACKCARD))
+        {
+
+        }
+        else if (selectedCardImagePath.equals(PINKCARD))
+        {
+
+        }
+        else if (selectedCardImagePath.equals(REDCARD))
+        {
+
+        }
+        else if (selectedCardImagePath.equals(YELLOWCARD))
+        {
+
+        }
+        else if (selectedCardImagePath.equals(TAXICARD))
+        {
+
+        }
+     */
 
     public static void main(String[] args)
     {

@@ -288,7 +288,7 @@ public class TicketToRide extends Application
                     catch (NullPointerException exception)
                     {
                         //displays the details of the null pointer exception
-                        System.out.println(exception.toString());
+                        System.out.println(exception);
                     }
                 });
             }
@@ -338,15 +338,18 @@ public class TicketToRide extends Application
         //Creates a new borderPane
         BorderPane borderPane = new BorderPane();
 
+        Pane overlayPane = new Pane();
+
         //Creates a new board object then gets the map image from the board class
         Board board = new Board();
 
         //Creates an ImageView for the map image
         ImageView ticketToRideNYMap = board.getTicketToRideImage();
 
+        //Creates a new HighlightRoutes object
         HighlightRoutes highlightRoutes = new HighlightRoutes();
 
-        highlightRoutes.highlightRectangles(ticketToRideNYMap);
+        //Overlay the highlight routes on the map
 
         //Creates a VBox for the left side of the borderPane to display the players in turn order
         VBox leftPlayersVBox = new VBox();
@@ -355,6 +358,19 @@ public class TicketToRide extends Application
         StackPane imageContainer = new StackPane();
         //Adds the ticketToRideNYMap to the imageContainer
         imageContainer.getChildren().add(ticketToRideNYMap);
+
+        try
+        {
+            imageContainer.getChildren().add(highlightRoutes.highlightRectangles(overlayPane));
+        }
+        catch (Exception e)
+        {
+            System.out.println("Shits broke");
+            e.printStackTrace();
+        }
+
+        imageContainer.setMaxWidth(800);
+        imageContainer.setMaxHeight(1000);
 
         //Adds the image container to the center of the borderPane
         borderPane.setCenter(imageContainer);
@@ -595,7 +611,7 @@ public class TicketToRide extends Application
         TextArea textOutput = new TextArea();
         textOutput.setPrefColumnCount(10);
         textOutput.setWrapText(true);
-        //textOutput.setPrefWidth(250);
+        textOutput.setPrefWidth(250);
         textOutput.setPrefHeight(300);
         textOutput.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         textOutput.setEditable(false);

@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -31,6 +32,42 @@ public class Display
     public Display(ObservableList<Player> currentPlayers)
     {
         this.Players = currentPlayers;
+    }
+
+    //Method that will create a HBox that will contain the current player's information
+    //This method will be called
+    public HBox getBottomPlayersInventoryHBox()
+    {
+        // Check if the list of current players is empty
+        if (Players.isEmpty())
+        {
+            System.out.println("No players have been added.");
+            //returns nothing if the list is empty
+            return null;
+        }
+        else
+        {
+            //Creates a HBox to store the current player's information
+            HBox currentPlayerHBox = new HBox();
+
+            //Creates a label for the current player's name
+            Label currentPlayerNameLabel = new Label("Player: " + Players.get(0).getName());
+
+            //Creates a label for the current player's score
+            Label currentPlayerScoreLabel = new Label("Score: " + Players.get(0).getScore());
+
+            //Creates a label for the current player's number of taxis
+            Label currentPlayerTaxisLabel = new Label("Taxis: " + Players.get(0).getNumGamePieces());
+
+            //Adds the current player's information to the VBox
+            //.getChildren().addAll(currentPlayerNameLabel, currentPlayerScoreLabel, currentPlayerTaxisLabel);
+
+            //Adds the current player's VBox to the HBox
+            //currentPlayerHBox.getChildren().add();
+
+            //Returns the HBox containing the current player's information
+            return currentPlayerHBox;
+        }
     }
 
     //Method that will create a VBox for the player information
@@ -79,5 +116,4 @@ public class Display
             return playersVBox;
         }
     }
-
 }

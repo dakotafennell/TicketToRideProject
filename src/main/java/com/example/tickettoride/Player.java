@@ -22,19 +22,32 @@ public class Player
     private List<DestinationCard> destinationCards;
     private Color playerColor;
 
+
+    String[][] testArray = {
+            {"Color.BLUE", "0"},
+            {"Color.GREEN", "0"},
+            {"Color.BLACK", "0"},
+            {"Color.PINK", "0"},
+            {"Color.RED", "0"},
+            {"Color.YELLOW", "0"},
+            {"Color.WHITE", "0"}
+    };
+
     public Player()
     {
-        this.name = name;
+        this.name = "Billy Bob";
         this.score = 0;
         this.numTransportationCards = 0;
         this.numDestinationCards = 0;
         this.numGamePieces = 0;
         this.transportationCards = new ArrayList<TransportationCard>();
         this.destinationCards = new ArrayList<DestinationCard>();
-        this.playerColor = playerColor;
+        this.playerColor = Color.WHITE;
     }
 
-    public Player(String name, int score, int numTransportationCards, int numDestinationCards, List<TransportationCard> transportationCards, List<DestinationCard> destinationCards, int numGamePieces, Color playerColor)
+    public Player(String name, int score, int numTransportationCards, int numDestinationCards,
+                  List<TransportationCard> transportationCards, List<DestinationCard> destinationCards,
+                  int numGamePieces, Color playerColor)
     {
         this.name = name;
         this.score = score;

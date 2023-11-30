@@ -1,17 +1,23 @@
 package com.example.tickettoride;
 import javafx.animation.*;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class HighlightRoutes
+import java.io.File;
+
+public class HighlightRoutes extends Application
 {
     public static final double HEIGHT = 15;
     public static final double WIDTH = 50;
@@ -113,19 +119,119 @@ public class HighlightRoutes
             ChinatownToBrooklynOrange, WallStreetToBrooklynBlue, WallStreetToBrooklynBlack, ChelseaToSoho
     };
 
-    public Pane highlightRectangles(ImageView overlay)
+    @Override
+    public void start(Stage primaryStage) throws Exception
     {
         try {
             // Load the image from a file
-            //File imageFile = new File("src/main/resources/com/example/tickettoride/Game_Map_v2.PNG");
-            //String imageUrl = imageFile.toURI().toURL().toString();
-            //Board board = new Board();
+            File imageFile = new File("src/main/resources/com/example/tickettoride/Game_Map_v2.PNG");
+            String imageUrl = imageFile.toURI().toURL().toString();
+            Board board = new Board();
 
-            //Load the image
-            //ImageView ticketToRideImage = board.getTicketToRideImage();
+            // Load the image
+            ImageView ticketToRideImage = board.getTicketToRideImage();
 
             // Create an overlay pane
             Pane overlayPane = new Pane();
+
+            Glow glow = new Glow(2);
+            //Set initial brightness
+            ColorAdjust colorAdjust = new ColorAdjust();
+            colorAdjust.setBrightness(0);
+
+            setRectangleFillAndEffects(threeBlockRoutes, glow, colorAdjust);
+
+            setRectangleFillAndEffects(twoBlockRoutes, glow, colorAdjust);
+
+            setRectangleFillAndEffects(oneBlockRoutes, glow, colorAdjust);
+
+            setRectangleFillAndEffects(fourBlockRoutes, glow, colorAdjust);
+
+            //Sets the effects for all rectangles
+            setRectangleFillAndEffects(allRectangles, glow, colorAdjust);
+
+            //Rotation positioning for each route
+            //One block route rotations
+            MidtownWestToTimesSquare.setRotate(-11);
+            TimesSquareToEmpireStateBuildingOrange.setRotate(55);
+            TimesSquareToEmpireStateBuildingPink.setRotate(55);
+            EmpireStateBuildingToGramercyParkRed.setRotate(55);
+            EmpireStateBuildingToGramercyParkBlue.setRotate(55);
+            EastVillageToLowerEastSide.setRotate(97);
+            ChinatownToLowerEastSide.setRotate(-33);
+            ChinatownToWallStreetGreen.setRotate(110);
+            ChinatownToWallStreetPink.setRotate(110);
+
+            //Three block route rotations
+            CentralParkToUnitedNations.setRotate(46);
+            UnitedNationsToGramercyPark.setRotate(110);
+            ChelseaToGreenwichVillageGreen.setRotate(43);
+            ChelseaToGreenwichVillageRed.setRotate(43);
+            LowerEastSideToBrooklyn.setRotate(66);
+            ChinatownToBrooklynRed.setRotate(38);
+            ChinatownToBrooklynOrange.setRotate(38);
+            WallStreetToBrooklynBlue.setRotate(7);
+            WallStreetToBrooklynBlack.setRotate(7);
+
+            //Four block route rotations
+            ChelseaToSoho.setRotate(70);
+
+            //Two block route rotations
+            LincolnCenterToMidtownWest.setRotate(90);
+            LincolnCenterToTimesSquareGreen.setRotate(62);
+            LincolnCenterToTimesSquareBlue.setRotate(62);
+            LincolnCenterToCentralPark.setRotate(1);
+            CentralParkToTimesSquareBlack.setRotate(-70);
+            CentralParkToTimesSquareRed.setRotate(-70);
+            TimesSquareToUnitedNations.setRotate(-2);
+            MidtownWestToChelsea.setRotate(75);
+            MidtownWestToEmpireStateBuilding.setRotate(26);
+            EmpireStateBuildingToUnitedNations.setRotate(-32);
+            ChelseaToEmpireStateBuildingGrey0.setRotate(-36);
+            ChelseaToEmpireStateBuildingGrey1.setRotate(-36);
+            ChelseaToGramercyPark.setRotate(-4);
+            GramercyParkToGreenwichVillageBlack.setRotate(-78);
+            GramercyParkToGreenwichVillagePink.setRotate(-78);
+            GramercyParkToEastVillage.setRotate(51);
+            GreenwichVillageToEastVillage.setRotate(0);
+            GreenwichVillageToSoho.setRotate(-60);
+            GreenwichVillageToChinatownGrey0.setRotate(75);
+            GreenwichVillageToChinatownGrey1.setRotate(75);
+            GreenwichVillageToLowerEastSide.setRotate(38);
+            SohoToWallStreet.setRotate(61);
+
+            //Creates a Timeline for the animation
+            Timeline timeline = new Timeline();
+
+            //Adds keyframes for smoothly increasing and decreasing brightness and opacity for each rectangle
+            routeAnimationKeyFrames(colorAdjust, timeline);
+
+            overlayPane.getChildren().addAll(oneBlockRoutes);
+            overlayPane.getChildren().addAll(twoBlockRoutes);
+            overlayPane.getChildren().addAll(threeBlockRoutes);
+            overlayPane.getChildren().addAll(fourBlockRoutes);
+
+            // Create a scene
+            Scene scene = new Scene(new StackPane(ticketToRideImage, overlayPane));
+
+            initializeClickableRectangles(allRectangles, timeline);
+
+            // Set the scene and show the stage
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Ticket To Ride: New York");
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Could not load image");
+        }
+    }
+
+    public Pane highlightRectangles(Pane overlay)
+    {
+        try {
+            // Create an overlay pane
+            StackPane overlayPane = new StackPane();
 
             Glow glow = new Glow(2);
             //Set initial brightness
@@ -215,8 +321,10 @@ public class HighlightRoutes
         }
     }
 
-    private void setRectangleFillAndEffects(Rectangle[] twoBlockRoutes, Glow glow, ColorAdjust colorAdjust) {
-        for (Rectangle rectangle : twoBlockRoutes) {
+    private void setRectangleFillAndEffects(Rectangle[] twoBlockRoutes, Glow glow, ColorAdjust colorAdjust)
+    {
+        for (Rectangle rectangle : twoBlockRoutes)
+        {
             //Sets the rectangle fill to yellow
             rectangle.setFill(Color.YELLOW);
             rectangle.setEffect(glow);
@@ -279,13 +387,14 @@ public class HighlightRoutes
                 System.out.println("Clicked on a rectangle");
                 System.out.println("Rectangle X: " + rectangle.getX());
                 System.out.println("Rectangle Y: " + rectangle.getY());
-                System.out.println("Rectangle Width: " + rectangle.getRotate());
+                System.out.println("Rotation angle: " + rectangle.getRotate());
                 //prints out the color of the rectangle
                 System.out.println("Rectangle Color: " + rectangle.getFill());
                 //Sets the fill color of the specifically clicked rectangle to the player's color
                 rectangle.setFill(Color.RED);
                 //Stops the timeline playing the animation for the specifically clicked rectangle
                 timeline.stop();
+
             });
         }
     }
