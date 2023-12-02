@@ -51,7 +51,7 @@ public class DestinationCard extends Application
             Chelsea_Brooklyn, Chelsea_WallStreet, EastVillage_Soho, EmpireState_Brooklyn,
             EmpireState_Greenwich, Gramercy_ChinaTown, LincolnCenter_EmpireState, LincolnCenter_Greenwich,
             LowerEastSide_WallStreet, TimesSquare_Brooklyn, TimesSquare_EastVillage, TimesSquare_Soho,
-            UN_Midtown, UN_WallStreet, Back
+            UN_Midtown, UN_WallStreet
     };
 
     @Override

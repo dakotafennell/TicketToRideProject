@@ -33,6 +33,7 @@ public class TicketToRide extends Application
     //Stores Player objects in a list
     public ObservableList<Player> currentPlayers = FXCollections.observableArrayList();
 
+    //---- Splash Screen Creation ----\\
     @Override
     public void start(Stage primaryStage)
     {
@@ -316,6 +317,7 @@ public class TicketToRide extends Application
         playerSelectStage.show();
     }
 
+    // ---- Main game board creation ----\
     private void createGameInterface(Stage primaryStage)
     {
         //Creates a new borderPane
@@ -480,7 +482,7 @@ public class TicketToRide extends Application
             dialog.showAndWait();
         });
 
-        //Create Button to select random card.
+        //Create Button to select random card for transportation deck
         TransportationCard transportationCard = new TransportationCard();
 
         // Create ImageView to display the selected card image
@@ -527,9 +529,9 @@ public class TicketToRide extends Application
             player.addTransportationCard(transportationCard);
         });
 
-        //--------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------\\
 
-        //Create Button to select random card.
+        //Create Button to select random card from destination deck
         DestinationCard destinationCard = new DestinationCard();
 
         // Create ImageView to display the selected card image
@@ -606,6 +608,7 @@ public class TicketToRide extends Application
         //Creates the player name's display VBox using a method from the Display class
         VBox playerVBox = display.getPlayerInfoVBox();
 
+        //----------------------------------------------------------------------\\
         //Displays the current player's turn
         Display currentTurn = new Display(currentPlayers);
 
