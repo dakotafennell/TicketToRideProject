@@ -618,24 +618,26 @@ public class TicketToRide extends Application
         //Adds the current player's information to the HBox
         currentPlayerHBox.getChildren().add(currentTurn.getBottomPlayersInventoryHBox());
 
-        //create images for players hand
+        //-------------------------------------------------------------------
+
+        // Create players 1 and 2 hand
 
         // Create Labels for player names
         Label player1Label = new Label("Player 1");
         Label player2Label = new Label("Player 2");
 
         // HBox images for player 1
-        HBox cardImagesHBoxP1 = new HBox(30);
+        HBox cardImagesHBoxP1 = new HBox(45);
 
         // HBox images for player 2
-        HBox cardImagesHBoxP2 = new HBox(30);
+        HBox cardImagesHBoxP2 = new HBox(45);
 
         // Create ImageView for the red card player 1
         ImageView redCardImageViewP1 = new ImageView();
         String redCardImagePathP1 = "/com/example/tickettoride/TransportCards/RedCard.png";
         Image redCardImageP1 = new Image(getClass().getResource(redCardImagePathP1).toExternalForm());
         redCardImageViewP1.setImage(redCardImageP1);
-        redCardImageViewP1.setFitWidth(75);
+        redCardImageViewP1.setFitWidth(100);
         redCardImageViewP1.setFitHeight(75);
 
 
@@ -644,7 +646,7 @@ public class TicketToRide extends Application
         String blueCardImagePathP1 = "/com/example/tickettoride/TransportCards/BlueCard.png";
         Image blueCardImageP1 = new Image(getClass().getResource(blueCardImagePathP1).toExternalForm());
         blueCardImageViewP1.setImage(blueCardImageP1);
-        blueCardImageViewP1.setFitWidth(75);
+        blueCardImageViewP1.setFitWidth(100);
         blueCardImageViewP1.setFitHeight(75);
 
         // Create ImageView for the rainbow card player 1
@@ -652,7 +654,7 @@ public class TicketToRide extends Application
         String rainbowCardImagePathP1 = "/com/example/tickettoride/TransportCards/RainbowCard.png";
         Image RainbowCardImageP1 = new Image(getClass().getResource(rainbowCardImagePathP1).toExternalForm());
         rainbowCardImageViewP1.setImage(RainbowCardImageP1);
-        rainbowCardImageViewP1.setFitWidth(75);
+        rainbowCardImageViewP1.setFitWidth(100);
         rainbowCardImageViewP1.setFitHeight(75);
 
         // Create ImageView for the pink card player 1
@@ -660,7 +662,7 @@ public class TicketToRide extends Application
         String pinkCardImagePathP1 = "/com/example/tickettoride/TransportCards/PinkCard.png";
         Image PinkCardImageP1 = new Image(getClass().getResource(pinkCardImagePathP1).toExternalForm());
         pinkCardImageViewP1.setImage(PinkCardImageP1);
-        pinkCardImageViewP1.setFitWidth(75);
+        pinkCardImageViewP1.setFitWidth(100);
         pinkCardImageViewP1.setFitHeight(75);
 
         // Create ImageView for the black card player 1
@@ -668,7 +670,7 @@ public class TicketToRide extends Application
         String blackCardImagePathP1 = "/com/example/tickettoride/TransportCards/BlackCard.png";
         Image blackCardImageP1 = new Image(getClass().getResource(blackCardImagePathP1).toExternalForm());
         blackCardImageViewP1.setImage(blackCardImageP1);
-        blackCardImageViewP1.setFitWidth(75);
+        blackCardImageViewP1.setFitWidth(100);
         blackCardImageViewP1.setFitHeight(75);
 
         // Create ImageView for the green card player 1
@@ -676,7 +678,7 @@ public class TicketToRide extends Application
         String greenCardImagePathP1 = "/com/example/tickettoride/TransportCards/GreenCard.png";
         Image greenCardImageP1 = new Image(getClass().getResource(greenCardImagePathP1).toExternalForm());
         greenCardImageViewP1.setImage(greenCardImageP1);
-        greenCardImageViewP1.setFitWidth(75);
+        greenCardImageViewP1.setFitWidth(100);
         greenCardImageViewP1.setFitHeight(75);
 
         // Create ImageView for the orange card player 1
@@ -684,7 +686,7 @@ public class TicketToRide extends Application
         String orangeCardImagePathP1 = "/com/example/tickettoride/TransportCards/OrangeCard.png";
         Image orangeCardImageP1 = new Image(getClass().getResource(orangeCardImagePathP1).toExternalForm());
         orangeCardImageViewP1.setImage(orangeCardImageP1);
-        orangeCardImageViewP1.setFitWidth(75);
+        orangeCardImageViewP1.setFitWidth(100);
         orangeCardImageViewP1.setFitHeight(75);
 
         // Create ImageView for the red card player 2
@@ -692,7 +694,7 @@ public class TicketToRide extends Application
         String redCardImagePathP2 = "/com/example/tickettoride/TransportCards/RedCard.png";
         Image redCardImageP2 = new Image(getClass().getResource(redCardImagePathP2).toExternalForm());
         redCardImageViewP2.setImage(redCardImageP2);
-        redCardImageViewP2.setFitWidth(75);
+        redCardImageViewP2.setFitWidth(100);
         redCardImageViewP2.setFitHeight(75);
 
 
@@ -701,7 +703,7 @@ public class TicketToRide extends Application
         String blueCardImagePathP2 = "/com/example/tickettoride/TransportCards/BlueCard.png";
         Image blueCardImageP2 = new Image(getClass().getResource(blueCardImagePathP2).toExternalForm());
         blueCardImageViewP2.setImage(blueCardImageP2);
-        blueCardImageViewP2.setFitWidth(75);
+        blueCardImageViewP2.setFitWidth(100);
         blueCardImageViewP2.setFitHeight(75);
 
         // Create ImageView for the rainbow card player 2
@@ -709,7 +711,7 @@ public class TicketToRide extends Application
         String rainbowCardImagePathP2 = "/com/example/tickettoride/TransportCards/RainbowCard.png";
         Image RainbowCardImageP2 = new Image(getClass().getResource(rainbowCardImagePathP2).toExternalForm());
         rainbowCardImageViewP2.setImage(RainbowCardImageP2);
-        rainbowCardImageViewP2.setFitWidth(75);
+        rainbowCardImageViewP2.setFitWidth(100);
         rainbowCardImageViewP2.setFitHeight(75);
 
         // Create ImageView for the pink card player 2
@@ -717,7 +719,7 @@ public class TicketToRide extends Application
         String pinkCardImagePathP2 = "/com/example/tickettoride/TransportCards/PinkCard.png";
         Image PinkCardImageP2 = new Image(getClass().getResource(pinkCardImagePathP2).toExternalForm());
         pinkCardImageViewP2.setImage(PinkCardImageP2);
-        pinkCardImageViewP2.setFitWidth(75);
+        pinkCardImageViewP2.setFitWidth(100);
         pinkCardImageViewP2.setFitHeight(75);
 
         // Create ImageView for the black card player 2
@@ -725,7 +727,7 @@ public class TicketToRide extends Application
         String blackCardImagePathP2 = "/com/example/tickettoride/TransportCards/BlackCard.png";
         Image blackCardImageP2 = new Image(getClass().getResource(blackCardImagePathP2).toExternalForm());
         blackCardImageViewP2.setImage(blackCardImageP2);
-        blackCardImageViewP2.setFitWidth(75);
+        blackCardImageViewP2.setFitWidth(100);
         blackCardImageViewP2.setFitHeight(75);
 
         // Create ImageView for the green card player 2
@@ -733,7 +735,7 @@ public class TicketToRide extends Application
         String greenCardImagePathP2 = "/com/example/tickettoride/TransportCards/GreenCard.png";
         Image greenCardImageP2 = new Image(getClass().getResource(greenCardImagePathP2).toExternalForm());
         greenCardImageViewP2.setImage(greenCardImageP2);
-        greenCardImageViewP2.setFitWidth(75);
+        greenCardImageViewP2.setFitWidth(100);
         greenCardImageViewP2.setFitHeight(75);
 
         // Create ImageView for the orange card player 2
@@ -741,7 +743,7 @@ public class TicketToRide extends Application
         String orangeCardImagePathP2 = "/com/example/tickettoride/TransportCards/OrangeCard.png";
         Image orangeCardImageP2 = new Image(getClass().getResource(orangeCardImagePathP2).toExternalForm());
         orangeCardImageViewP2.setImage(orangeCardImageP2);
-        orangeCardImageViewP2.setFitWidth(75);
+        orangeCardImageViewP2.setFitWidth(100);
         orangeCardImageViewP2.setFitHeight(75);
 
 
