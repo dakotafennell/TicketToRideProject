@@ -13,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.*;
 
@@ -130,7 +131,7 @@ public class TicketToRide extends Application
     private void createPlayerSelection(Stage playerSelectStage)
     {
         //imageURL of table.png
-        String imageUrl = getClass().getResource("/com/example/tickettoride/Table.png").toExternalForm();
+        String imageUrl = Objects.requireNonNull(getClass().getResource("/com/example/tickettoride/Table.png")).toExternalForm();
 
         //Creates a label with the game title
         Label titleLabel = new Label(TITLE);
@@ -527,6 +528,9 @@ public class TicketToRide extends Application
             cardImage.setImage(TransportationCard.cardImageView.getImage());
             Player player = currentPlayers.get(0);
             player.addTransportationCard(transportationCard);
+            player.incrementPlayerHandValue(transportationCard.getCardColor(),1);
+
+
         });
 
         //--------------------------------------------------------------------------------\\
@@ -545,7 +549,7 @@ public class TicketToRide extends Application
         Button btnDestinationCard = new Button("Please Select A Card");
 
         // Define the URL for the button background image
-        String imageDestinationUrl = getClass().getResource("/com/example/tickettoride/DestinationCards/BackOfTransportationCard.png").toExternalForm();
+        String imageDestinationUrl = Objects.requireNonNull(getClass().getResource("/com/example/tickettoride/DestinationCards/BackOfTransportationCard.png")).toExternalForm();
         // Set the button's background to the image
         btnDestinationCard.setStyle(
                 "-fx-background-image: url('" + imageDestinationUrl + "'); " +
@@ -632,10 +636,13 @@ public class TicketToRide extends Application
         // HBox images for player 2
         HBox cardImagesHBoxP2 = new HBox(45);
 
+        HBox valueImageHBoxP1 = new HBox(150);
+        HBox valueImageHBoxP2 = new HBox(150);
+
         // Create ImageView for the red card player 1
         ImageView redCardImageViewP1 = new ImageView();
         String redCardImagePathP1 = "/com/example/tickettoride/TransportCards/RedCard.png";
-        Image redCardImageP1 = new Image(getClass().getResource(redCardImagePathP1).toExternalForm());
+        Image redCardImageP1 = new Image(Objects.requireNonNull(getClass().getResource(redCardImagePathP1)).toExternalForm());
         redCardImageViewP1.setImage(redCardImageP1);
         redCardImageViewP1.setFitWidth(100);
         redCardImageViewP1.setFitHeight(75);
@@ -644,7 +651,7 @@ public class TicketToRide extends Application
         // Create ImageView for the blue card player 1
         ImageView blueCardImageViewP1 = new ImageView();
         String blueCardImagePathP1 = "/com/example/tickettoride/TransportCards/BlueCard.png";
-        Image blueCardImageP1 = new Image(getClass().getResource(blueCardImagePathP1).toExternalForm());
+        Image blueCardImageP1 = new Image(Objects.requireNonNull(getClass().getResource(blueCardImagePathP1)).toExternalForm());
         blueCardImageViewP1.setImage(blueCardImageP1);
         blueCardImageViewP1.setFitWidth(100);
         blueCardImageViewP1.setFitHeight(75);
@@ -652,7 +659,7 @@ public class TicketToRide extends Application
         // Create ImageView for the rainbow card player 1
         ImageView rainbowCardImageViewP1 = new ImageView();
         String rainbowCardImagePathP1 = "/com/example/tickettoride/TransportCards/RainbowCard.png";
-        Image RainbowCardImageP1 = new Image(getClass().getResource(rainbowCardImagePathP1).toExternalForm());
+        Image RainbowCardImageP1 = new Image(Objects.requireNonNull(getClass().getResource(rainbowCardImagePathP1)).toExternalForm());
         rainbowCardImageViewP1.setImage(RainbowCardImageP1);
         rainbowCardImageViewP1.setFitWidth(100);
         rainbowCardImageViewP1.setFitHeight(75);
@@ -660,7 +667,7 @@ public class TicketToRide extends Application
         // Create ImageView for the pink card player 1
         ImageView pinkCardImageViewP1 = new ImageView();
         String pinkCardImagePathP1 = "/com/example/tickettoride/TransportCards/PinkCard.png";
-        Image PinkCardImageP1 = new Image(getClass().getResource(pinkCardImagePathP1).toExternalForm());
+        Image PinkCardImageP1 = new Image(Objects.requireNonNull(getClass().getResource(pinkCardImagePathP1)).toExternalForm());
         pinkCardImageViewP1.setImage(PinkCardImageP1);
         pinkCardImageViewP1.setFitWidth(100);
         pinkCardImageViewP1.setFitHeight(75);
@@ -668,7 +675,7 @@ public class TicketToRide extends Application
         // Create ImageView for the black card player 1
         ImageView blackCardImageViewP1 = new ImageView();
         String blackCardImagePathP1 = "/com/example/tickettoride/TransportCards/BlackCard.png";
-        Image blackCardImageP1 = new Image(getClass().getResource(blackCardImagePathP1).toExternalForm());
+        Image blackCardImageP1 = new Image(Objects.requireNonNull(getClass().getResource(blackCardImagePathP1)).toExternalForm());
         blackCardImageViewP1.setImage(blackCardImageP1);
         blackCardImageViewP1.setFitWidth(100);
         blackCardImageViewP1.setFitHeight(75);
@@ -676,7 +683,7 @@ public class TicketToRide extends Application
         // Create ImageView for the green card player 1
         ImageView greenCardImageViewP1 = new ImageView();
         String greenCardImagePathP1 = "/com/example/tickettoride/TransportCards/GreenCard.png";
-        Image greenCardImageP1 = new Image(getClass().getResource(greenCardImagePathP1).toExternalForm());
+        Image greenCardImageP1 = new Image(Objects.requireNonNull(getClass().getResource(greenCardImagePathP1)).toExternalForm());
         greenCardImageViewP1.setImage(greenCardImageP1);
         greenCardImageViewP1.setFitWidth(100);
         greenCardImageViewP1.setFitHeight(75);
@@ -684,7 +691,7 @@ public class TicketToRide extends Application
         // Create ImageView for the orange card player 1
         ImageView orangeCardImageViewP1 = new ImageView();
         String orangeCardImagePathP1 = "/com/example/tickettoride/TransportCards/OrangeCard.png";
-        Image orangeCardImageP1 = new Image(getClass().getResource(orangeCardImagePathP1).toExternalForm());
+        Image orangeCardImageP1 = new Image(Objects.requireNonNull(getClass().getResource(orangeCardImagePathP1)).toExternalForm());
         orangeCardImageViewP1.setImage(orangeCardImageP1);
         orangeCardImageViewP1.setFitWidth(100);
         orangeCardImageViewP1.setFitHeight(75);
@@ -692,7 +699,7 @@ public class TicketToRide extends Application
         // Create ImageView for the red card player 2
         ImageView redCardImageViewP2 = new ImageView();
         String redCardImagePathP2 = "/com/example/tickettoride/TransportCards/RedCard.png";
-        Image redCardImageP2 = new Image(getClass().getResource(redCardImagePathP2).toExternalForm());
+        Image redCardImageP2 = new Image(Objects.requireNonNull(getClass().getResource(redCardImagePathP2)).toExternalForm());
         redCardImageViewP2.setImage(redCardImageP2);
         redCardImageViewP2.setFitWidth(100);
         redCardImageViewP2.setFitHeight(75);
@@ -701,7 +708,7 @@ public class TicketToRide extends Application
         // Create ImageView for the blue card player 2
         ImageView blueCardImageViewP2 = new ImageView();
         String blueCardImagePathP2 = "/com/example/tickettoride/TransportCards/BlueCard.png";
-        Image blueCardImageP2 = new Image(getClass().getResource(blueCardImagePathP2).toExternalForm());
+        Image blueCardImageP2 = new Image(Objects.requireNonNull(getClass().getResource(blueCardImagePathP2)).toExternalForm());
         blueCardImageViewP2.setImage(blueCardImageP2);
         blueCardImageViewP2.setFitWidth(100);
         blueCardImageViewP2.setFitHeight(75);
@@ -709,7 +716,7 @@ public class TicketToRide extends Application
         // Create ImageView for the rainbow card player 2
         ImageView rainbowCardImageViewP2 = new ImageView();
         String rainbowCardImagePathP2 = "/com/example/tickettoride/TransportCards/RainbowCard.png";
-        Image RainbowCardImageP2 = new Image(getClass().getResource(rainbowCardImagePathP2).toExternalForm());
+        Image RainbowCardImageP2 = new Image(Objects.requireNonNull(getClass().getResource(rainbowCardImagePathP2)).toExternalForm());
         rainbowCardImageViewP2.setImage(RainbowCardImageP2);
         rainbowCardImageViewP2.setFitWidth(100);
         rainbowCardImageViewP2.setFitHeight(75);
@@ -717,7 +724,7 @@ public class TicketToRide extends Application
         // Create ImageView for the pink card player 2
         ImageView pinkCardImageViewP2 = new ImageView();
         String pinkCardImagePathP2 = "/com/example/tickettoride/TransportCards/PinkCard.png";
-        Image PinkCardImageP2 = new Image(getClass().getResource(pinkCardImagePathP2).toExternalForm());
+        Image PinkCardImageP2 = new Image(Objects.requireNonNull(getClass().getResource(pinkCardImagePathP2)).toExternalForm());
         pinkCardImageViewP2.setImage(PinkCardImageP2);
         pinkCardImageViewP2.setFitWidth(100);
         pinkCardImageViewP2.setFitHeight(75);
@@ -725,7 +732,7 @@ public class TicketToRide extends Application
         // Create ImageView for the black card player 2
         ImageView blackCardImageViewP2 = new ImageView();
         String blackCardImagePathP2 = "/com/example/tickettoride/TransportCards/BlackCard.png";
-        Image blackCardImageP2 = new Image(getClass().getResource(blackCardImagePathP2).toExternalForm());
+        Image blackCardImageP2 = new Image(Objects.requireNonNull(getClass().getResource(blackCardImagePathP2)).toExternalForm());
         blackCardImageViewP2.setImage(blackCardImageP2);
         blackCardImageViewP2.setFitWidth(100);
         blackCardImageViewP2.setFitHeight(75);
@@ -733,7 +740,7 @@ public class TicketToRide extends Application
         // Create ImageView for the green card player 2
         ImageView greenCardImageViewP2 = new ImageView();
         String greenCardImagePathP2 = "/com/example/tickettoride/TransportCards/GreenCard.png";
-        Image greenCardImageP2 = new Image(getClass().getResource(greenCardImagePathP2).toExternalForm());
+        Image greenCardImageP2 = new Image(Objects.requireNonNull(getClass().getResource(greenCardImagePathP2)).toExternalForm());
         greenCardImageViewP2.setImage(greenCardImageP2);
         greenCardImageViewP2.setFitWidth(100);
         greenCardImageViewP2.setFitHeight(75);
@@ -741,7 +748,7 @@ public class TicketToRide extends Application
         // Create ImageView for the orange card player 2
         ImageView orangeCardImageViewP2 = new ImageView();
         String orangeCardImagePathP2 = "/com/example/tickettoride/TransportCards/OrangeCard.png";
-        Image orangeCardImageP2 = new Image(getClass().getResource(orangeCardImagePathP2).toExternalForm());
+        Image orangeCardImageP2 = new Image(Objects.requireNonNull(getClass().getResource(orangeCardImagePathP2)).toExternalForm());
         orangeCardImageViewP2.setImage(orangeCardImageP2);
         orangeCardImageViewP2.setFitWidth(100);
         orangeCardImageViewP2.setFitHeight(75);
@@ -750,12 +757,34 @@ public class TicketToRide extends Application
         // Add both card images to the HBox for player 1
         cardImagesHBoxP1.getChildren().addAll(redCardImageViewP1, blueCardImageViewP1, rainbowCardImageViewP1, pinkCardImageViewP1, blackCardImageViewP1, greenCardImageViewP1, orangeCardImageViewP1);
 
+        for(int i = 0; i < currentPlayers.size(); i++) {
+            if (i == 0) {
+                for (Map.Entry<Color, Integer> entry : currentPlayers.get(i).getPlayerHandMap().entrySet()) {
+                    Color color = entry.getKey();
+                    int value = entry.getValue();
+                    Text text = new Text(Integer.toString(value));
+                    valueImageHBoxP1.getChildren().add(text);
+                }
+            }
+            else if (i == 1) {
+                for (Map.Entry<Color, Integer> entry : currentPlayers.get(i).getPlayerHandMap().entrySet()) {
+                    Color color = entry.getKey();
+                    int value = entry.getValue();
+                    Text text = new Text(Integer.toString(value));
+                    valueImageHBoxP2.getChildren().add(text);
+                }
+            }
+        }
+
+
+
+
         // Add both card images to the HBox for player 2
         cardImagesHBoxP2.getChildren().addAll(redCardImageViewP2, blueCardImageViewP2, rainbowCardImageViewP2, pinkCardImageViewP2, blackCardImageViewP2, greenCardImageViewP2, orangeCardImageViewP2);
 
         // Add the HBox with card images to the bottom of the borderPane
-        VBox cardImagesVBox = new VBox(10);
-        cardImagesVBox.getChildren().addAll(player1Label, cardImagesHBoxP1, player2Label, cardImagesHBoxP2);
+        VBox cardImagesVBox = new VBox(5);
+        cardImagesVBox.getChildren().addAll(player1Label, cardImagesHBoxP1,valueImageHBoxP1,valueImageHBoxP2, player2Label, cardImagesHBoxP2);
 
         borderPane.setBottom(cardImagesVBox);
 

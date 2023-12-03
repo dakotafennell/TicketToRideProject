@@ -13,11 +13,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.lang.reflect.Array;
+import java.util.Objects;
 import java.util.Random;
 
 public class TransportationCard extends Application
 {
     public static final ImageView cardImageView = new ImageView();
+
+    private Color cardColor;
+
     private final ImageView transportationDeckImageView = new ImageView();
 
     //Card images
@@ -37,7 +41,7 @@ public class TransportationCard extends Application
             Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.YELLOW, Color.ORANGE, Color.WHITE
     };
 
-    //public String[][] cards = {{"Color.BLUE", "0"}, {Color.GREEN, 0}, {Color.BLACK, 0}, {Color.PINK, 0}, {Color.RED, 0}, {Color.YELLOW, 0}, {Color.ORANGE, 0}, {Color.WHITE, 0}};
+    //public String[][] cards = {{blueCard, "0"}, {Color.GREEN, 0}, {Color.BLACK, 0}, {Color.PINK, 0}, {Color.RED, 0}, {Color.YELLOW, 0}, {Color.ORANGE, 0}, {Color.WHITE, 0}};
 
     //Card values
     private final Color blueCard = colors[0];
@@ -56,6 +60,8 @@ public class TransportationCard extends Application
 
     //Set taxi card to all available colors
     private final Color taxiCard = colors[7];
+
+   // public String[][] cards = {{String.valueOf(blueCard), "0"}, {Color.GREEN, 0}, {Color.BLACK, 0}, {Color.PINK, 0}, {Color.RED, 0}, {Color.YELLOW, 0}, {Color.ORANGE, 0}, {Color.WHITE, 0}};
 
     @Override
     public void start(Stage primaryStage)
@@ -116,14 +122,18 @@ public class TransportationCard extends Application
         // Get the selected card image path
         String selectedCardImagePath = CARDIMAGEPATHS[cardIndex];
 
+        cardColor = colors[cardIndex];
+
         // Load the image using ClassLoader
         final int imageWidth = 1000;
         final int imageHeight = 800;
 
         try
         {
-            Image selectedCardImage = new Image(getClass().getResource(selectedCardImagePath).toExternalForm(),
+            Image selectedCardImage = new Image(Objects.requireNonNull(getClass().getResource(selectedCardImagePath)).toExternalForm(),
                     imageWidth, imageHeight, true, false);
+
+
 
             // Set the selected card image to the cardImageView
             cardImageView.setImage(selectedCardImage);
@@ -177,6 +187,9 @@ public class TransportationCard extends Application
         }
      */
 
+    public Color getCardColor() {
+        return cardColor;
+    }
     public static void main(String[] args)
     {
         launch(args);

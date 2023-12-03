@@ -2,8 +2,7 @@ package com.example.tickettoride;
 
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Player class
@@ -33,6 +32,8 @@ public class Player
             {"Color.WHITE", "0"}
     };
 
+    private Map<Color, Integer> playerHandMap = new LinkedHashMap<>();
+
     public Player()
     {
         this.name = "Billy Bob";
@@ -43,6 +44,13 @@ public class Player
         this.transportationCards = new ArrayList<TransportationCard>();
         this.destinationCards = new ArrayList<DestinationCard>();
         this.playerColor = Color.WHITE;
+        playerHandMap.put(Color.RED, 0);
+        playerHandMap.put(Color.BLUE, 0);
+        playerHandMap.put(Color.WHITE, 0);
+        playerHandMap.put(Color.PINK, 0);
+        playerHandMap.put(Color.BLACK, 0);
+        playerHandMap.put(Color.GREEN, 0);
+        playerHandMap.put(Color.ORANGE, 0);
     }
 
     public Player(String name, int score, int numTransportationCards, int numDestinationCards,
@@ -57,7 +65,15 @@ public class Player
         this.transportationCards = new ArrayList<TransportationCard>();
         this.destinationCards = new ArrayList<DestinationCard>();
         this.playerColor = playerColor;
+        playerHandMap.put(Color.RED, 0);
+        playerHandMap.put(Color.BLUE, 0);
+        playerHandMap.put(Color.WHITE, 0);
+        playerHandMap.put(Color.PINK, 0);
+        playerHandMap.put(Color.BLACK, 0);
+        playerHandMap.put(Color.GREEN, 0);
+        playerHandMap.put(Color.ORANGE, 0);
     }
+
 
     protected void setNumPlayers(int numPlayers)
     {
@@ -65,6 +81,20 @@ public class Player
         {
             this.numPlayers = numPlayers;
         }
+    }
+
+    public Map<Color, Integer> getPlayerHandMap()
+    {
+        return playerHandMap;
+    }
+    public void setPlayerCardAmount(Color color, int value) {
+        playerHandMap.put(color, value);
+    }
+
+    public void incrementPlayerHandValue(Color color, int value) {
+        int currentValue = playerHandMap.getOrDefault(color, 0);
+        int newValue = currentValue + value;
+        playerHandMap.put(color, newValue);
     }
 
     public String getName()
