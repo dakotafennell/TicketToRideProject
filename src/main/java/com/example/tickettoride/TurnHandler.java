@@ -13,16 +13,20 @@ public class TurnHandler
         this.players = players;
     }
 
-    public void nextTurn() {
+    public void nextTurn()
+    {
         if (turn == numPlayers - 1)
         {
             turn = 0;
-        } else {
+        }
+        else
+        {
             turn++;
         }
     }
 
-    public int getTurn() {
+    public int getTurn()
+    {
         return turn;
     }
 

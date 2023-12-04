@@ -60,7 +60,7 @@ public class TransportationCard extends Application
     private final Color taxiCard = colors[7];
 
     public String[][] cards = {
-            {"Color.blueCard", "0"}, {"Color.GREEN", "0"}, {"Color.BLACK", "0"},
+            {"Color.BLUE", "0"}, {"Color.GREEN", "0"}, {"Color.BLACK", "0"},
             {"Color.PINK", "0"}, {"Color.RED", "0"}, {"Color.YELLOW", "0"},
             {"Color.ORANGE", "0"}, {"Color.WHITE", "0"}
     };

@@ -529,9 +529,7 @@ public class TicketToRide extends Application
             cardImage.setImage(TransportationCard.cardImageView.getImage());
             Player player = currentPlayers.get(0);
             player.addTransportationCard(transportationCard);
-            player.incrementPlayerHandValue(transportationCard.getCardColor(),1);
-
-
+            //player.incrementPlayerHandValue(transportationCard.getCardColor(),1);
         });
 
         //--------------------------------------------------------------------------------\\
@@ -660,7 +658,7 @@ public class TicketToRide extends Application
     //Separate method for creating a player object
     private Player createPlayer(String playerName, Color color)
     {
-        return new Player(playerName, 0, 0, 0, new ArrayList<>(), new ArrayList<>(), 15, color);
+        return new Player(playerName, 0, 0, 0, new ArrayList<TransportationCard>(), new ArrayList<DestinationCard>(), 0, color);
     }
 
     public static void main(String[] args)

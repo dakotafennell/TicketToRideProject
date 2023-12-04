@@ -18,19 +18,18 @@ public class Player
     private int numDestinationCards;
     private int numGamePieces;
     private List<TransportationCard> transportationCards;
-    private List<DestinationCard> destinationCards;
-    private Color playerColor;
-
-
-    public String[][] testArray = {
+    public static String[][] cards = {
             {"Color.BLUE", "0"},
             {"Color.GREEN", "0"},
             {"Color.BLACK", "0"},
             {"Color.PINK", "0"},
             {"Color.RED", "0"},
             {"Color.YELLOW", "0"},
+            {"Color.ORANGE", "0"},
             {"Color.WHITE", "0"}
     };
+    private List<DestinationCard> destinationCards;
+    private Color playerColor;
 
     private Map<Color, Integer> playerHandMap = new LinkedHashMap<>();
 
@@ -74,6 +73,51 @@ public class Player
         playerHandMap.put(Color.ORANGE, 0);
     }
 
+    /*
+    public enum Color
+    {
+        BLUE, GREEN, BLACK, PINK, RED, ORANGE, WHITE
+    }
+
+    public static void main(String[] args)
+    {
+        //Gets the number of each card
+        for (int i = 0; i < cards.length; i++)
+        {
+            cards[i][1] = String.valueOf(12);
+        }
+
+        //increments the number of each card based on the color and which card is drawn
+        for (int i = 0; i < cards.length; i++)
+        {
+            if (cards[i][0].equals("Color.BLUE"))
+            {
+                cards[i][1] = String.valueOf(Integer.parseInt(cards[i][1]) + 1);
+            }
+        }
+
+        //Prints the number of each card
+        for (String[] row : cards)
+        {
+            System.out.println(row[0] + ": " + row[1]);
+        }
+
+        //Update the number for Color.BLUE
+        int newValue = 42;
+        updateNumber(cards, Color.BLUE, newValue);
+    }
+
+    private static void updateNumber(String[][] array, Color color, int newValue)
+    {
+        String colorString = "Color." + color.name();
+        for (String[] row : array) {
+            if (row[0].equals(colorString)) {
+                row[1] = String.valueOf(newValue);
+                break;
+            }
+        }
+    }
+     */
 
     protected void setNumPlayers(int numPlayers)
     {
