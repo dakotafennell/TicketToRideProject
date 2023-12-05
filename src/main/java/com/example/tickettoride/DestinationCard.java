@@ -47,7 +47,7 @@ public class DestinationCard
     private static final String UN_WallStreet = "/com/example/tickettoride/DestinationCards/UnitedNationsToWallStreet.png";
     private static final String Back = "/com/example/tickettoride/DestinationCards/BackOfTransportationCard.png";
 
-    //array of card images
+    //-------------------  array of card images ---------------------\\
     public static final String[] CardImagePath = {
             CentralPark_Chelsea, CentralPark_Chinatown, CentralPark_Gramercy, CentralPark_Midtown,
             Chelsea_Brooklyn, Chelsea_WallStreet, EastVillage_Soho, EmpireState_Brooklyn,
@@ -114,6 +114,7 @@ public class DestinationCard
         return points;
     }
 
+    //string that displays the two destinations on the card as well as value of the route
     public String toString()
     {
         return city1 + " to " + city2 + " for " + points + " points";

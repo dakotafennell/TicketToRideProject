@@ -6,7 +6,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import java.util.Objects;
 import java.util.Random;
-
+/*
+    Creation of the cards that are in the Transportation Deck
+    -Assigns the Image to the color of the card to become
+     applicable to the players hand
+ */
 public class TransportationCard
 {
     public static final ImageView cardImageView = new ImageView();

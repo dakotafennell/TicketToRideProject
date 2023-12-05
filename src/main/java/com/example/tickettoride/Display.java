@@ -18,11 +18,12 @@ import java.util.Objects;
 
 public class Display
 {
-    //TicketToRide game = new TicketToRide();
-
-    //This class will contain logic for displaying the game window and each of the game's components.
-
-    //Public method that sets the application icon
+    /*
+        Display class
+        TicketToRide game = new TicketToRide();
+        This class will contain logic for displaying the game window and each of the game's components.
+        Public method that sets the application icon
+     */
     public static void ChangeIcon(Stage primaryStage)
     {
         //Sets the application icon.
@@ -30,7 +31,7 @@ public class Display
         String iconUrl = iconFile.toURI().toString();
         primaryStage.getIcons().add(new Image(iconUrl));
     }
-
+    //created list of players
     private final ObservableList<Player> Players;
 
     // Constructor that takes the current players list
@@ -89,6 +90,8 @@ public class Display
         }
     }
 
+    //---------------------------------------------------------------\\
+    //Creates a VBox display of the players hand on lower section of main game.
     public VBox displayPlayersHand()
     {
         //Create players 1 and 2 hand
@@ -149,7 +152,7 @@ public class Display
         // Add both card images to the HBox for player 1
         cardImagesHBoxP1.getChildren().addAll(redCardImageViewP1, blueCardImageViewP1, rainbowCardImageViewP1, pinkCardImageViewP1, blackCardImageViewP1, greenCardImageViewP1, orangeCardImageViewP1);
 
-        //gets the current players
+        //---------------------------- gets the current players ---------------------------\\
         ObservableList<Player> currentPlayers = getPlayers();
 
         //gets the current players hand
@@ -197,9 +200,12 @@ public class Display
         return redCardImageViewP1;
     }
 
-    //Method that will create a VBox for the player information
-    //This method will be called when the game is started and when a player's information changes
-    //This method calls the players information from the ObservableList currentPlayers
+    /*
+        Method that will create a VBox for the player information
+        This method will be called when the game is started and when a player's information changes
+        This method calls the players information from the ObservableList currentPlayers
+    */
+
     public VBox getPlayerInfoVBox()
     {
         // Check if the list of current players is empty

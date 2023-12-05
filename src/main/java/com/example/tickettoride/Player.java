@@ -7,6 +7,12 @@ import java.util.*;
 /**
  * Player class
  * This class will contain logic for the player and/or the player's hand
+ * Includes:
+ * - name
+ * - player color
+ * - score
+ * - taxi counts
+ * - hand(s)
  */
 public class Player
 {
@@ -33,6 +39,7 @@ public class Player
 
     private Map<Color, Integer> playerHandMap = new LinkedHashMap<>();
 
+    //-----------------------------------------------------------------\\
     public Player()
     {
         this.name = "Billy Bob";
@@ -89,12 +96,14 @@ public class Player
         playerHandMap.put(color, value);
     }
 
+    //Change count values of the respective players cards
     public void incrementPlayerHandValue(Color color, int value) {
         int currentValue = playerHandMap.getOrDefault(color, 0);
         int newValue = currentValue + value;
         playerHandMap.put(color, newValue);
     }
 
+//------------------------------ Get/Sets -----------------------------\\
     public String getName()
     {
         return name;
@@ -125,6 +134,7 @@ public class Player
         return numGamePieces;
     }
 
+    //Sets up the name
     public void setName(String name)
     {
         if (name != null)
@@ -133,6 +143,7 @@ public class Player
         }
     }
 
+    //Sets up the scoring
     public void setScore(int score)
     {
         this.score = score;

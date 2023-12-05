@@ -4,7 +4,11 @@ import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/*
+    Keeps count of all the routes
+    Keeps count of the length of the routes
+    Tracks the required color of the routes
+ */
 public class Route
 {
     public static final int TOTAL_ALL_ROUTES = 41;
@@ -66,6 +70,7 @@ public class Route
     public int lengthOfWallStreetToBrooklynBlack = 3;
     public int lengthOfWallStreetToBrooklynBlue = 3;
 
+    //---------------- Sets up the color to be assigned to the routes -----------------------\\
     public void createRouteColorLength()
     {
         colorLengthOfRoutes.put(Color.BLACK, lengthOfCentralParkToTimesSquareBlack);
@@ -110,6 +115,7 @@ public class Route
         colorLengthOfRoutes.put(Color.BLACK, lengthOfWallStreetToBrooklynBlack);
         colorLengthOfRoutes.put(Color.BLUE, lengthOfWallStreetToBrooklynBlue);
     }
+
 
     public int getLengthOfRoute(Color color)
     {

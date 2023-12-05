@@ -19,9 +19,13 @@ import java.io.File;
 
 /**
  * HighlightRoutes class
+ * This class was created to display where the user is able to use their taxis.
+ * added feature of them pulsing
+ * Upon click we are able to change from a highlight to the routes color marking that it has been taken.
  */
 public class HighlightRoutes
 {
+    //Using variables to keep measurements uniform
     public static final double HEIGHT = 15;
     public static final double WIDTH = 50;
     public static final double WIDTH2 = 100;
@@ -39,7 +43,7 @@ public class HighlightRoutes
     Rectangle ChinatownToWallStreetGreen = new Rectangle(299, 653, WIDTH, HEIGHT);
     Rectangle ChinatownToWallStreetPink = new Rectangle(317, 660, WIDTH, HEIGHT);
 
-    //All one block routes
+    //List of All one block routes
     Rectangle[] oneBlockRoutes = {
             MidtownWestToTimesSquare, TimesSquareToEmpireStateBuildingOrange,
             TimesSquareToEmpireStateBuildingPink, EmpireStateBuildingToGramercyParkRed,
@@ -71,7 +75,7 @@ public class HighlightRoutes
     Rectangle GreenwichVillageToLowerEastSide = new Rectangle(332, 507, WIDTH2, HEIGHT);
     Rectangle SohoToWallStreet = new Rectangle(210, 653, WIDTH2, HEIGHT);
 
-    //All two block routes
+    //List of All two block routes
     Rectangle[] twoBlockRoutes = {
             LincolnCenterToMidtownWest, LincolnCenterToTimesSquareGreen,
             LincolnCenterToTimesSquareBlue, LincolnCenterToCentralPark, CentralParkToTimesSquareBlack,
@@ -94,7 +98,7 @@ public class HighlightRoutes
     Rectangle WallStreetToBrooklynBlue = new Rectangle(325, 720, WIDTH3, HEIGHT);
     Rectangle WallStreetToBrooklynBlack = new Rectangle(323, 740, WIDTH3, HEIGHT);
 
-    //All three block routes
+    //List of All three block routes
     Rectangle[] threeBlockRoutes = {CentralParkToUnitedNations, UnitedNationsToGramercyPark,
             ChelseaToGreenwichVillageGreen, ChelseaToGreenwichVillageRed, LowerEastSideToBrooklyn,
             ChinatownToBrooklynRed, ChinatownToBrooklynOrange, WallStreetToBrooklynBlue, WallStreetToBrooklynBlack};
@@ -105,6 +109,7 @@ public class HighlightRoutes
     //All four block routes
     Rectangle[] fourBlockRoutes = {ChelseaToSoho};
 
+    //List of all the routes combined
     Rectangle[] allRectangles = {
             MidtownWestToTimesSquare, TimesSquareToEmpireStateBuildingOrange,
             TimesSquareToEmpireStateBuildingPink, EmpireStateBuildingToGramercyParkRed,
@@ -122,6 +127,7 @@ public class HighlightRoutes
             ChinatownToBrooklynOrange, WallStreetToBrooklynBlue, WallStreetToBrooklynBlack, ChelseaToSoho
     };
 
+    //--------------------------- Display ----------------------------------\\
     public Pane highlightRectangles(Pane overlay)
     {
         try
@@ -226,8 +232,7 @@ public class HighlightRoutes
         }
     }
 
-
-    //Method to set the initial fill and effects for each rectangle
+    //--------- Method to set the initial fill and effects for each rectangle ------------\\
     private void setRectangleFillAndEffects(Rectangle[] twoBlockRoutes, Glow glow, ColorAdjust colorAdjust)
     {
         for (Rectangle rectangle : twoBlockRoutes)

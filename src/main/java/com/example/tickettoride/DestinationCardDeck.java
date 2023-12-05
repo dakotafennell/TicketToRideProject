@@ -3,9 +3,12 @@ package com.example.tickettoride;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+/*
+    This creates a deck from the DestinationCard class
+ */
 public class DestinationCardDeck
 {
+    //List creation for the Destination Card Deck
     private static List<DestinationCard> destinationCards;
 
     //Card Images
@@ -28,6 +31,12 @@ public class DestinationCardDeck
     private static final String UN_Midtown = "/com/example/tickettoride/DestinationCards/UnitedNationsToMidtownWest.png";
     private static final String UN_WallStreet = "/com/example/tickettoride/DestinationCards/UnitedNationsToWallStreet.png";
     private static final String Back = "/com/example/tickettoride/DestinationCards/BackOfTransportationCard.png";
+
+    /*
+        Logic for the destination deck:
+        -prevents issue of not having enough cards in draw deck
+        -removes the card once its pulled
+     */
     public static List<DestinationCard> drawDestinationCards(int numCards)
     {
         if (destinationCards.size() < numCards)
@@ -46,6 +55,7 @@ public class DestinationCardDeck
         return drawnCards;
     }
 
+    //Shuffles the deck
     public void shuffle()
     {
         Collections.shuffle(destinationCards);

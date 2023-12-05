@@ -5,7 +5,11 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+    Class that handles the turn logic
+    -Creates list of the current players and implements turns
+     through use of the list
+ */
 public class TurnHandler
 {
     public static final int DRAW_TRANSPORTATION_CARDS = 0;
@@ -45,6 +49,7 @@ public class TurnHandler
         }
     }
 
+    //----------------- Sets up the Drawing of the cards per turn -------------------\\
     private static void drawTransportationCards(Player player, int numCards)
     {
         //gets the player's hand
@@ -88,7 +93,7 @@ public class TurnHandler
         }
     }
 
-    //Checks if the game is over
+    //---------------- Checks if the game is over ----------------------\\
     protected boolean endGame()
     {
         for (int i = 0; i < numPlayers; i++)

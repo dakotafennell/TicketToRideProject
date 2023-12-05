@@ -38,7 +38,7 @@ public class TicketToRide extends Application
     Display display = new Display(currentPlayers);
     int startTurns;
 
-    //---- Splash Screen Creation ----\\
+    //------------------ Splash Screen Creation -----------------\\
     @Override
     public void start(Stage primaryStage)
     {
@@ -132,13 +132,13 @@ public class TicketToRide extends Application
         });
     }
 
-    //Method that will display the player count and selection screen
+    //----------- Method that will display the player count and selection screen ----------\\
     private void createPlayerSelection(Stage playerSelectStage)
     {
         //imageURL of table.png
         String imageUrl = Objects.requireNonNull(getClass().getResource("/com/example/tickettoride/Table.png")).toExternalForm();
 
-        //Creates a label with the game title
+        // Creates a label with the game title
         Label titleLabel = new Label(TITLE);
         titleLabel.setTextFill(Color.BLACK);
         /* Sets the style of the titleLabel with a background color and 60% opacity with rounded corners, a black border
@@ -190,7 +190,7 @@ public class TicketToRide extends Application
 
         //Creates the ComboBox for selecting the number of players
         ComboBox<Integer> playerComboBox = new ComboBox<>();
-        playerComboBox.getItems().addAll(2, 3, 4);
+        playerComboBox.getItems().addAll(2); //changed to 2 for simpler coding
         playerComboBox.setPromptText("Number Of Players");
 
         //Sets the default value of the ComboBox to blank
@@ -209,7 +209,7 @@ public class TicketToRide extends Application
         playerSelectionAlert.setHeaderText(null); // No header text
         playerSelectionAlert.setContentText("Please Enter Number Of Players.");
 
-        //Event handler for the confirm button
+        //-------------- Event handler for the confirm button -------------------\\
         confirmButton.setOnAction(e ->
         {
             try
@@ -323,7 +323,7 @@ public class TicketToRide extends Application
         playerSelectStage.show();
     }
 
-    // ---- Main game board creation ----\
+    // ------------------------- Main game board creation --------------------------\\
     private void createGameInterface(Stage primaryStage)
     {
         //Creates a new borderPane
@@ -401,7 +401,7 @@ public class TicketToRide extends Application
             primaryStage.close();
         });
 
-        //Creates the event and text for the rules button
+        //---------------------- Creates the event and text for the rules button -------------------\\
         rulesMenuItem.setOnAction(actionEvent ->
         {
             Dialog<String> dialog = new Dialog<>();
@@ -488,7 +488,7 @@ public class TicketToRide extends Application
             dialog.showAndWait();
         });
 
-        //Create Button to select random card for transportation deck
+        //-------------- Create Button to select random card for transportation deck ---------------------\\
         TransportationCard transportationCard = new TransportationCard();
 
         // Create ImageView to display the selected card image
@@ -534,7 +534,7 @@ public class TicketToRide extends Application
 
             // While loop to add cards to the player's hand
             Player player = currentPlayers.get(0);
-
+            System.out.println(player+" drew from transportation deck.");
             player.addTransportationCard(transportationCard);
             // Increment the value in the playerHandMap for the drawn card color
             player.incrementPlayerHandValue(drawnCardColor, 1);
@@ -582,17 +582,20 @@ public class TicketToRide extends Application
             // Update the ImageView with the new card image
             destinationImage.setImage(randomImages.selectRandomDestinationCard());
             //destinationImage.setImage(DestinationCard.cardImageView.getImage());
-
+            System.out.println("Drew from destination deck");
             //Creates an event handler to store the selected card in the player's hand when the card is clicked
             destinationImage.setOnMouseClicked(
                 event1 ->
                 {
                     //Adds the selected card to the player's hand
                     currentPlayers.get(0).addDestinationCard(destinationCard);
+                    System.out.println(currentPlayers+" drew "+destinationCard);
                     //Removes the selected card from the deck
                     destinationCard.removeCardFromDeck();
                     //adds the selected card to the current player's list of destination cards
                     currentPlayers.get(0).addDestinationCard(destinationCard);
+                    //Remove card from pile visually
+
                 }
             );
         });

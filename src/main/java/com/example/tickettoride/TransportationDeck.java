@@ -3,7 +3,11 @@ package com.example.tickettoride;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+/*
+    Creates the deck of Transportation cards from the TransportationCard class
+    Handles logic/issues if there are not enough cards in the deck
+    Shuffles the deck
+ */
 public class TransportationDeck
 {
     private static List<TransportationCard> transportationCards;

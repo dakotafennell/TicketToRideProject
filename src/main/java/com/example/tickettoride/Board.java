@@ -21,6 +21,7 @@ public class Board extends StackPane
     private static final int BOARD_WIDTH = 1000;
     private static final int BOARD_HEIGHT = 800;
 
+    //Gets and sets the image using try/catch to ensure success without crash
     public ImageView getTicketToRideImage()
     {
         ImageView ticketToRideImageView = new ImageView();
