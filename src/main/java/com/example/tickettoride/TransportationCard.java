@@ -71,43 +71,6 @@ public class TransportationCard
     }
     */
 
-    //Method to select a random card from the deck
-    public Image selectRandomCard()
-    {
-        Random random = new Random();
-        // Get a random card index
-        int cardIndex = random.nextInt(CARDIMAGEPATHS.length);
-        // Get the selected card image path
-        String selectedCardImagePath = CARDIMAGEPATHS[cardIndex];
-
-        cardColor = colors[cardIndex];
-
-        // Load the image using ClassLoader
-        final int imageWidth = 1000;
-        final int imageHeight = 800;
-
-        try
-        {
-            Image selectedCardImage = new Image(Objects.requireNonNull(getClass().getResource(selectedCardImagePath)).toExternalForm(),
-                    imageWidth, imageHeight, true, false);
-
-            // Set the selected card image to the cardImageView
-            cardImageView.setImage(selectedCardImage);
-            //Prints out to the console the specific card image path that is null
-            System.out.println("The selected card image path is: " + selectedCardImagePath);
-
-            return selectedCardImage;
-        }
-        catch (NullPointerException e)
-        {
-            e.printStackTrace();
-            System.out.println("The selected card image path is null.");
-            //Prints out to the console the specific card image path that is null
-            System.out.println("The selected card image path is: " + selectedCardImagePath);
-        }
-        return null;
-    }
-
     public Color getCardColor() {
         return cardColor;
     }

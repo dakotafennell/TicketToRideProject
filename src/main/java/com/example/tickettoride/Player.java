@@ -264,12 +264,22 @@ public class Player
         return 0;
     }
 
-    public void addToHand(List<TransportationCard> drawnCards)
+    // This method will be called when the player draws transportation cards
+    public void addTranspoCardsToHand(ArrayList<TransportationCard> drawnCards)
     {
         for (TransportationCard card : drawnCards)
         {
             Color cardColor = card.getCardColor();
             incrementPlayerHandValue(cardColor, 1);
+        }
+    }
+
+    public void addDestToHand(ArrayList<DestinationCard> drawnCards)
+    {
+        for (DestinationCard card : drawnCards)
+        {
+            DestinationCard destCities = card.getCities();
+            int destPoints = card.getPoints();
         }
     }
 }

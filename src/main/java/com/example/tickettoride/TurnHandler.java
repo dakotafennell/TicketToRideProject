@@ -1,21 +1,27 @@
 package com.example.tickettoride;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class TurnHandler
 {
-    public static final int PLACE_ROUTE = 0;
-    private static final int DRAW_DESTINATION_CARDS = 2;
-    private static final int DRAW_TRANSPORTATION_CARDS = 3;
+    public static final int DRAW_TRANSPORTATION_CARDS = 0;
+    public static final int DRAW_DESTINATION_CARDS = 1;
+    public static final int PLACE_ROUTE = 2;
     private int turn;
     private int numPlayers;
     private Player[] players;
+    //Gets the current players
+    ObservableList<Player> currentPlayers = FXCollections.observableArrayList();
 
-    public TurnHandler(int numPlayers, Player[] players)
+    public TurnHandler(int numPlayers, ObservableList<Player> players)
     {
         this.turn = 0;
         this.numPlayers = numPlayers;
-        this.players = players;
+        this.players = new Player[numPlayers];
     }
 
     public static void handlePlayerTurn(Player player)
@@ -39,29 +45,47 @@ public class TurnHandler
         }
     }
 
-    private static void drawTransportationCards(Player player, int numCards) {
+    private static void drawTransportationCards(Player player, int numCards)
+    {
+        //gets the player's hand
         List<TransportationCard> drawnCards = TransportationDeck.drawTransportationCards(numCards);
 
         if (!drawnCards.isEmpty())
         {
-            player.addToHand(drawnCards);
+            player.addTranspoCardsToHand((ArrayList<TransportationCard>) drawnCards);
             // You might want to update UI or perform other actions based on the drawn cards
             System.out.println(player.getName() + " drew " + numCards + " transportation cards.");
         }
     }
 
-
     private static void drawDestinationCards(Player player, int numCards) {
-        //Implement logic for drawing destination cards
-        //List<DestinationCard> drawnCards = .drawDestinationCards(numCards);
-        //player.addToHand(drawnCards);
-        //You might want to update UI or perform other actions based on the drawn cards
+        List<DestinationCard> drawnCards = DestinationCard.drawDestinationCards(numCards);
+
+        if (!drawnCards.isEmpty())
+        {
+            //Adds the drawn cards to the player's hand
+            player.addDestToHand((ArrayList<DestinationCard>) drawnCards);
+            // You might want to update UI or perform other actions based on the drawn cards
+            System.out.println(player.getName() + " drew " + numCards + " destination cards.");
+        }
     }
 
-    private static void placeRoute(Player player) {
-        // Implement logic for placing a route
-        // Check if the player has the required cards and select a route to place
-        // Update the player's hand and other game state accordingly
+    //Method for handling placing routes
+    private static void placeRoute(Player player)
+    {
+        //Gets the current players
+        ObservableList<Player> currentPlayers = FXCollections.observableArrayList();
+        //For each player, check if they have enough cards to place a route
+        //If they do, then they can place a route
+        for (int i = 0; i < currentPlayers.size(); i++)
+        {
+            //Checks which routes are available to the player to place
+            if (!currentPlayers.get(i).getTransportationCards().isEmpty())
+            {
+                //If the player has enough cards, then they can place a route
+                currentPlayers.get(i).setTurnPhase(TurnHandler.PLACE_ROUTE);
+            }
+        }
     }
 
     //Checks if the game is over
@@ -109,27 +133,3 @@ public class TurnHandler
         this.turn = turn;
     }
 }
-
-/*
-    public static void handlePlayerTurn(Player player)
-    {
-        switch (player.getTurnPhase())
-        {
-            case DRAW_TRANSPORTATION_CARDS:
-                // Implement logic for drawing transportation cards
-                break;
-
-            case DRAW_DESTINATION_CARDS:
-                // Implement logic for drawing destination cards
-                break;
-
-            case PLACE_ROUTE:
-                // Implement logic for placing a route
-                break;
-
-            default:
-                // Handle unexpected turn phase
-                break;
-        }
-    }
-    */

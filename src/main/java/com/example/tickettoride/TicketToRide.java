@@ -28,6 +28,7 @@ public class TicketToRide extends Application
     public static final String AUTHORS = "By: Austin, Joseph, and Louis";
     public static final int HEIGHT = 1080;
     public static final int WIDTH = 1440;
+    RandomImages randomImages = new RandomImages();
 
     //Contains the number of players
     private int currentNumPlayers;
@@ -46,7 +47,8 @@ public class TicketToRide extends Application
 
         //Get the image from the TransportationCard class
         TransportationCard transportationCard = new TransportationCard();
-        Image cardImage = transportationCard.selectRandomCard();
+
+        Image cardImage = randomImages.selectRandomTransportationCard();
 
         //Create an ImageView for the splash screen
         ImageView imageView = new ImageView(cardImage);
@@ -526,9 +528,9 @@ public class TicketToRide extends Application
         btnRandomCard.setOnAction(event ->
         {
             // Use the instance of selectRandomCard
-            transportationCard.selectRandomCard();
+            randomImages.selectRandomTransportationCard();
             // Update the ImageView with the new card image
-            cardImage.setImage(TransportationCard.cardImageView.getImage());
+            cardImage.setImage(randomImages.selectRandomTransportationCard());
 
             //While
             Player player = currentPlayers.get(0);
@@ -571,13 +573,15 @@ public class TicketToRide extends Application
         btnDestinationCard.setMinHeight(200);
         btnDestinationCard.setMinWidth(250);
 
+        RandomImages randomImages = new RandomImages();
         //Set Button Action
         btnDestinationCard.setOnAction(event ->
         {
             // Use the instance of selectRandomCard
-            destinationCard.selectRandomCard();
+            randomImages.selectRandomDestinationCard();
             // Update the ImageView with the new card image
-            destinationImage.setImage(DestinationCard.cardImageView.getImage());
+            destinationImage.setImage(randomImages.selectRandomDestinationCard());
+            //destinationImage.setImage(DestinationCard.cardImageView.getImage());
 
             //Creates an event handler to store the selected card in the player's hand when the card is clicked
             destinationImage.setOnMouseClicked(
@@ -662,40 +666,22 @@ public class TicketToRide extends Application
         primaryStage.show();
     }
 
-    /*
+
     //Method used to set up the turns for the game
     private void SetupTurn()
     {
         for(int i = 0; i < currentPlayers.size(); i++)
         {
-            currentPlayers.get(i).setTurnPhase(TurnPhase.DRAW_TRANSPORTATION_CARDS);
+            currentPlayers.get(i).setTurnPhase(TurnHandler.DRAW_TRANSPORTATION_CARDS);
             if (currentPlayers.get(i).getNumGamePieces() < 3)
             {
                 //End the game
+                TurnHandler turnHandler = new TurnHandler(currentNumPlayers, currentPlayers);
+                turnHandler.endGame();
             }
         }
     }
-    */
 
-    //Method for handling placing routes
-    private void placeRoute(Player player)
-    {
-        //For each player, check if they have enough cards to place a route
-        //If they do, then they can place a route
-        for (int i = 0; i < currentPlayers.size(); i++)
-        {
-            //Checks which routes are available to the player to place
-            if (currentPlayers.get(i).getTransportationCards().size() >= 2)
-            {
-                //If the player has enough cards, then they can place a route
-                currentPlayers.get(i).setTurnPhase(TurnHandler.PLACE_ROUTE);
-            }
-        }
-
-        // Implement logic for placing a route
-        // Check if the player has the required cards and select a route to place
-        // Update the player's hand and other game state accordingly
-    }
 
     //Separate method for creating a player object
     private Player createPlayer(String playerName, Color color)
