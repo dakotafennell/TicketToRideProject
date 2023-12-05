@@ -13,6 +13,7 @@ public class RandomImages
     //Destination card logic
     public static final ImageView cardImageView = new ImageView();
     private final ImageView DestinationCardImageView = new ImageView();
+    protected int cardIndex = 0;
     private Color cardColor;
 
     //Card Images
@@ -105,6 +106,7 @@ public class RandomImages
     //Method to select a random card from the deck
     public Image selectRandomTransportationCard()
     {
+
         Random random = new Random();
         // Get a random card index
         //prints out the length of the card image paths
@@ -143,6 +145,9 @@ public class RandomImages
             //Prints out the new pair
             System.out.println("The new pair is: " + new Pair<>(selectedCardImage, cardColor));
 
+            // Reset cardIndex to 0
+            cardIndex = 0;
+            System.out.println("The card index ended at: " + cardIndex);
             return new Pair<>(selectedCardImage, cardColor).getKey();
         }
         catch (NullPointerException e)

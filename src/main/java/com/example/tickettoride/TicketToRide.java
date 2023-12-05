@@ -559,8 +559,6 @@ public class TicketToRide extends Application
                 cardImage.setImage(randomImages.selectRandomTransportationCard());
                 //prints out which image was chosen
                 System.out.println("The selected card image is: " + cardImage.getImage());
-
-                // While loop to add cards to the player's hand
                 Player player = currentPlayers.get(0);
                 System.out.println(player + " drew from transportation deck.");
                 player.addTransportationCard(transportationCard);
@@ -568,7 +566,8 @@ public class TicketToRide extends Application
                 System.out.println(player + " added " + transportationCard + " to their hand.");
                 // Increment the value in the playerHandMap for the drawn card color
                 player.incrementPlayerHandValue(drawnCardColor, 1);
-
+                //prints out the drawn card color
+                System.out.println("The drawn card color is: " + drawnCardColor);
                 //Displays the current player's hand
                 borderPane.setBottom(display.displayPlayersHand());
 
