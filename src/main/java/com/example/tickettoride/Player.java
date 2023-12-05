@@ -1,6 +1,7 @@
 package com.example.tickettoride;
 
 import javafx.scene.paint.Color;
+import kotlin.random.Random;
 
 import java.util.*;
 
@@ -23,6 +24,7 @@ public class Player
     private int numTransportationCards;
     private int numDestinationCards;
     private int numGamePieces;
+    RandomImages randomImages = new RandomImages();
     private List<TransportationCard> transportationCards;
     public static String[][] cards = {
             {"Color.BLUE", "0"},
@@ -30,10 +32,10 @@ public class Player
             {"Color.BLACK", "0"},
             {"Color.PINK", "0"},
             {"Color.RED", "0"},
-            {"Color.YELLOW", "0"},
             {"Color.ORANGE", "0"},
             {"Color.WHITE", "0"}
     };
+
     private List<DestinationCard> destinationCards;
     private Color playerColor;
 
@@ -50,14 +52,24 @@ public class Player
         this.transportationCards = new ArrayList<TransportationCard>();
         this.destinationCards = new ArrayList<DestinationCard>();
         this.playerColor = Color.WHITE;
-        playerHandMap.put(Color.RED, 0);
         playerHandMap.put(Color.BLUE, 0);
-        playerHandMap.put(Color.WHITE, 0);
-        playerHandMap.put(Color.PINK, 0);
-        playerHandMap.put(Color.BLACK, 0);
         playerHandMap.put(Color.GREEN, 0);
+        playerHandMap.put(Color.BLACK, 0);
+        playerHandMap.put(Color.PINK, 0);
+        playerHandMap.put(Color.RED, 0);
         playerHandMap.put(Color.ORANGE, 0);
+        playerHandMap.put(Color.WHITE, 0);
     }
+
+    /*
+    blueCardImageViewP1,
+    greenCardImageViewP1,
+    blackCardImageViewP1,
+    pinkCardImageViewP1,
+    redCardImageViewP1,
+    orangeCardImageViewP1,
+    rainbowCardImageViewP1
+     */
 
     public Player(String name, int score, int numTransportationCards, int numDestinationCards,
                   List<TransportationCard> transportationCards, List<DestinationCard> destinationCards,
@@ -71,13 +83,13 @@ public class Player
         this.transportationCards = new ArrayList<TransportationCard>();
         this.destinationCards = new ArrayList<DestinationCard>();
         this.playerColor = playerColor;
-        playerHandMap.put(Color.RED, 0);
         playerHandMap.put(Color.BLUE, 0);
-        playerHandMap.put(Color.WHITE, 0);
-        playerHandMap.put(Color.PINK, 0);
-        playerHandMap.put(Color.BLACK, 0);
         playerHandMap.put(Color.GREEN, 0);
+        playerHandMap.put(Color.BLACK, 0);
+        playerHandMap.put(Color.PINK, 0);
+        playerHandMap.put(Color.RED, 0);
         playerHandMap.put(Color.ORANGE, 0);
+        playerHandMap.put(Color.WHITE, 0);
     }
 
     protected void setNumPlayers(int numPlayers)
@@ -99,8 +111,13 @@ public class Player
     //Change count values of the respective players cards
     public void incrementPlayerHandValue(Color color, int value) {
         int currentValue = playerHandMap.getOrDefault(color, 0);
+        //prints out the current value of the card
+        System.out.println("The current value of the card is: " + currentValue);
         int newValue = currentValue + value;
         playerHandMap.put(color, newValue);
+
+        //prints out what was put in the map
+        System.out.println("The value of the card put in the map is: " + playerHandMap.get(color));
     }
 
 //------------------------------ Get/Sets -----------------------------\\
@@ -280,7 +297,8 @@ public class Player
     {
         for (TransportationCard card : drawnCards)
         {
-            Color cardColor = card.getCardColor();
+            //Gets the color of the drawn card from the deck
+            Color cardColor = randomImages.selectRandomTransportationCardColor();
             incrementPlayerHandValue(cardColor, 1);
         }
     }

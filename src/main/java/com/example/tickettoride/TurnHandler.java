@@ -89,6 +89,11 @@ public class TurnHandler
             {
                 //If the player has enough cards, then they can place a route
                 currentPlayers.get(i).setTurnPhase(TurnHandler.PLACE_ROUTE);
+                //If the player has one card, displays the one block highlight rectangles
+                if (currentPlayers.get(i).getTransportationCards().size() == 1)
+                {
+                    //Displays the one block highlight rectangles
+                }
             }
         }
     }
@@ -136,5 +141,23 @@ public class TurnHandler
     public void setTurn(int turn)
     {
         this.turn = turn;
+    }
+
+    //method to end the current player's turn
+    public void endTurn()
+    {
+        //Gets the current players
+        ObservableList<Player> currentPlayers = FXCollections.observableArrayList();
+        //For each player, check if they have enough cards to place a route
+        //If they do, then they can place a route
+        for (int i = 0; i < currentPlayers.size(); i++)
+        {
+            //Checks which routes are available to the player to place
+            if (!currentPlayers.get(i).getTransportationCards().isEmpty())
+            {
+                //If the player has enough cards, then they can place a route
+                currentPlayers.get(i).setTurnPhase(TurnHandler.PLACE_ROUTE);
+            }
+        }
     }
 }

@@ -160,6 +160,8 @@ public class HighlightRoutes
             //Sets the effects for all rectangles
             setRectangleFillAndEffects(allRectangles, glow, colorAdjust);
 
+            //Rotation positioning for all one block routes
+            int[] oneBlockRectangleRotations = {-11, 55, 55, 55, 55, 97, -33, 110, 110};
             //Rotation positioning for each route
             //One block route rotations
             MidtownWestToTimesSquare.setRotate(-11);
@@ -172,6 +174,8 @@ public class HighlightRoutes
             ChinatownToWallStreetGreen.setRotate(110);
             ChinatownToWallStreetPink.setRotate(110);
 
+            //Rotation positioning for all three block routes
+            int[] threeBlockRectangleRotations = {46, 110, 43, 43, 66, 38, 38, 7, 7};
             //Three block route rotations
             CentralParkToUnitedNations.setRotate(46);
             UnitedNationsToGramercyPark.setRotate(110);
@@ -183,8 +187,91 @@ public class HighlightRoutes
             WallStreetToBrooklynBlue.setRotate(7);
             WallStreetToBrooklynBlack.setRotate(7);
 
+            //Rotation positioning for all four block routes
+            int[] fourBlockRectangleRotations = {70};
             //Four block route rotations
             ChelseaToSoho.setRotate(70);
+
+            //Rotation positioning for all two block routes
+            int[] twoBlockRectangleRotations = {90, 62, 62, 1, -70, -70, -2, 75, 26, -32, -36, -36, -4, -78, -78, 51, 0, -60, 75, 75, 38, 61};
+
+            /*
+            For loop for each transportation card the player has, checks if the player has enough cards (two cards of
+            the same color) to place a route. If they do, then highlight the route. If they don't, then don't highlight
+            that route */
+            for (int i = 0; i < 2; i++)
+            {
+                //Checks if the player has enough cards to place a route
+                if (i == 0)
+                {
+                    //If the player has enough cards, then highlight the route
+                    for (Rectangle rectangle : twoBlockRoutes)
+                    {
+                        //Sets the rectangle fill to yellow
+                        rectangle.setFill(Color.YELLOW);
+                        rectangle.setEffect(glow);
+                        rectangle.setEffect(colorAdjust);
+                    }
+                }
+                //If the player does not have enough cards, then don't highlight the route
+                else
+                {
+                    for (Rectangle rectangle : twoBlockRoutes)
+                    {
+                        //Sets the rectangle fill to yellow
+                        rectangle.setFill(Color.TRANSPARENT);
+                        rectangle.setEffect(glow);
+                        rectangle.setEffect(colorAdjust);
+                    }
+                }
+            }
+
+            //For loop for each transportation card the player has, checks if the player has enough cards (three cards of
+            //the same color) to place a route. If they do, then highlight the route. If they don't, then don't highlight
+            //that route
+            for (int i = 0; i < 3; i++)
+            {
+                //Checks if the player has enough cards to place a route
+                if (i == 0)
+                {
+                    //If the player has enough cards, then highlight the route
+                    for (Rectangle rectangle : threeBlockRoutes)
+                    {
+                        //Sets the rectangle fill to yellow
+                        rectangle.setFill(Color.YELLOW);
+                        rectangle.setEffect(glow);
+                        rectangle.setEffect(colorAdjust);
+                    }
+                }
+                //If the player does not have enough cards, then don't highlight the route
+                else
+                {
+                    for (Rectangle rectangle : threeBlockRoutes)
+                    {
+                        //Sets the rectangle fill to yellow
+                        rectangle.setFill(Color.TRANSPARENT);
+                        rectangle.setEffect(glow);
+                        rectangle.setEffect(colorAdjust);
+                    }
+                }
+            }
+
+            //For loop for each transportation card the player has, checks if the player has enough cards (four cards of
+            //the same color) to place a route. If they do, then highlight the route. If they don't, then don't highlight
+            //that route
+            for (int i = 0; i < 4; i++) {
+                //Checks if the player has enough cards to place a route
+                if (i == 0) {
+                    //If the player has enough cards, then highlight the route
+                    for (Rectangle rectangle : fourBlockRoutes)
+                    {
+                        //Sets the rectangle fill to yellow
+                        rectangle.setFill(Color.YELLOW);
+                        rectangle.setEffect(glow);
+                        rectangle.setEffect(colorAdjust);
+                    }
+                }
+            }
 
             //Two block route rotations
             LincolnCenterToMidtownWest.setRotate(90);
@@ -315,5 +402,26 @@ public class HighlightRoutes
 
             });
         }
+    }
+
+    //Gets which rectangle the user clicked on, outputting that rectangle to the console
+    public Rectangle getSelectedRectangle()
+    {
+        for (Rectangle rectangle : allRectangles)
+        {
+            rectangle.setOnMouseClicked(event ->
+            {
+                //Handle click event for the rectangle
+                System.out.println("Clicked on a rectangle");
+                System.out.println("Rectangle X: " + rectangle.getX());
+                System.out.println("Rectangle Y: " + rectangle.getY());
+                System.out.println("Rotation angle: " + rectangle.getRotate());
+                //prints out the color of the rectangle
+                System.out.println("Rectangle Color: " + rectangle.getFill());
+                //Sets the fill color of the specifically clicked rectangle to the player's color
+                rectangle.setFill(Color.RED);
+            });
+        }
+        return null;
     }
 }

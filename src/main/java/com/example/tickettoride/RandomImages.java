@@ -49,6 +49,10 @@ public class RandomImages
 
     //Array of card image paths
     public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, ORANGECARD, TAXICARD};
+    //Color hex codes
+    public static final String[] colorHexCodes = {
+            "#0000FF BLUE", "#008000 GREEN", "#000000 BLACK", "#FFC0CB PINK", "#FF0000 RED", "#FFA500 ORANGE", "#FFFFFF WHITE"
+    };
     //array of card images
     public static final String[] CardImagePath = {
             CentralPark_Chelsea, CentralPark_Chinatown, CentralPark_Gramercy, CentralPark_Midtown,
@@ -91,11 +95,22 @@ public class RandomImages
     {
         Random random = new Random();
         // Get a random card index
-        int cardIndex = random.nextInt(CARDIMAGEPATHS.length);
+        //prints out the length of the card image paths
+        System.out.println("The length of the card image paths is: " + CARDIMAGEPATHS.length);
+        int cardIndex = random.nextInt(CARDIMAGEPATHS.length - 1);
+        //prints out the index of the card
+        System.out.println("The card index is: " + cardIndex);
         // Get the selected card image path
         String selectedCardImagePath = CARDIMAGEPATHS[cardIndex];
 
+        //sets the card color to the color of the card image
         cardColor = colors[cardIndex];
+        //prints out the index of the card color
+        System.out.println("The card color index is: " + cardIndex);
+        //Prints out the card color index hex code as a string
+        System.out.println("The card color index hex code is: " + colorHexCodes[cardIndex]);
+        //prints out the color of the card
+        System.out.println("The card color is: " + cardColor);
 
         // Load the image using ClassLoader
         final int imageWidth = 1000;
@@ -108,6 +123,8 @@ public class RandomImages
 
             // Set the selected card image to the cardImageView
             cardImageView.setImage(selectedCardImage);
+            //prints out the selected card image
+            System.out.println("The selected card image is: " + selectedCardImage);
 
             return new Pair<>(selectedCardImage, cardColor).getKey();
         }
@@ -121,6 +138,7 @@ public class RandomImages
         return null;
     }
 
+    //returns the color of the card
     public Color selectRandomTransportationCardColor()
     {
         return cardColor;

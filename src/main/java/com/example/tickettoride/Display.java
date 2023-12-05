@@ -107,53 +107,71 @@ public class Display
 
         HBox valueImageHBoxP1 = new HBox(150);
         HBox valueImageHBoxP2 = new HBox(150);
-
-        ImageView redCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/RedCard.png");
+        /*
+        BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, ORANGECARD, TAXICARD
+         */
 
         // Create ImageView for the blue card player 1
         ImageView blueCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/BlueCard.png");
 
-        // Create ImageView for the rainbow card player 1
-        ImageView rainbowCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/RainbowCard.png");
-
-        // Create ImageView for the pink card player 1
-        ImageView pinkCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/PinkCard.png");
+        // Create ImageView for the green card player 1
+        ImageView greenCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/GreenCard.png");
 
         // Create ImageView for the black card player 1
         ImageView blackCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/BlackCard.png");
 
-        // Create ImageView for the green card player 1
-        ImageView greenCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/GreenCard.png");
+        // Create ImageView for the pink card player 1
+        ImageView pinkCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/PinkCard.png");
+
+        // Create ImageView for the red card player 1
+        ImageView redCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/RedCard.png");
 
         // Create ImageView for the orange card player 1
         ImageView orangeCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/OrangeCard.png");
 
-        // Create ImageView for the red card player 2
-        ImageView redCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/RedCard.png");
+        // Create ImageView for the rainbow card player 1
+        ImageView rainbowCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/RainbowCard.png");
+
 
         // Create ImageView for the blue card player 2
         ImageView blueCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/BlueCard.png");
 
-        // Create ImageView for the rainbow card player 2
-        ImageView rainbowCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/RainbowCard.png");
-
-        // Create ImageView for the pink card player 2
-        ImageView pinkCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/PinkCard.png");
+        // Create ImageView for the green card player 2
+        ImageView greenCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/GreenCard.png");
 
         // Create ImageView for the black card player 2
         ImageView blackCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/BlackCard.png");
 
-        // Create ImageView for the green card player 2
-        ImageView greenCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/GreenCard.png");
+        // Create ImageView for the pink card player 2
+        ImageView pinkCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/PinkCard.png");
+
+        // Create ImageView for the red card player 2
+        ImageView redCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/RedCard.png");
 
         // Create ImageView for the orange card player 2
         ImageView orangeCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/OrangeCard.png");
 
+        // Create ImageView for the rainbow card player 2
+        ImageView rainbowCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/RainbowCard.png");
+
         // Add both card images to the HBox for player 1
-        cardImagesHBoxP1.getChildren().addAll(redCardImageViewP1, blueCardImageViewP1, rainbowCardImageViewP1, pinkCardImageViewP1, blackCardImageViewP1, greenCardImageViewP1, orangeCardImageViewP1);
+        cardImagesHBoxP1.getChildren().addAll(blueCardImageViewP1, greenCardImageViewP1, blackCardImageViewP1, pinkCardImageViewP1, redCardImageViewP1, orangeCardImageViewP1, rainbowCardImageViewP1);
+        /*
+
+        //Array of card image paths
+        public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, ORANGECARD, TAXICARD};
+        //Color hex codes
+        public static final String[] colorHexCodes = {
+                "#0000FF BLUE", "#008000 GREEN", "#000000 BLACK", "#FFC0CB PINK", "#FF0000 RED", "#FFA500 ORANGE", "#FFFFFF WHITE"
+        };
+
+         */
 
         //---------------------------- gets the current players ---------------------------\\
         ObservableList<Player> currentPlayers = getPlayers();
+
+        //For loop that iterates through the current players
+
 
         //gets the current players hand
         for(int i = 0; i < currentPlayers.size(); i++)
@@ -181,7 +199,7 @@ public class Display
         }
 
         // Add both card images to the HBox for player 2
-        cardImagesHBoxP2.getChildren().addAll(redCardImageViewP2, blueCardImageViewP2, rainbowCardImageViewP2, pinkCardImageViewP2, blackCardImageViewP2, greenCardImageViewP2, orangeCardImageViewP2);
+        cardImagesHBoxP2.getChildren().addAll(blueCardImageViewP2, greenCardImageViewP2, blackCardImageViewP2, pinkCardImageViewP2, redCardImageViewP2, orangeCardImageViewP2, rainbowCardImageViewP2);
 
         // Add the HBox with card images to the bottom of the borderPane
         VBox cardImagesVBox = new VBox(5);
