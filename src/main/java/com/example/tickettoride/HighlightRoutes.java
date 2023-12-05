@@ -331,6 +331,8 @@ public class HighlightRoutes extends Application
         }
     }
 
+
+    //Method to set the initial fill and effects for each rectangle
     private void setRectangleFillAndEffects(Rectangle[] twoBlockRoutes, Glow glow, ColorAdjust colorAdjust)
     {
         for (Rectangle rectangle : twoBlockRoutes)
@@ -342,27 +344,31 @@ public class HighlightRoutes extends Application
         }
     }
 
+    //Method to create keyframes to animate the rectangles and play the animation
     private void routeAnimationKeyFrames(ColorAdjust colorAdjust, Timeline timeline)
     {
+        //For each rectangle in the array of all rectangles
         for (Rectangle allRectangle : allRectangles)
         {
-            // Brightness Animation
+            //Defines the increase brightness Animation
             KeyFrame increaseBrightness = new KeyFrame(
                     Duration.seconds(2),
                     new KeyValue(colorAdjust.brightnessProperty(), 0.5)
             );
 
+            //Defines the decrease brightness Animation
             KeyFrame decreaseBrightness = new KeyFrame(
                     Duration.seconds(2),
                     new KeyValue(colorAdjust.brightnessProperty(), -0.5)
             );
 
-            // Opacity Animation
+            //Defines the increase opacity Animation
             KeyFrame increaseOpacity = new KeyFrame(
                     Duration.seconds(2),
                     new KeyValue(allRectangle.fillProperty(), Color.rgb(255, 255, 0, 1.0)) // Set alpha to 1.0
             );
 
+            //Defines the set transparent Animation
             KeyFrame setTransparent = new KeyFrame(
                     Duration.seconds(2),
                     new KeyValue(allRectangle.fillProperty(), Color.TRANSPARENT)
@@ -374,19 +380,21 @@ public class HighlightRoutes extends Application
             KeyFrame endFrame = new KeyFrame(Duration.seconds(2), new KeyValue(
                     allRectangle.opacityProperty(), 0.0, Interpolator.EASE_BOTH));
 
-            //Add the keyframes to the timeline
+            //Adds the keyframes to the timeline
             timeline.getKeyFrames().addAll(increaseBrightness, decreaseBrightness, increaseOpacity,
                     setTransparent, startFrame, endFrame);
         }
 
+        //Sets the timeline to play forwards and backwards
         timeline.setAutoReverse(true);
         //Sets the timeline to repeat indefinitely
         timeline.setCycleCount(Animation.INDEFINITE);
 
-        // Play the timeline
+        //Plays the timeline
         timeline.play();
     }
 
+    //Method to allow the rectangles to be clickable
     private void initializeClickableRectangles(Rectangle[] rectangles, Timeline timeline)
     {
         for (Rectangle rectangle : rectangles)

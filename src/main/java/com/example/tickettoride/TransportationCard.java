@@ -1,25 +1,15 @@
 package com.example.tickettoride;
 
-import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.collections.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-
-import java.lang.reflect.Array;
 import java.util.Objects;
 import java.util.Random;
 
-public class TransportationCard extends Application
+public class TransportationCard
 {
     public static final ImageView cardImageView = new ImageView();
-
     private Color cardColor;
 
     private final ImageView transportationDeckImageView = new ImageView();
@@ -33,13 +23,14 @@ public class TransportationCard extends Application
     private static final String YELLOWCARD = "/com/example/tickettoride/TransportCards/OrangeCard.png";
     private static final String TAXICARD = "/com/example/tickettoride/TransportCards/RainbowCard.png";
 
-
     private static final String BACK = "com/example/tickettoride/TransportCards/BackTransportationCard.png";
 
     //Colors for the cards
     private final Color[] colors = {
             Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.YELLOW, Color.ORANGE, Color.WHITE
     };
+
+    public ObservableList<TransportationCard> transportationCards = FXCollections.observableArrayList();
 
     //Card values
     private final Color blueCard = colors[0];
@@ -65,56 +56,20 @@ public class TransportationCard extends Application
             {"Color.ORANGE", "0"}, {"Color.WHITE", "0"}
     };
 
-    //Start method to be used for testing
-    @Override
-    public void start(Stage primaryStage)
-    {
-        StackPane root = new StackPane();
-        StackPane cardPane = new StackPane();
-        StackPane deckPane = new StackPane();
-        GridPane gridPane = new GridPane();
-
-        gridPane.gridLinesVisibleProperty().setValue(true);
-
-        Scene scene = new Scene(root, 1280, 720);
-        Button btnRandomCard = new Button("Random Card");
-        ImageView transportationDeckImageView = new ImageView();
-        HBox hbox = new HBox(20); //Spacing = 10 (pixels)
-
-        primaryStage.setOnShowing(event ->
-        {
-            selectRandomCard();
-        });
-
-        btnRandomCard.setOnMouseClicked(event ->
-        {
-            selectRandomCard();
-        });
-
-        btnRandomCard.setAlignment(Pos.BOTTOM_CENTER);
-
-        hbox.getChildren().addAll(btnRandomCard, cardImageView);
-
-        deckPane.getChildren().add(transportationDeckImageView);
-
-        cardPane.getChildren().add(cardImageView);
-
-        //dd cardPane to the HBox
-        hbox.getChildren().addAll(cardPane, deckPane);
-
-        hbox.setPadding(new javafx.geometry.Insets(15, 12, 15, 12));
-
-        gridPane.getChildren().add(hbox);
-
-        root.getChildren().addAll(gridPane);
-
-        primaryStage.setTitle("Transportation Card Selector");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
     //Array of card image paths
     public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, YELLOWCARD, TAXICARD};
+
+    /*
+    Color color;
+    Image cardImage;
+
+    //Constructor
+    public TransportationCard(Image img, Color c)
+    {
+        this.cardColor = c;
+        this.cardImage = img;
+    }
+    */
 
     //Method to select a random card from the deck
     public Image selectRandomCard()
@@ -153,48 +108,7 @@ public class TransportationCard extends Application
         return null;
     }
 
-    //Method to
-
-    /*
-    if (selectedCardImagePath.equals(BACK))
-        {
-            transportationDeckImageView.setImage(selectedCardImage);
-        }
-        else if (selectedCardImagePath.equals(BLUECARD))
-        {
-            BlueCards += 1;
-        }
-        else if (selectedCardImagePath.equals(GREENCARD))
-        {
-            GreenCards += 1;
-        }
-        else if (selectedCardImagePath.equals(BLACKCARD))
-        {
-
-        }
-        else if (selectedCardImagePath.equals(PINKCARD))
-        {
-
-        }
-        else if (selectedCardImagePath.equals(REDCARD))
-        {
-
-        }
-        else if (selectedCardImagePath.equals(YELLOWCARD))
-        {
-
-        }
-        else if (selectedCardImagePath.equals(TAXICARD))
-        {
-
-        }
-     */
-
     public Color getCardColor() {
         return cardColor;
-    }
-    public static void main(String[] args)
-    {
-        launch(args);
     }
 }

@@ -32,6 +32,8 @@ public class TicketToRide extends Application
     //Contains the number of players
     private int currentNumPlayers;
 
+    int startTurns;
+
     //Stores Player objects in a list
     public ObservableList<Player> currentPlayers = FXCollections.observableArrayList();
 
@@ -137,9 +139,9 @@ public class TicketToRide extends Application
         //Creates a label with the game title
         Label titleLabel = new Label(TITLE);
         titleLabel.setTextFill(Color.BLACK);
-        //Sets the style of the titleLabel with a background color and 60% opacity with rounded corners, a black border
-        //set to 3 pixels wide, and a font size of 50px and San-serif font.
-        //Set text fill to white
+        /* Sets the style of the titleLabel with a background color and 60% opacity with rounded corners, a black border
+        set to 3 pixels wide, and a font size of 50px and San-serif font.
+        Set text fill to white */
         titleLabel.setStyle("-fx-background-color: rgba(0, 0, 0, 0.60);  -fx-background-radius: 10; " +
                 "-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-text-fill: white;-fx-font: 50px \"serif\"; -fx-font-weight: bold ");
 
@@ -147,10 +149,10 @@ public class TicketToRide extends Application
         Label authorsLabel = new Label(AUTHORS);
         //Increases the spacing between the titleLabel and the authorsLabel
         authorsLabel.setPadding(new Insets(0, 0, 50, 0));
-        // Authors label
-        //Font size: 25px
-        //Text Color: white
-        //Font Weight: BOLD
+        /* Author label styling
+        Font size: 25px
+        Text Color: white
+        Font Weight: BOLD */
         authorsLabel.setStyle("-fx-font: 25px \"serif\"; " +
                 "-fx-text-fill: White;" +
                 "-fx-font-weight: BOLD");
@@ -527,9 +529,14 @@ public class TicketToRide extends Application
             transportationCard.selectRandomCard();
             // Update the ImageView with the new card image
             cardImage.setImage(TransportationCard.cardImageView.getImage());
+
+            //While
             Player player = currentPlayers.get(0);
-            player.addTransportationCard(transportationCard);
-            //player.incrementPlayerHandValue(transportationCard.getCardColor(),1);
+            while (player.getTransportationCards().size() < 2)
+            {
+                player.addTransportationCard(transportationCard);
+                //player.incrementPlayerHandValue(transportationCard.getCardColor(),1);
+            }
         });
 
         //--------------------------------------------------------------------------------\\
@@ -653,6 +660,41 @@ public class TicketToRide extends Application
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    /*
+    //Method used to set up the turns for the game
+    private void SetupTurn()
+    {
+        for(int i = 0; i < currentPlayers.size(); i++)
+        {
+            currentPlayers.get(i).setTurnPhase(TurnPhase.DRAW_TRANSPORTATION_CARDS);
+            if (currentPlayers.get(i).getNumGamePieces() < 3)
+            {
+                //End the game
+            }
+        }
+    }
+    */
+
+    //Method for handling placing routes
+    private void placeRoute(Player player)
+    {
+        //For each player, check if they have enough cards to place a route
+        //If they do, then they can place a route
+        for (int i = 0; i < currentPlayers.size(); i++)
+        {
+            //Checks which routes are available to the player to place
+            if (currentPlayers.get(i).getTransportationCards().size() >= 2)
+            {
+                //If the player has enough cards, then they can place a route
+                currentPlayers.get(i).setTurnPhase(TurnHandler.PLACE_ROUTE);
+            }
+        }
+
+        // Implement logic for placing a route
+        // Check if the player has the required cards and select a route to place
+        // Update the player's hand and other game state accordingly
     }
 
     //Separate method for creating a player object

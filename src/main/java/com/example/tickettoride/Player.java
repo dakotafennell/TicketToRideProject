@@ -73,52 +73,6 @@ public class Player
         playerHandMap.put(Color.ORANGE, 0);
     }
 
-    /*
-    public enum Color
-    {
-        BLUE, GREEN, BLACK, PINK, RED, ORANGE, WHITE
-    }
-
-    public static void main(String[] args)
-    {
-        //Gets the number of each card
-        for (int i = 0; i < cards.length; i++)
-        {
-            cards[i][1] = String.valueOf(12);
-        }
-
-        //increments the number of each card based on the color and which card is drawn
-        for (int i = 0; i < cards.length; i++)
-        {
-            if (cards[i][0].equals("Color.BLUE"))
-            {
-                cards[i][1] = String.valueOf(Integer.parseInt(cards[i][1]) + 1);
-            }
-        }
-
-        //Prints the number of each card
-        for (String[] row : cards)
-        {
-            System.out.println(row[0] + ": " + row[1]);
-        }
-
-        //Update the number for Color.BLUE
-        int newValue = 42;
-        updateNumber(cards, Color.BLUE, newValue);
-    }
-
-    private static void updateNumber(String[][] array, Color color, int newValue)
-    {
-        String colorString = "Color." + color.name();
-        for (String[] row : array) {
-            if (row[0].equals(colorString)) {
-                row[1] = String.valueOf(newValue);
-                break;
-            }
-        }
-    }
-     */
-
     protected void setNumPlayers(int numPlayers)
     {
         if (numPlayers >= 2 && numPlayers <= 5)
@@ -298,5 +252,24 @@ public class Player
     public void decrementNumGamePieces(int numGamePieces)
     {
         this.numGamePieces -= numGamePieces;
+    }
+
+    public int getTurnPhase()
+    {
+        return 0;
+    }
+
+    public int setTurnPhase(int phase)
+    {
+        return 0;
+    }
+
+    public void addToHand(List<TransportationCard> drawnCards)
+    {
+        for (TransportationCard card : drawnCards)
+        {
+            Color cardColor = card.getCardColor();
+            incrementPlayerHandValue(cardColor, 1);
+        }
     }
 }
