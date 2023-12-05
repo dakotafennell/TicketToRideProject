@@ -525,21 +525,23 @@ public class TicketToRide extends Application
         }
 
         //Set Button Action
-        btnRandomCard.setOnAction(event ->
-        {
+        btnRandomCard.setOnAction(event -> {
             // Use the instance of selectRandomCard
-            randomImages.selectRandomTransportationCard();
+            Color drawnCardColor = randomImages.selectRandomTransportationCardColor();
+
             // Update the ImageView with the new card image
             cardImage.setImage(randomImages.selectRandomTransportationCard());
 
-            //While
+            // While loop to add cards to the player's hand
             Player player = currentPlayers.get(0);
-            while (player.getTransportationCards().size() < 2)
-            {
+            while (player.getTransportationCards().size() < 2) {
                 player.addTransportationCard(transportationCard);
-                //player.incrementPlayerHandValue(transportationCard.getCardColor(),1);
+
+                // Increment the value in the playerHandMap for the drawn card color
+                player.incrementPlayerHandValue(drawnCardColor, 1);
             }
         });
+
 
         //--------------------------------------------------------------------------------\\
 
@@ -641,6 +643,8 @@ public class TicketToRide extends Application
         //borderPane.setBottom(cardImagesVBox);
 
         currentPlayerHBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        cardImagesVBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
         borderPane.setBottom(cardImagesVBox);
 
         //Adds the first Player's information to the leftPlayersVBox
@@ -651,7 +655,7 @@ public class TicketToRide extends Application
         //setup of borderPane displays titles
         //borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
         borderPane.setTop(hBox);
-        currentPlayerHBox.setMinHeight(200);
+        //currentPlayerHBox.setMinHeight(200);
 
         borderPane.setLeft(leftPlayersVBox);
 

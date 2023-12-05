@@ -17,7 +17,10 @@ import javafx.util.Duration;
 
 import java.io.File;
 
-public class HighlightRoutes extends Application
+/**
+ * HighlightRoutes class
+ */
+public class HighlightRoutes
 {
     public static final double HEIGHT = 15;
     public static final double WIDTH = 50;
@@ -118,114 +121,6 @@ public class HighlightRoutes extends Application
             ChelseaToGreenwichVillageRed, LowerEastSideToBrooklyn, ChinatownToBrooklynRed,
             ChinatownToBrooklynOrange, WallStreetToBrooklynBlue, WallStreetToBrooklynBlack, ChelseaToSoho
     };
-
-    @Override
-    public void start(Stage primaryStage) throws Exception
-    {
-        try {
-            // Load the image from a file
-            File imageFile = new File("src/main/resources/com/example/tickettoride/Game_Map_v2.PNG");
-            String imageUrl = imageFile.toURI().toURL().toString();
-            Board board = new Board();
-
-            // Load the image
-            ImageView ticketToRideImage = board.getTicketToRideImage();
-
-            // Create an overlay pane
-            Pane overlayPane = new Pane();
-
-            Glow glow = new Glow(2);
-            //Set initial brightness
-            ColorAdjust colorAdjust = new ColorAdjust();
-            colorAdjust.setBrightness(0);
-
-            setRectangleFillAndEffects(threeBlockRoutes, glow, colorAdjust);
-
-            setRectangleFillAndEffects(twoBlockRoutes, glow, colorAdjust);
-
-            setRectangleFillAndEffects(oneBlockRoutes, glow, colorAdjust);
-
-            setRectangleFillAndEffects(fourBlockRoutes, glow, colorAdjust);
-
-            //Sets the effects for all rectangles
-            setRectangleFillAndEffects(allRectangles, glow, colorAdjust);
-
-            //Rotation positioning for each route
-            //One block route rotations
-            MidtownWestToTimesSquare.setRotate(-11);
-            TimesSquareToEmpireStateBuildingOrange.setRotate(55);
-            TimesSquareToEmpireStateBuildingPink.setRotate(55);
-            EmpireStateBuildingToGramercyParkRed.setRotate(55);
-            EmpireStateBuildingToGramercyParkBlue.setRotate(55);
-            EastVillageToLowerEastSide.setRotate(97);
-            ChinatownToLowerEastSide.setRotate(-33);
-            ChinatownToWallStreetGreen.setRotate(110);
-            ChinatownToWallStreetPink.setRotate(110);
-
-            //Three block route rotations
-            CentralParkToUnitedNations.setRotate(46);
-            UnitedNationsToGramercyPark.setRotate(110);
-            ChelseaToGreenwichVillageGreen.setRotate(43);
-            ChelseaToGreenwichVillageRed.setRotate(43);
-            LowerEastSideToBrooklyn.setRotate(66);
-            ChinatownToBrooklynRed.setRotate(38);
-            ChinatownToBrooklynOrange.setRotate(38);
-            WallStreetToBrooklynBlue.setRotate(7);
-            WallStreetToBrooklynBlack.setRotate(7);
-
-            //Four block route rotations
-            ChelseaToSoho.setRotate(70);
-
-            //Two block route rotations
-            LincolnCenterToMidtownWest.setRotate(90);
-            LincolnCenterToTimesSquareGreen.setRotate(62);
-            LincolnCenterToTimesSquareBlue.setRotate(62);
-            LincolnCenterToCentralPark.setRotate(1);
-            CentralParkToTimesSquareBlack.setRotate(-70);
-            CentralParkToTimesSquareRed.setRotate(-70);
-            TimesSquareToUnitedNations.setRotate(-2);
-            MidtownWestToChelsea.setRotate(75);
-            MidtownWestToEmpireStateBuilding.setRotate(26);
-            EmpireStateBuildingToUnitedNations.setRotate(-32);
-            ChelseaToEmpireStateBuildingGrey0.setRotate(-36);
-            ChelseaToEmpireStateBuildingGrey1.setRotate(-36);
-            ChelseaToGramercyPark.setRotate(-4);
-            GramercyParkToGreenwichVillageBlack.setRotate(-78);
-            GramercyParkToGreenwichVillagePink.setRotate(-78);
-            GramercyParkToEastVillage.setRotate(51);
-            GreenwichVillageToEastVillage.setRotate(0);
-            GreenwichVillageToSoho.setRotate(-60);
-            GreenwichVillageToChinatownGrey0.setRotate(75);
-            GreenwichVillageToChinatownGrey1.setRotate(75);
-            GreenwichVillageToLowerEastSide.setRotate(38);
-            SohoToWallStreet.setRotate(61);
-
-            //Creates a Timeline for the animation
-            Timeline timeline = new Timeline();
-
-            //Adds keyframes for smoothly increasing and decreasing brightness and opacity for each rectangle
-            routeAnimationKeyFrames(colorAdjust, timeline);
-
-            overlayPane.getChildren().addAll(oneBlockRoutes);
-            overlayPane.getChildren().addAll(twoBlockRoutes);
-            overlayPane.getChildren().addAll(threeBlockRoutes);
-            overlayPane.getChildren().addAll(fourBlockRoutes);
-
-            // Create a scene
-            Scene scene = new Scene(new StackPane(ticketToRideImage, overlayPane));
-
-            initializeClickableRectangles(allRectangles, timeline);
-
-            // Set the scene and show the stage
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Ticket To Ride: New York");
-            primaryStage.setResizable(false);
-            primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Could not load image");
-        }
-    }
 
     public Pane highlightRectangles(Pane overlay)
     {

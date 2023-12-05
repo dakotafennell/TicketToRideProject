@@ -2,6 +2,9 @@ package com.example.tickettoride;
 
 import javafx.scene.paint.Color;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Route
 {
     public static final int TOTAL_ALL_ROUTES = 41;
@@ -16,6 +19,9 @@ public class Route
     public static int totalRedRoutes = 0;
     public static int totalOrangeRoutes = 0;
     public static int totalTaxiRoutes = 0;
+
+    // Map to hold values for each route
+    private Map<Color, Integer> colorLengthOfRoutes = new HashMap<>();
 
     //Length of each route
     public int lengthOfCentralParkToTimesSquareBlack = 2;
@@ -60,48 +66,75 @@ public class Route
     public int lengthOfWallStreetToBrooklynBlack = 3;
     public int lengthOfWallStreetToBrooklynBlue = 3;
 
-    //Value of each route
-    public int valueOfCentralParkToTimesSquareBlack = 2;
-    public int valueOfCentralParkToTimesSquareRed = 2;
-    public int valueOfCentralParkToUnitedNations = 4;
-    public int valueOfChelseaToEmpireStateBuildingGrey0 = 2;
-    public int valueOfChelseaToEmpireStateBuildingGrey1 = 2;
-    public int valueOfChelseaToGramercyPark = 2;
-    public int valueOfChelseaToGreenwichVillageGreen = 4;
-    public int valueOfChelseaToGreenwichVillageRed = 4;
-    public int valueOfChelseaToSoho = 7;
-    public int valueOfChinatownToBrooklynOrange = 4;
-    public int valueOfChinatownToBrooklynRed = 4;
-    public int valueOfChinatownToLowerEastSide = 1;
-    public int valueOfChinatownToWallStreetGreen = 1;
-    public int valueOfChinatownToWallStreetPink = 1;
-    public int valueOfEastVillageToLowerEastSide = 1;
-    public int valueOfEmpireStateBuildingToGramercyParkBlue = 1;
-    public int valueOfEmpireStateBuildingToGramercyParkRed = 1;
-    public int valueOfEmpireStateBuildingToUnitedNations = 2;
-    public int valueOfGramercyParkToEastVillage = 2;
-    public int valueOfGramercyParkToGreenwichVillageBlack = 2;
-    public int valueOfGramercyParkToGreenwichVillagePink = 2;
-    public int valueOfGreenwichVillageToChinatownGrey0 = 2;
-    public int valueOfGreenwichVillageToChinatownGrey1 = 2;
-    public int valueOfGreenwichVillageToEastVillage = 2;
-    public int valueOfGreenwichVillageToLowerEastSide = 2;
-    public int valueOfGreenwichVillageToSoho = 2;
-    public int valueOfLincolnCenterToCentralPark = 2;
-    public int valueOfLincolnCenterToMidtownWest = 2;
-    public int valueOfLincolnCenterToTimesSquareBlue = 2;
-    public int valueOfLincolnCenterToTimesSquareGreen = 2;
-    public int valueOfLowerEastSideToBrooklyn = 4;
-    public int valueOfMidtownWestToChelsea = 2;
-    public int valueOfMidtownWestToEmpireStateBuilding = 2;
-    public int valueOfMidtownWestToTimesSquare = 1;
-    public int valueOfSohoToWallStreet = 2;
-    public int valueOfTimesSquareToEmpireStateBuildingOrange = 1;
-    public int valueOfTimesSquareToEmpireStateBuildingPink = 1;
-    public int valueOfTimesSquareToUnitedNations = 2;
-    public int valueOfUnitedNationsToGramercyPark = 4;
-    public int valueOfWallStreetToBrooklynBlack = 4;
-    public int valueOfWallStreetToBrooklynBlue = 4;
+    public void createRouteColorLength()
+    {
+        colorLengthOfRoutes.put(Color.BLACK, lengthOfCentralParkToTimesSquareBlack);
+        colorLengthOfRoutes.put(Color.RED, lengthOfCentralParkToTimesSquareRed);
+        colorLengthOfRoutes.put(Color.PINK, lengthOfCentralParkToUnitedNations);
+        colorLengthOfRoutes.put(Color.GREY, lengthOfChelseaToEmpireStateBuildingGrey0);
+        colorLengthOfRoutes.put(Color.GREY, lengthOfChelseaToEmpireStateBuildingGrey1);
+        colorLengthOfRoutes.put(Color.ORANGE, lengthOfChelseaToGramercyPark);
+        colorLengthOfRoutes.put(Color.GREEN, lengthOfChelseaToGreenwichVillageGreen);
+        colorLengthOfRoutes.put(Color.RED, lengthOfChelseaToGreenwichVillageRed);
+        colorLengthOfRoutes.put(Color.PINK, lengthOfChelseaToSoho);
+        colorLengthOfRoutes.put(Color.ORANGE, lengthOfChinatownToBrooklynOrange);
+        colorLengthOfRoutes.put(Color.RED, lengthOfChinatownToBrooklynRed);
+        colorLengthOfRoutes.put(Color.BLACK, lengthOfChinatownToLowerEastSide);
+        colorLengthOfRoutes.put(Color.GREEN, lengthOfChinatownToWallStreetGreen);
+        colorLengthOfRoutes.put(Color.PINK, lengthOfChinatownToWallStreetPink);
+        colorLengthOfRoutes.put(Color.BLACK, lengthOfEastVillageToLowerEastSide);
+        colorLengthOfRoutes.put(Color.BLUE, lengthOfEmpireStateBuildingToGramercyParkBlue);
+        colorLengthOfRoutes.put(Color.RED, lengthOfEmpireStateBuildingToGramercyParkRed);
+        colorLengthOfRoutes.put(Color.BLACK, lengthOfEmpireStateBuildingToUnitedNations);
+        colorLengthOfRoutes.put(Color.GREY, lengthOfGramercyParkToEastVillage);
+        colorLengthOfRoutes.put(Color.BLACK, lengthOfGramercyParkToGreenwichVillageBlack);
+        colorLengthOfRoutes.put(Color.PINK, lengthOfGramercyParkToGreenwichVillagePink);
+        colorLengthOfRoutes.put(Color.GREY, lengthOfGreenwichVillageToChinatownGrey0);
+        colorLengthOfRoutes.put(Color.GREY, lengthOfGreenwichVillageToChinatownGrey1);
+        colorLengthOfRoutes.put(Color.BLUE, lengthOfGreenwichVillageToEastVillage);
+        colorLengthOfRoutes.put(Color.GREY, lengthOfGreenwichVillageToLowerEastSide);
+        colorLengthOfRoutes.put(Color.ORANGE, lengthOfGreenwichVillageToSoho);
+        colorLengthOfRoutes.put(Color.ORANGE, lengthOfLincolnCenterToCentralPark);
+        colorLengthOfRoutes.put(Color.RED, lengthOfLincolnCenterToMidtownWest);
+        colorLengthOfRoutes.put(Color.BLUE, lengthOfLincolnCenterToTimesSquareBlue);
+        colorLengthOfRoutes.put(Color.GREEN, lengthOfLincolnCenterToTimesSquareGreen);
+        colorLengthOfRoutes.put(Color.GREY, lengthOfLowerEastSideToBrooklyn);
+        colorLengthOfRoutes.put(Color.BLUE, lengthOfMidtownWestToChelsea);
+        colorLengthOfRoutes.put(Color.GREEN, lengthOfMidtownWestToEmpireStateBuilding);
+        colorLengthOfRoutes.put(Color.GREY, lengthOfMidtownWestToTimesSquare);
+        colorLengthOfRoutes.put(Color.GREY, lengthOfSohoToWallStreet);
+        colorLengthOfRoutes.put(Color.ORANGE, lengthOfTimesSquareToEmpireStateBuildingOrange);
+        colorLengthOfRoutes.put(Color.PINK, lengthOfTimesSquareToEmpireStateBuildingPink);
+        colorLengthOfRoutes.put(Color.GREY, lengthOfTimesSquareToUnitedNations);
+        colorLengthOfRoutes.put(Color.GREEN, lengthOfUnitedNationsToGramercyPark);
+        colorLengthOfRoutes.put(Color.BLACK, lengthOfWallStreetToBrooklynBlack);
+        colorLengthOfRoutes.put(Color.BLUE, lengthOfWallStreetToBrooklynBlue);
+    }
+
+    public int getLengthOfRoute(Color color)
+    {
+        return colorLengthOfRoutes.getOrDefault(color, 0);
+    }
+/*
+    //Gets the total number of each color card the current player has
+    public int getTotalColorCards(Player player, Color color)
+    {
+        //returns the number of each
+        return player.getTransportationCards();
+    }
+
+    //Calculates if the current player has enough cards to place a route
+    public boolean canPlaceRoute(Player player, int lengthOfRoute, Color color)
+    {
+        //If the player has enough cards, then they can place a route
+        if (player.getTransportationCards().get(color) >= lengthOfRoute)
+        {
+            return true;
+        }
+        return false;
+    }
+
+ */
 
     //Constructor
     public Route()

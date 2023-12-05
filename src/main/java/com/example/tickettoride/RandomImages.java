@@ -3,6 +3,7 @@ package com.example.tickettoride;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.util.Pair;
 
 import java.util.Objects;
 import java.util.Random;
@@ -107,10 +108,8 @@ public class RandomImages
 
             // Set the selected card image to the cardImageView
             cardImageView.setImage(selectedCardImage);
-            //Prints out to the console the specific card image path that is null
-            System.out.println("The selected card image path is: " + selectedCardImagePath);
 
-            return selectedCardImage;
+            return new Pair<>(selectedCardImage, cardColor).getKey();
         }
         catch (NullPointerException e)
         {
@@ -121,4 +120,10 @@ public class RandomImages
         }
         return null;
     }
+
+    public Color selectRandomTransportationCardColor()
+    {
+        return cardColor;
+    }
+
 }
