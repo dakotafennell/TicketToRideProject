@@ -49,6 +49,23 @@ public class RandomImages
 
     //Array of card image paths
     public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, ORANGECARD, TAXICARD};
+
+    public static final String[] TRANSPORTATIONCARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, ORANGECARD, TAXICARD};
+
+    //Colors for the cards
+    public static final Color[] colors = {
+            Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.ORANGE, Color.WHITE
+    };
+
+    /*
+    "#0000FF" = Color.BLUE
+    "#008000" = Color.GREEN
+    "#000000" = Color.BLACK
+    "#FFC0CB" = Color.PINK
+    "#FF0000" = Color.RED
+    "#FFA500" = Color.ORANGE
+    "#FFFFFF" = Color.WHITE
+     */
     //Color hex codes
     public static final String[] colorHexCodes = {
             "#0000FF BLUE", "#008000 GREEN", "#000000 BLACK", "#FFC0CB PINK", "#FF0000 RED", "#FFA500 ORANGE", "#FFFFFF WHITE"
@@ -60,11 +77,6 @@ public class RandomImages
             EmpireState_Greenwich, Gramercy_ChinaTown, LincolnCenter_EmpireState, LincolnCenter_Greenwich,
             LowerEastSide_WallStreet, TimesSquare_Brooklyn, TimesSquare_EastVillage, TimesSquare_Soho,
             UN_Midtown, UN_WallStreet
-    };
-
-    //Colors for the cards
-    private final Color[] colors = {
-            Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.ORANGE, Color.WHITE
     };
 
     public Color color;
@@ -96,21 +108,23 @@ public class RandomImages
         Random random = new Random();
         // Get a random card index
         //prints out the length of the card image paths
-        //System.out.println("The length of the card image paths is: " + CARDIMAGEPATHS.length);
+        System.out.println("The length of the card image paths is: " + CARDIMAGEPATHS.length);
         int cardIndex = random.nextInt(CARDIMAGEPATHS.length - 1);
         //prints out the index of the card
-        //System.out.println("The card index is: " + cardIndex);
+        System.out.println("The card index is: " + cardIndex);
         // Get the selected card image path
         String selectedCardImagePath = CARDIMAGEPATHS[cardIndex];
+        //prints out the selected card image path
+        System.out.println("The selected card image path is: " + selectedCardImagePath);
 
         //sets the card color to the color of the card image
         cardColor = colors[cardIndex];
         //prints out the index of the card color
-        //System.out.println("The card color index is: " + cardIndex);
+        System.out.println("The card color index is: " + cardIndex);
         //Prints out the card color index hex code as a string
-        //System.out.println("The card color index hex code is: " + colorHexCodes[cardIndex]);
+        System.out.println("The card color index hex code is: " + colorHexCodes[cardIndex]);
         //prints out the color of the card
-        //System.out.println("The card color is: " + cardColor);
+        System.out.println("The card color is: " + cardColor);
 
         // Load the image using ClassLoader
         final int imageWidth = 1000;
@@ -125,6 +139,9 @@ public class RandomImages
             cardImageView.setImage(selectedCardImage);
             //prints out the selected card image
             //System.out.println("The selected card image is: " + selectedCardImage);
+
+            //Prints out the new pair
+            System.out.println("The new pair is: " + new Pair<>(selectedCardImage, cardColor));
 
             return new Pair<>(selectedCardImage, cardColor).getKey();
         }

@@ -1,7 +1,6 @@
 package com.example.tickettoride;
 
 import javafx.scene.paint.Color;
-import kotlin.random.Random;
 
 import java.util.*;
 
@@ -299,6 +298,8 @@ public class Player
         {
             //Gets the color of the drawn card from the deck
             Color cardColor = randomImages.selectRandomTransportationCardColor();
+            //prints out the color of the card
+            System.out.println("The color of the card is: " + cardColor);
             incrementPlayerHandValue(cardColor, 1);
         }
     }
