@@ -17,6 +17,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.*;
 
 /**
@@ -53,21 +55,35 @@ public class TicketToRide extends Application
         //Get the image from the TransportationCard class
         TransportationCard transportationCard = new TransportationCard();
 
-        Image cardImage = randomImages.selectRandomTransportationCard();
+        try {
+            // Load the image from a file
+            File imageFile = new File("src/main/resources/com/example/tickettoride/TransportCards/RainbowCard.png");
+            String imageUrl = imageFile.toURI().toURL().toString();
 
-        //Create an ImageView for the splash screen
-        ImageView imageView = new ImageView(cardImage);
+            // Set the button's background to the image
+            //Set height and width of button
+            //Create an ImageView for the splash screen
+            ImageView imageView = new ImageView(imageUrl);
 
-        //Set up Image Size.
-        //Width of the splash screen
-        imageView.setFitWidth(WIDTH);
-        //Height of the splash screen
-        imageView.setFitHeight(HEIGHT);
-        //Preserve the ratio of the image
-        imageView.setPreserveRatio(true);
+            //Set up Image Size.
+            //Width of the splash screen
+            imageView.setFitWidth(WIDTH);
+            //Height of the splash screen
+            imageView.setFitHeight(HEIGHT);
+            //Preserve the ratio of the image
+            imageView.setPreserveRatio(true);
 
-        // Set the imageView as the background
-        splashScreen.getChildren().add(imageView);
+            // Set the imageView as the background
+            splashScreen.getChildren().add(imageView);
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("The selected card image path is null.");
+        }
+        catch (MalformedURLException e)
+        {
+            System.out.println("The selected card image path is malformed.");
+        }
 
         // Create a label with the game title
         Label titleLabel = new Label(TITLE);
@@ -532,8 +548,6 @@ public class TicketToRide extends Application
             System.out.println("The selected card image path is null.");
         }
 
-        clickCounter = 0;
-
         //Creates the event to handle the player drawing transportation cards
         btnRandomCard.setOnAction(event -> {
             //Gets the current player
@@ -551,14 +565,15 @@ public class TicketToRide extends Application
             {
                 //Gets the current total number of transportation cards the current player has
                 int currentNumTransportationCards = currentPlayers.get(0).getNumTransportationCards();
-                //gets the color of the drawn card
-                Color drawnCardColor = randomImages.selectRandomTransportationCardColor();
-                System.out.println("The drawn card color is: " + drawnCardColor);
 
                 // Update the ImageView with the new card image
                 cardImage.setImage(randomImages.selectRandomTransportationCard());
                 //prints out which image was chosen
                 System.out.println("The selected card image is: " + cardImage.getImage());
+
+                Color drawnCardColor = randomImages.selectRandomTransportationCardColor();
+                //gets the color of the drawn card
+                System.out.println("The drawn card color is: " + drawnCardColor);
                 Player player = currentPlayers.get(0);
                 System.out.println(player + " drew from transportation deck.");
                 player.addTransportationCard(transportationCard);
