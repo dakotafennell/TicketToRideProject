@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class Display
 {
-    TicketToRide game = new TicketToRide();
+    //TicketToRide game = new TicketToRide();
 
     //This class will contain logic for displaying the game window and each of the game's components.
 

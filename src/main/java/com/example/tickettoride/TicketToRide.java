@@ -29,14 +29,14 @@ public class TicketToRide extends Application
     public static final int HEIGHT = 1080;
     public static final int WIDTH = 1440;
     RandomImages randomImages = new RandomImages();
+    //Stores Player objects in a list
+    public ObservableList<Player> currentPlayers = FXCollections.observableArrayList();
 
     //Contains the number of players
     private int currentNumPlayers;
-
+    //Creates a new Display object, passing the currentPlayers list to it
+    Display display = new Display(currentPlayers);
     int startTurns;
-
-    //Stores Player objects in a list
-    public ObservableList<Player> currentPlayers = FXCollections.observableArrayList();
 
     //---- Splash Screen Creation ----\\
     @Override
@@ -534,14 +534,12 @@ public class TicketToRide extends Application
 
             // While loop to add cards to the player's hand
             Player player = currentPlayers.get(0);
-            while (player.getTransportationCards().size() < 2) {
-                player.addTransportationCard(transportationCard);
 
-                // Increment the value in the playerHandMap for the drawn card color
-                player.incrementPlayerHandValue(drawnCardColor, 1);
-            }
+            player.addTransportationCard(transportationCard);
+            // Increment the value in the playerHandMap for the drawn card color
+            player.incrementPlayerHandValue(drawnCardColor, 1);
+            borderPane.setBottom(display.displayPlayersHand());
         });
-
 
         //--------------------------------------------------------------------------------\\
 
@@ -618,8 +616,7 @@ public class TicketToRide extends Application
         textOutput.setEditable(false);
         textOutput.setScrollTop(5);
 
-        //Creates a new Display object, passing the currentPlayers list to it
-        Display display = new Display(currentPlayers);
+
 
         //Creates the player name's display VBox using a method from the Display class
         VBox playerVBox = display.getPlayerInfoVBox();
