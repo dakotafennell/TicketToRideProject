@@ -30,7 +30,6 @@ public class Player
             {"Color.BLACK", "0"},
             {"Color.PINK", "0"},
             {"Color.RED", "0"},
-            {"Color.YELLOW", "0"},
             {"Color.ORANGE", "0"},
             {"Color.WHITE", "0"}
     };
