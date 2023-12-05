@@ -42,13 +42,13 @@ public class RandomImages
     private static final String BLACKCARD = "/com/example/tickettoride/TransportCards/BlackCard.png";
     private static final String PINKCARD = "/com/example/tickettoride/TransportCards/PinkCard.png";
     private static final String REDCARD = "/com/example/tickettoride/TransportCards/RedCard.png";
-    private static final String YELLOWCARD = "/com/example/tickettoride/TransportCards/OrangeCard.png";
+    private static final String ORANGECARD = "/com/example/tickettoride/TransportCards/OrangeCard.png";
     private static final String TAXICARD = "/com/example/tickettoride/TransportCards/RainbowCard.png";
 
     private static final String BACK = "com/example/tickettoride/TransportCards/BackTransportationCard.png";
 
     //Array of card image paths
-    public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, YELLOWCARD, TAXICARD};
+    public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, ORANGECARD, TAXICARD};
     //array of card images
     public static final String[] CardImagePath = {
             CentralPark_Chelsea, CentralPark_Chinatown, CentralPark_Gramercy, CentralPark_Midtown,
@@ -60,7 +60,7 @@ public class RandomImages
 
     //Colors for the cards
     private final Color[] colors = {
-            Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.YELLOW, Color.ORANGE, Color.WHITE
+            Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.ORANGE, Color.WHITE
     };
 
     public Color color;

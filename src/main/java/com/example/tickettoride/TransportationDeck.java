@@ -23,7 +23,7 @@ public class TransportationDeck
 
         List<TransportationCard> drawnCards = new ArrayList<>();
         for (int i = 0; i < numCards; i++) {
-            TransportationCard drawnCard = transportationCards.remove(0); // Assuming cards are drawn from the top of the deck
+            TransportationCard drawnCard = transportationCards.remove(0);
             drawnCards.add(drawnCard);
         }
 

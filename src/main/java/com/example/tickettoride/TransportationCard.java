@@ -24,14 +24,14 @@ public class TransportationCard
     private static final String BLACKCARD = "/com/example/tickettoride/TransportCards/BlackCard.png";
     private static final String PINKCARD = "/com/example/tickettoride/TransportCards/PinkCard.png";
     private static final String REDCARD = "/com/example/tickettoride/TransportCards/RedCard.png";
-    private static final String YELLOWCARD = "/com/example/tickettoride/TransportCards/OrangeCard.png";
+    private static final String ORANGECARD = "/com/example/tickettoride/TransportCards/OrangeCard.png";
     private static final String TAXICARD = "/com/example/tickettoride/TransportCards/RainbowCard.png";
 
     private static final String BACK = "com/example/tickettoride/TransportCards/BackTransportationCard.png";
 
     //Colors for the cards
     private final Color[] colors = {
-            Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.YELLOW, Color.ORANGE, Color.WHITE
+            Color.BLUE, Color.GREEN, Color.BLACK, Color.PINK, Color.RED, Color.ORANGE, Color.WHITE
     };
 
     public ObservableList<TransportationCard> transportationCards = FXCollections.observableArrayList();
@@ -47,21 +47,19 @@ public class TransportationCard
 
     private final Color redCard = colors[4];
 
-    private final Color yellowCard = colors[5];
-
-    private final Color orangeCard = colors[6];
+    private final Color orangeCard = colors[5];
 
     //Set taxi card to all available colors
-    private final Color taxiCard = colors[7];
+    private final Color taxiCard = colors[6];
 
     public String[][] cards = {
             {"Color.BLUE", "0"}, {"Color.GREEN", "0"}, {"Color.BLACK", "0"},
-            {"Color.PINK", "0"}, {"Color.RED", "0"}, {"Color.YELLOW", "0"},
+            {"Color.PINK", "0"}, {"Color.RED", "0"},
             {"Color.ORANGE", "0"}, {"Color.WHITE", "0"}
     };
 
     //Array of card image paths
-    public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, YELLOWCARD, TAXICARD};
+    public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, ORANGECARD, TAXICARD};
 
     /*
     Color color;
