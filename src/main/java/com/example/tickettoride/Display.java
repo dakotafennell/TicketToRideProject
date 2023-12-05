@@ -184,6 +184,8 @@ public class Display
                     int value = entry.getValue();
                     Text text = new Text(Integer.toString(value));
                     valueImageHBoxP1.getChildren().add(text);
+                    //prints out the current index entry set
+                    //System.out.println(entry);
                 }
             }
             else if (i == 1)
@@ -194,6 +196,8 @@ public class Display
                     int value = entry.getValue();
                     Text text = new Text(Integer.toString(value));
                     valueImageHBoxP2.getChildren().add(text);
+                    //prints out the current index entry set
+                    //System.out.println(entry);
                 }
             }
         }
@@ -203,7 +207,7 @@ public class Display
 
         // Add the HBox with card images to the bottom of the borderPane
         VBox cardImagesVBox = new VBox(5);
-        cardImagesVBox.getChildren().addAll(player1Label, cardImagesHBoxP1,valueImageHBoxP1,valueImageHBoxP2, player2Label, cardImagesHBoxP2);
+        cardImagesVBox.getChildren().addAll(player1Label, cardImagesHBoxP1, valueImageHBoxP1, valueImageHBoxP2, player2Label, cardImagesHBoxP2);
         return cardImagesVBox;
     }
 

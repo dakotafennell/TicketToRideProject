@@ -53,21 +53,21 @@ public class TicketToRide extends Application
         //Get the image from the TransportationCard class
         TransportationCard transportationCard = new TransportationCard();
 
-        Image cardImage = randomImages.selectRandomTransportationCard();
+        //Image cardImage = randomImages.selectRandomTransportationCard();
 
         //Create an ImageView for the splash screen
-        ImageView imageView = new ImageView(cardImage);
+        //ImageView imageView = new ImageView(cardImage);
 
         //Set up Image Size.
         //Width of the splash screen
-        imageView.setFitWidth(WIDTH);
+        //imageView.setFitWidth(WIDTH);
         //Height of the splash screen
-        imageView.setFitHeight(HEIGHT);
+        //imageView.setFitHeight(HEIGHT);
         //Preserve the ratio of the image
-        imageView.setPreserveRatio(true);
+        //imageView.setPreserveRatio(true);
 
         // Set the imageView as the background
-        splashScreen.getChildren().add(imageView);
+        //splashScreen.getChildren().add(imageView);
 
         // Create a label with the game title
         Label titleLabel = new Label(TITLE);
@@ -555,32 +555,21 @@ public class TicketToRide extends Application
                 // Update the ImageView with the new card image
                 cardImage.setImage(randomImages.selectRandomTransportationCard());
                 //prints out which image was chosen
-                //System.out.println("The selected card image is: " + cardImage.getImage());
+                System.out.println("The selected card image is: " + cardImage.getImage());
 
                 // While loop to add cards to the player's hand
                 Player player = currentPlayers.get(0);
                 //System.out.println(player + " drew from transportation deck.");
                 player.addTransportationCard(transportationCard);
                 //prints out which transportation card was added
-                //System.out.println(player + " added " + transportationCard + " to their hand.");
+                System.out.println(player + " added " + transportationCard + " to their hand.");
                 // Increment the value in the playerHandMap for the drawn card color
                 player.incrementPlayerHandValue(drawnCardColor, 1);
                 //prints out the incremented value of the drawn card color
+                System.out.println("The incremented value of the drawn card color is: " + player.getPlayerHandMap().get(drawnCardColor));
 
                 //Displays the current player's hand
                 borderPane.setBottom(display.displayPlayersHand());
-
-                //Ends the current player's turn after they've drawn two cards
-                //If the current players current number of transportation cards is two more than the value in the
-                //variable currentNumTransportationCards, then end current players turn
-                if (player.getNumTransportationCards() == currentNumTransportationCards + 2)
-                {
-                    //Prints the current player's current number of transportation cards
-                    System.out.println(player.getName() + "'s # of transpo cards: " + currentNumTransportationCards);
-                    //Prints the current player's total number of transportation cards
-                    System.out.println(player.getName() + "'s # of transpo cards increased to: " + player.getNumTransportationCards());
-
-                }
             }
             else
             {
