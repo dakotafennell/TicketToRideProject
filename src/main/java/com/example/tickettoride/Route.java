@@ -121,26 +121,6 @@ public class Route
     {
         return colorLengthOfRoutes.getOrDefault(color, 0);
     }
-/*
-    //Gets the total number of each color card the current player has
-    public int getTotalColorCards(Player player, Color color)
-    {
-        //returns the number of each
-        return player.getTransportationCards();
-    }
-
-    //Calculates if the current player has enough cards to place a route
-    public boolean canPlaceRoute(Player player, int lengthOfRoute, Color color)
-    {
-        //If the player has enough cards, then they can place a route
-        if (player.getTransportationCards().get(color) >= lengthOfRoute)
-        {
-            return true;
-        }
-        return false;
-    }
-
- */
 
     //Constructor
     public Route()

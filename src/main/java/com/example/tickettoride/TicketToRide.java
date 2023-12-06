@@ -47,6 +47,18 @@ public class TicketToRide extends Application
     //Initializes the turn counter to zero to start the game with the first player (player 1 a.k.a. player 0)
     public int turnCounter = 0;
 
+    //Setter for the turnCounter
+    public void SetTurnCounter(int turnCounter)
+    {
+        this.turnCounter = turnCounter;
+    }
+
+    //Getter for the turnCounter
+    public int GetTurnCounter()
+    {
+        return turnCounter;
+    }
+
     //------------------ Splash Screen Creation -----------------\\
     @Override
     public void start(Stage primaryStage)
@@ -615,9 +627,12 @@ public class TicketToRide extends Application
                             alert.setContentText("You have already drawn two cards this turn.");
                             alert.showAndWait();
                             System.out.println("Player 1's turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before incrementing it
+                            //resets the current players click counter to zero
+                            clickCounterMap.put(currentPlayer, 0);
+                            //Prints out the current player's click counter
+                            System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
                             //Moves to the second player
                             turnCounter++;
-                            System.out.println("Player 1's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after incrementing it
                         }
                     }
                     else
@@ -627,6 +642,10 @@ public class TicketToRide extends Application
                         TurnHandler turnHandler = new TurnHandler(currentNumPlayers, currentPlayers);
                         //Ends the current player's turn
                         turnHandler.endTurn();
+                        //resets the current players click counter to zero
+                        clickCounterMap.put(currentPlayer, 0);
+                        //Prints out the current player's click counter
+                        System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
 
                         System.out.println("Player 1's turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before incrementing it
                         //Moves to the second player
@@ -666,14 +685,14 @@ public class TicketToRide extends Application
                         //prints out which image was chosen
                         //System.out.println("The selected card image is: " + cardImage.getImage());
 
-                        Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and broke everything, order of operations matters
+                        Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and we all hate it. it broke everything, order of operations matters
                         //gets the color of the drawn card
                         //System.out.println("The drawn card color is: " + drawnCardColor);
                         Player player = currentPlayers.get(1);
                         //System.out.println(player + " drew from transportation deck.");
                         player.addTransportationCard(transportationCard);
                         //prints out which transportation card was added
-                        System.out.println(player + " added " + transportationCard + " to their hand.");
+                        //System.out.println(player + " added " + transportationCard + " to their hand.");
                         // Increment the value in the playerHandMap for the drawn card color
                         player.incrementPlayerHandValue(drawnCardColor, 1);
                         //prints out the drawn card color
@@ -697,6 +716,10 @@ public class TicketToRide extends Application
                             //Moves to the second player
                             turnCounter--;
                             System.out.println("Player 2's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after
+                            //resets the current players click counter to zero
+                            clickCounterMap.put(currentPlayer, 0);
+                            //Prints out the current player's click counter
+                            System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
                         }
                     }
                     else
@@ -711,6 +734,10 @@ public class TicketToRide extends Application
                         //Moves to the second player
                         turnCounter--;
                         System.out.println("Player 2's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after decrementing it
+                        //resets the current players click counter to zero
+                        clickCounterMap.put(currentPlayer, 0);
+                        //Prints out the current player's click counter
+                        System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
                         }
                     }
                     ;
