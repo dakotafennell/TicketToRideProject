@@ -3,18 +3,6 @@ package com.example.tickettoride;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
 
 /**
  * Destinations class
@@ -22,10 +10,7 @@ import java.util.Random;
  */
 public class DestinationCard
 {
-    //Destination card logic
-    public static final ImageView cardImageView = new ImageView();
-    private final ImageView DestinationCardImageView = new ImageView();
-
+    //-------------  Destination Card Image Paths -----------------\\
     //Card Images
     private static final String CentralPark_Chelsea = "/com/example/tickettoride/DestinationCards/CentralParkToChelsea.png";
     private static final String CentralPark_Chinatown = "/com/example/tickettoride/DestinationCards/CentralParkToChinatown.png";
@@ -45,7 +30,6 @@ public class DestinationCard
     private static final String TimesSquare_Soho = "/com/example/tickettoride/DestinationCards/TimesSquareToSoho.png";
     private static final String UN_Midtown = "/com/example/tickettoride/DestinationCards/UnitedNationsToMidtownWest.png";
     private static final String UN_WallStreet = "/com/example/tickettoride/DestinationCards/UnitedNationsToWallStreet.png";
-    private static final String Back = "/com/example/tickettoride/DestinationCards/BackOfTransportationCard.png";
 
     //-------------------  array of card images ---------------------\\
     public static final String[] CardImagePath = {
@@ -55,25 +39,25 @@ public class DestinationCard
             LowerEastSide_WallStreet, TimesSquare_Brooklyn, TimesSquare_EastVillage, TimesSquare_Soho,
             UN_Midtown, UN_WallStreet
     };
-    private String city1;
-    private String city2;
-    private int points;
+    private final String CITY1;
+    private final String CITY2;
+    private final int POINTS;
     ArrayList<DestinationCard> card;
 
     public DestinationCard()
     {
-        city1 = "Lincoln Center";
-        city2 = "Central Park";
-        points = 2;
+        CITY1 = "Lincoln Center";
+        CITY2 = "Central Park";
+        POINTS = 2;
         card = new ArrayList<>();
     }
 
     public DestinationCard(String city1, String city2, int points)
     {
-        this.city1 = city1;
-        this.city2 = city2;
-        this.points = points;
-        card = new ArrayList<DestinationCard>();
+        this.CITY1 = city1;
+        this.CITY2 = city2;
+        this.POINTS = points;
+        card = new ArrayList<>();
     }
 
     public static List<DestinationCard> drawDestinationCards(int numCards)
@@ -85,13 +69,7 @@ public class DestinationCard
             return Collections.emptyList();
         }
 
-        List<DestinationCard> drawnCards = new ArrayList<>();
-        //for (int i = 0; i < numCards; i++) {
-            //DestinationCard drawnCard = DestinationCard.CardImagePath.remove(0); // Assuming cards are drawn from the top of the deck
-            //drawnCards.add(drawnCard);
-        //}
-
-        return drawnCards;
+        return new ArrayList<>();
     }
 
     public DestinationCard getCities()
@@ -99,25 +77,30 @@ public class DestinationCard
         return null;
     }
 
-    public String getCity1()
+    public String getCITY1()
     {
-        return city1;
+        return CITY1;
     }
 
-    public String getCity2()
+    public String getCITY2()
     {
-        return city2;
+        return CITY2;
+    }
+
+    public void testingMethod()
+    {
+        System.out.println("This is a test" + getCITY1() + getCITY2());
     }
 
     public int getPoints()
     {
-        return points;
+        return POINTS;
     }
 
     //string that displays the two destinations on the card as well as value of the route
     public String toString()
     {
-        return city1 + " to " + city2 + " for " + points + " points";
+        return CITY1 + " to " + CITY2 + " for " + POINTS + " points";
     }
 
     public void removeCardFromDeck()

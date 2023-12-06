@@ -1,18 +1,12 @@
 package com.example.tickettoride;
-import javafx.animation.*;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
+import javafx.animation.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
-
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -488,71 +482,39 @@ public class HighlightRoutes
             int whiteCards = playerHandMap.getOrDefault(Color.WHITE, 0);
 
             //for loop to display the one block routes based on the number of cards in the player's hand
-            for (int i = 0; i < oneBlockRoutes.length; i++)
-            {
+            for (Rectangle oneBlockRoute : oneBlockRoutes) {
                 //If the player has enough blue cards, then display the blue routes
-                if (blueCards >= 1)
-                {
-                    //Displays the blue routes
-                    oneBlockRoutes[i].setVisible(true);
-                }
+                //Displays the blue routes
                 //If the player does not have enough blue cards, then don't display the blue routes
-                else
-                {
-                    //Don't display the blue routes
-                    oneBlockRoutes[i].setVisible(false);
-                }
+                //Don't display the blue routes
+                oneBlockRoute.setVisible(blueCards >= 1);
             }
 
             //for loop to display the two block routes based on the number of cards in the player's hand
-            for (int i = 0; i < twoBlockRoutes.length; i++)
-            {
+            for (Rectangle twoBlockRoute : twoBlockRoutes) {
                 //If the player has enough blue cards, then display the blue routes
-                if (blueCards >= 2)
-                {
-                    //Displays the blue routes
-                    twoBlockRoutes[i].setVisible(true);
-                }
+                //Displays the blue routes
                 //If the player does not have enough blue cards, then don't display the blue routes
-                else
-                {
-                    //Don't display the blue routes
-                    twoBlockRoutes[i].setVisible(false);
-                }
+                //Don't display the blue routes
+                twoBlockRoute.setVisible(blueCards >= 2);
             }
 
             //for loop to display the three block routes based on the number of cards in the player's hand
-            for (int i = 0; i < threeBlockRoutes.length; i++)
-            {
+            for (Rectangle threeBlockRoute : threeBlockRoutes) {
                 //If the player has enough blue cards, then display the blue routes
-                if (blueCards >= 3)
-                {
-                    //Displays the blue routes
-                    threeBlockRoutes[i].setVisible(true);
-                }
+                //Displays the blue routes
                 //If the player does not have enough blue cards, then don't display the blue routes
-                else
-                {
-                    //Don't display the blue routes
-                    threeBlockRoutes[i].setVisible(false);
-                }
+                //Don't display the blue routes
+                threeBlockRoute.setVisible(blueCards >= 3);
             }
 
             //for loop to display the four block routes based on the number of cards in the player's hand
-            for (int i = 0; i < fourBlockRoutes.length; i++)
-            {
+            for (Rectangle fourBlockRoute : fourBlockRoutes) {
                 //If the player has enough blue cards, then display the blue routes
-                if (blueCards >= 4)
-                {
-                    //Displays the blue routes
-                    fourBlockRoutes[i].setVisible(true);
-                }
+                //Displays the blue routes
                 //If the player does not have enough blue cards, then don't display the blue routes
-                else
-                {
-                    //Don't display the blue routes
-                    fourBlockRoutes[i].setVisible(false);
-                }
+                //Don't display the blue routes
+                fourBlockRoute.setVisible(blueCards >= 4);
             }
 
             //Two block route rotations
@@ -634,6 +596,7 @@ public class HighlightRoutes
     }
      */
 
+    /*
     //Method to display the specific rectangles
     //based on the player's current number of transportation cards of a specific color
     public void DisplaySpecificRectangles()
@@ -644,6 +607,7 @@ public class HighlightRoutes
         Map<Color, Integer> playerHandMap = currentPlayer.getPlayerHandMap();
 
     }
+     */
 
     //Method to create keyframes to animate the rectangles and play the animation
     private void routeAnimationKeyFrames(ColorAdjust colorAdjust, Timeline timeline)

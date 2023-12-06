@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.Map;
@@ -46,50 +47,6 @@ public class Display
         return Players;
     }
 
-    //Method that will create a HBox that will contain the current player's information
-    //This method is ready for you to update Joseph Lemois
-    public HBox getBottomPlayersInventoryHBox()
-    {
-        // Check if the list of current players is empty
-        if (Players.isEmpty())
-        {
-            System.out.println("No players have been added.");
-            //returns nothing if the list is empty
-            return null;
-        }
-        else
-        {
-            //Creates a HBox to store the current player's information
-            HBox currentPlayerHBox = new HBox();
-
-            //Creates a label for the current player's name
-            Label currentPlayerNameLabel = new Label("Player: " + Players.get(0).getName());
-
-            //Creates a label for the current player's score
-            Label currentPlayerScoreLabel = new Label("Score: " + Players.get(0).getScore());
-
-            //Creates a label for the current player's number of taxis
-            Label currentPlayerTaxisLabel = new Label("Taxis: " + Players.get(0).getNumGamePieces());
-
-            //Prints out the number of each color Transportation Cards the player has
-            for (int i = 0; i < Players.get(0).getNumTransportationCards(); i++)
-            {
-                //Creates a label for the current player's number of taxis
-                Label currentPlayerTransportationCardsColorLabel =
-                        new Label("Transportation Cards: " + Players.get(0).getNumTransportationCards());
-            }
-
-            Label currentPlayerDestinationCardsLabel =
-                    new Label("Destination Cards: " + Players.get(0).getNumDestinationCards());
-
-            //Adds the current player's information to the VBox
-            currentPlayerHBox.getChildren().addAll(currentPlayerNameLabel, currentPlayerScoreLabel, currentPlayerTaxisLabel);
-
-            //Returns the HBox containing the current player's information
-            return currentPlayerHBox;
-        }
-    }
-
     //---------------------------------------------------------------\\
     //Creates a VBox display of the players hand on lower section of main game.
     public VBox displayPlayersHand()
@@ -111,51 +68,26 @@ public class Display
         BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, ORANGECARD, TAXICARD
          */
 
-        // Create ImageView for the blue card player 1
-        ImageView blueCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/BlueCard.png");
-
-        // Create ImageView for the green card player 1
-        ImageView greenCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/GreenCard.png");
-
-        // Create ImageView for the black card player 1
-        ImageView blackCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/BlackCard.png");
-
-        // Create ImageView for the pink card player 1
-        ImageView pinkCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/PinkCard.png");
-
-        // Create ImageView for the red card player 1
-        ImageView redCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/RedCard.png");
-
-        // Create ImageView for the orange card player 1
-        ImageView orangeCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/OrangeCard.png");
-
-        // Create ImageView for the rainbow card player 1
-        ImageView rainbowCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/RainbowCard.png");
+        Result result = getResult();
 
 
         // Create ImageView for the blue card player 2
         ImageView blueCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/BlueCard.png");
-
         // Create ImageView for the green card player 2
         ImageView greenCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/GreenCard.png");
-
         // Create ImageView for the black card player 2
         ImageView blackCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/BlackCard.png");
-
         // Create ImageView for the pink card player 2
         ImageView pinkCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/PinkCard.png");
-
         // Create ImageView for the red card player 2
         ImageView redCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/RedCard.png");
-
         // Create ImageView for the orange card player 2
         ImageView orangeCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/OrangeCard.png");
-
         // Create ImageView for the rainbow card player 2
         ImageView rainbowCardImageViewP2 = getImageView("/com/example/tickettoride/TransportCards/RainbowCard.png");
 
         // Add both card images to the HBox for player 1
-        cardImagesHBoxP1.getChildren().addAll(blueCardImageViewP1, greenCardImageViewP1, blackCardImageViewP1, pinkCardImageViewP1, redCardImageViewP1, orangeCardImageViewP1, rainbowCardImageViewP1);
+        cardImagesHBoxP1.getChildren().addAll(result.blueCardImageViewP1(), result.greenCardImageViewP1(), result.blackCardImageViewP1(), result.pinkCardImageViewP1(), result.redCardImageViewP1(), result.orangeCardImageViewP1(), result.rainbowCardImageViewP1());
 
         // Add both card images to the HBox for player 2
         cardImagesHBoxP2.getChildren().addAll(blueCardImageViewP2, greenCardImageViewP2, blackCardImageViewP2, pinkCardImageViewP2, redCardImageViewP2, orangeCardImageViewP2, rainbowCardImageViewP2);
@@ -197,6 +129,28 @@ public class Display
         return cardImagesVBox;
     }
 
+    private Result getResult() {
+        // Create ImageView for the blue card player 1
+        ImageView blueCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/BlueCard.png");
+        // Create ImageView for the green card player 1
+        ImageView greenCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/GreenCard.png");
+        // Create ImageView for the black card player 1
+        ImageView blackCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/BlackCard.png");
+        // Create ImageView for the pink card player 1
+        ImageView pinkCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/PinkCard.png");
+        // Create ImageView for the red card player 1
+        ImageView redCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/RedCard.png");
+        // Create ImageView for the orange card player 1
+        ImageView orangeCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/OrangeCard.png");
+        // Create ImageView for the rainbow card player 1
+        ImageView rainbowCardImageViewP1 = getImageView("/com/example/tickettoride/TransportCards/RainbowCard.png");
+        Result result = new Result(blueCardImageViewP1, greenCardImageViewP1, blackCardImageViewP1, pinkCardImageViewP1, redCardImageViewP1, orangeCardImageViewP1, rainbowCardImageViewP1);
+        return result;
+    }
+
+    private record Result(ImageView blueCardImageViewP1, ImageView greenCardImageViewP1, ImageView blackCardImageViewP1, ImageView pinkCardImageViewP1, ImageView redCardImageViewP1, ImageView orangeCardImageViewP1, ImageView rainbowCardImageViewP1) {
+    }
+
     private ImageView getImageView(String redCardImagePathP1)
     {
         // Create ImageView for the red card player 1
@@ -236,7 +190,7 @@ public class Display
             for (Player player : Players)
             {
                 //Adds a margin to the left of the player's information
-                playersVBox.setMargin(playersVBox, new javafx.geometry.Insets(0, 0, 0, 10));
+                VBox.setMargin(playersVBox, new javafx.geometry.Insets(0, 0, 0, 10));
                 //Sets the font size for the player's information
                 playersVBox.setStyle("-fx-font-size: 20px;");
                 //Creates labels for player information

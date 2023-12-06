@@ -28,6 +28,8 @@ public class TicketToRide extends Application
     public static final String AUTHORS = "By: Austin, Joseph, and Louis";
     public static final int HEIGHT = 1080;
     public static final int WIDTH = 1440;
+    //Constant for the max cards per turn
+    public static final int MAX_CARDS_PER_TURN = 2;
     RandomImages randomImages = new RandomImages();
     //Stores Player objects in a list
     public ObservableList<Player> currentPlayers = FXCollections.observableArrayList();
@@ -569,28 +571,18 @@ public class TicketToRide extends Application
                 {
                     // Update the ImageView with the new card image
                     cardImage.setImage(randomImages.selectRandomTransportationCard());
-                    //prints out which image was chosen
-                    //System.out.println("The selected card image is: " + cardImage.getImage());
 
                     Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and we all hate it. it broke everything, order of operations matters
-                    //gets the color of the drawn card
-                    //System.out.println("The drawn card color is: " + drawnCardColor);
+
                     Player player = currentPlayers.get(0);
-                    //System.out.println(player + " drew from transportation deck.");
+
                     player.addTransportationCard(transportationCard);
-                    //prints out which transportation card was added
-                    //System.out.println(player + " added " + transportationCard + " to their hand.");
+
                     // Increment the value in the playerHandMap for the drawn card color
                     player.incrementPlayerHandValue(drawnCardColor, 1);
-                    //prints out the drawn card color
-                    //System.out.println("The drawn card color is: " + drawnCardColor);
+
                     //Displays the current player's hand
                     borderPane.setBottom(display.displayPlayersHand());
-
-                    //Prints the current player's current number of transportation cards
-                    //System.out.println(player.getName() + "'s # of transpo cards: " + currentNumTransportationCards
-                    //Prints the current player's total number of transportation cards
-                    //System.out.println(player.getName() + "'s # of transpo cards increased to: " + player.getNumTransportationCards());
                     if (clickCounter == 2)
                     {
                         //Displays an alert if the player has already drawn two cards
@@ -603,6 +595,18 @@ public class TicketToRide extends Application
                         //Moves to the second player
                         turnCounter++;
                         DisplayCurrentPlayersTurn();
+                        try
+                        {
+                            //Removes the old highlighted rectangles from the image container
+                            imageContainer.getChildren().remove(highlightRoutes.highlightRectangles(imageContainer));
+                            //Adds the new highlighted rectangles to the image container
+                            imageContainer.getChildren().add(highlightRoutes.highlightRectangles(imageContainer));
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println("The image container is null.");
+                            System.out.println("Shits broke");
+                        }
                         System.out.println("Player 1's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after incrementing it
                     }
                 }
@@ -617,6 +621,18 @@ public class TicketToRide extends Application
                     //Moves to the second player
                     turnCounter++;
                     DisplayCurrentPlayersTurn();
+                    try
+                    {
+                        //Removes the old highlighted rectangles from the image container
+                        imageContainer.getChildren().remove(highlightRoutes.highlightRectangles(imageContainer));
+                        //Adds the new highlighted rectangles to the image container
+                        imageContainer.getChildren().add(highlightRoutes.highlightRectangles(imageContainer));
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("The image container is null.");
+                        System.out.println("Shits broke");
+                    }
                     System.out.println("Player 1's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after incrementing it
                 }
             }
@@ -638,28 +654,19 @@ public class TicketToRide extends Application
                 {
                     // Update the ImageView with the new card image
                     cardImage.setImage(randomImages.selectRandomTransportationCard());
-                    //prints out which image was chosen
-                    //System.out.println("The selected card image is: " + cardImage.getImage());
 
                     Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and we all hate it. it broke everything, order of operations matters
-                    //gets the color of the drawn card
-                    //System.out.println("The drawn card color is: " + drawnCardColor);
+
                     Player player = currentPlayers.get(1);
-                    //System.out.println(player + " drew from transportation deck.");
+
                     player.addTransportationCard(transportationCard);
-                    //prints out which transportation card was added
-                    //System.out.println(player + " added " + transportationCard + " to their hand.");
+
                     // Increment the value in the playerHandMap for the drawn card color
                     player.incrementPlayerHandValue(drawnCardColor, 1);
-                    //prints out the drawn card color
-                    //System.out.println("The drawn card color is: " + drawnCardColor);
+
                     //Displays the current player's hand
                     borderPane.setBottom(display.displayPlayersHand());
 
-                    //Prints the current player's current number of transportation cards
-                    //System.out.println(player.getName() + "'s # of transpo cards: " + currentNumTransportationCards;
-                    //Prints the current player's total number of transportation cards
-                    //System.out.println(player.getName() + "'s # of transpo cards increased to: " + player.getNumTransportationCards());
                     if (clickCounter == 2)
                     {
                         //Displays an alert if the player has already drawn two cards
@@ -672,11 +679,25 @@ public class TicketToRide extends Application
                         //Moves to the second player
                         turnCounter--;
                         DisplayCurrentPlayersTurn();
+                        //Updates the board game map for the next player
+                        highlightRoutes.highlightRectangles(imageContainer);
                         System.out.println("Player 2's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after
                         //resets the current players click counter to zero
                         clickCounterMap.put(currentPlayer, 0);
                         //Prints out the current player's click counter
                         System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
+                        try
+                        {
+                            //Removes the old highlighted rectangles from the image container
+                            imageContainer.getChildren().remove(highlightRoutes.highlightRectangles(imageContainer));
+                            //Adds the new highlighted rectangles to the image container
+                            imageContainer.getChildren().add(highlightRoutes.highlightRectangles(imageContainer));
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println("The image container is null.");
+                            System.out.println("Shits broke");
+                        }
                     }
                 }
                 else
@@ -685,6 +706,18 @@ public class TicketToRide extends Application
                     //Moves to the second player
                     turnCounter--;
                     DisplayCurrentPlayersTurn();
+                    try
+                    {
+                        //Removes the old highlighted rectangles from the image container
+                        imageContainer.getChildren().remove(highlightRoutes.highlightRectangles(imageContainer));
+                        //Adds the new highlighted rectangles to the image container
+                        imageContainer.getChildren().add(highlightRoutes.highlightRectangles(imageContainer));
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("The image container is null.");
+                        System.out.println("Shits broke");
+                    }
                     System.out.println("Player 2's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after decrementing it
                     //resets the current players click counter to zero
                     clickCounterMap.put(currentPlayer, 0);
@@ -697,7 +730,6 @@ public class TicketToRide extends Application
         });
 
         //--------------------------------------------------------------------------------\\
-
         //Create Button to select random card from destination deck
         DestinationCard destinationCard = new DestinationCard();
 
@@ -728,6 +760,8 @@ public class TicketToRide extends Application
         btnDestinationCard.setMinWidth(250);
 
         RandomImages randomImages = new RandomImages();
+
+        //-------------------- Event handler for the destination card button ----------------------\\
         //Set Button Action
         btnDestinationCard.setOnAction(event ->
         {
@@ -752,6 +786,7 @@ public class TicketToRide extends Application
                 }
             );
         });
+        //----------------- End of event handler for the destination card button -------------------\\
 
         // Add Button and ImageView to Right Side
         VBox rightVBox = new VBox(); //Create a VBox for layout
@@ -775,24 +810,11 @@ public class TicketToRide extends Application
         VBox playerVBox = display.getPlayerInfoVBox();
 
         //----------------------------------------------------------------------\\
-        //Displays the current player's turn
-        Display currentTurn = new Display(currentPlayers);
-
-        //Creates a new HBox for the current player's information
-        HBox currentPlayerHBox = new HBox();
-
-        //Adds the current player's information to the HBox
-        currentPlayerHBox.getChildren().add(currentTurn.getBottomPlayersInventoryHBox());
-
-        //-------------------------------------------------------------------
         Display playersHand = new Display(currentPlayers);
 
         //Moving the below functions to the Display class
         VBox cardImagesVBox = playersHand.displayPlayersHand();
 
-        //borderPane.setBottom(cardImagesVBox);
-
-        currentPlayerHBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         cardImagesVBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         borderPane.setBottom(cardImagesVBox);
@@ -803,9 +825,7 @@ public class TicketToRide extends Application
         leftPlayersVBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         //setup of borderPane displays titles
-        //borderPane.setTop(new LabelPane("By: Austin, Joseph, and Louis!"));
         borderPane.setTop(hBox);
-        //currentPlayerHBox.setMinHeight(200);
 
         borderPane.setLeft(leftPlayersVBox);
 
