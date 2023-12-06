@@ -43,7 +43,8 @@ public class TicketToRide extends Application
     private int currentNumPlayers;
     //Creates a new Display object, passing the currentPlayers list to it
     Display display = new Display(currentPlayers);
-    int startTurns;
+
+    public int turnCounter = 1;
 
     //------------------ Splash Screen Creation -----------------\\
     @Override
@@ -549,76 +550,143 @@ public class TicketToRide extends Application
         }
 
         //Creates the event to handle the player drawing transportation cards
-        btnRandomCard.setOnAction(event -> {
-            //Gets the current player
-            Player currentPlayer = currentPlayers.get(0);
-
-            //gets or initializes the click counter for the current player
-            int clickCounter = clickCounterMap.getOrDefault(currentPlayer, 0);
-
-            //Increments the clickCounter by one
-            clickCounter++;
-
-            //Updates the click counter in the map
-            clickCounterMap.put(currentPlayer, clickCounter);
-            if (clickCounter <= 2)
+        btnRandomCard.setOnAction(event ->
             {
-                //Gets the current total number of transportation cards the current player has
-                int currentNumTransportationCards = currentPlayers.get(0).getNumTransportationCards();
-
-                // Update the ImageView with the new card image
-                cardImage.setImage(randomImages.selectRandomTransportationCard());
-                //prints out which image was chosen
-                System.out.println("The selected card image is: " + cardImage.getImage());
-
-                Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and broke everything, order of operations matters
-                //gets the color of the drawn card
-                System.out.println("The drawn card color is: " + drawnCardColor);
-                Player player = currentPlayers.get(0);
-                System.out.println(player + " drew from transportation deck.");
-                player.addTransportationCard(transportationCard);
-                //prints out which transportation card was added
-                System.out.println(player + " added " + transportationCard + " to their hand.");
-                // Increment the value in the playerHandMap for the drawn card color
-                player.incrementPlayerHandValue(drawnCardColor, 1);
-                //prints out the drawn card color
-                System.out.println("The drawn card color is: " + drawnCardColor);
-                //Displays the current player's hand
-                borderPane.setBottom(display.displayPlayersHand());
-
-                //Ends the current player's turn after they've drawn two cards
-                //If the current players current number of transportation cards is two more than the value in the
-                //variable currentNumTransportationCards, then end current players turn
-                if (player.getNumTransportationCards() == currentNumTransportationCards + 2)
+                //if the starting turn counter is 1 gets the first player in the list
+                if (turnCounter == 0)
                 {
-                    //Prints the current player's current number of transportation cards
-                    System.out.println(player.getName() + "'s # of transpo cards: " + currentNumTransportationCards);
-                    //Prints the current player's total number of transportation cards
-                    System.out.println(player.getName() + "'s # of transpo cards increased to: " + player.getNumTransportationCards());
+                    //Gets the current player
+                    Player currentPlayer = currentPlayers.get(0);
+                    //gets or initializes the click counter for the current player
+                    int clickCounter = clickCounterMap.getOrDefault(currentPlayer, 0);
+
+                    //Increments the clickCounter by one
+                    clickCounter++;
+
+                    //Updates the click counter in the map
+                    clickCounterMap.put(currentPlayer, clickCounter);
+                    if (clickCounter <= 2)
+                    {
+                        //Gets the current total number of transportation cards the current player has
+                        int currentNumTransportationCards = currentPlayers.get(0).getNumTransportationCards();
+
+                        // Update the ImageView with the new card image
+                        cardImage.setImage(randomImages.selectRandomTransportationCard());
+                        //prints out which image was chosen
+                        System.out.println("The selected card image is: " + cardImage.getImage());
+
+                        Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and broke everything, order of operations matters
+                        //gets the color of the drawn card
+                        System.out.println("The drawn card color is: " + drawnCardColor);
+                        Player player = currentPlayers.get(0);
+                        System.out.println(player + " drew from transportation deck.");
+                        player.addTransportationCard(transportationCard);
+                        //prints out which transportation card was added
+                        System.out.println(player + " added " + transportationCard + " to their hand.");
+                        // Increment the value in the playerHandMap for the drawn card color
+                        player.incrementPlayerHandValue(drawnCardColor, 1);
+                        //prints out the drawn card color
+                        System.out.println("The drawn card color is: " + drawnCardColor);
+                        //Displays the current player's hand
+                        borderPane.setBottom(display.displayPlayersHand());
+
+                        //Ends the current player's turn after they've drawn two cards
+                        //If the current players current number of transportation cards is two more than the value in the
+                        //variable currentNumTransportationCards, then end current players turn
+                        if (player.getNumTransportationCards() == currentNumTransportationCards + 2) {
+                            //Prints the current player's current number of transportation cards
+                            System.out.println(player.getName() + "'s # of transpo cards: " + currentNumTransportationCards);
+                            //Prints the current player's total number of transportation cards
+                            System.out.println(player.getName() + "'s # of transpo cards increased to: " + player.getNumTransportationCards());
+                        }
+                    }
+                    else
+                    {
+                        //Displays an alert if the player has already drawn two cards
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText(null); // No header text
+                        alert.setContentText("You have already drawn two cards this turn.");
+                        alert.showAndWait();
+
+                        //Ends the current player's turn, and starts the next player's turn by showing a pop-up message.
+                        //Creates a new TurnHandler object
+                        TurnHandler turnHandler = new TurnHandler(currentNumPlayers, currentPlayers);
+                        //Ends the current player's turn
+                        turnHandler.endTurn();
+
+                        //Moves to the second player
+                        turnCounter++;
+                    }
                 }
+                else
+                {
+                    //Gets player 2
+                    Player currentPlayer = currentPlayers.get(1);
+                    //gets or initializes the click counter for the current player
+                    int clickCounter = clickCounterMap.getOrDefault(currentPlayer, 0);
 
+                    //Increments the clickCounter by one
+                    clickCounter++;
 
-            }
-            else
-            {
-                //Displays an alert if the player has already drawn two cards
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning");
-                alert.setHeaderText(null); // No header text
-                alert.setContentText("You have already drawn two cards this turn.");
-                alert.showAndWait();
+                    //Updates the click counter in the map
+                    clickCounterMap.put(currentPlayer, clickCounter);
+                    if (clickCounter <= 2)
+                    {
+                        //Gets the current total number of transportation cards the current player has
+                        int currentNumTransportationCards = currentPlayers.get(0).getNumTransportationCards();
 
-                //Ends the current player's turn, and starts the next player's turn by showing a pop-up message.
-                //Creates a new TurnHandler object
-                TurnHandler turnHandler = new TurnHandler(currentNumPlayers, currentPlayers);
-                //Ends the current player's turn
-                turnHandler.endTurn();
+                        // Update the ImageView with the new card image
+                        cardImage.setImage(randomImages.selectRandomTransportationCard());
+                        //prints out which image was chosen
+                        System.out.println("The selected card image is: " + cardImage.getImage());
 
-                //Moves to the second player
+                        Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and broke everything, order of operations matters
+                        //gets the color of the drawn card
+                        System.out.println("The drawn card color is: " + drawnCardColor);
+                        Player player = currentPlayers.get(1);
+                        System.out.println(player + " drew from transportation deck.");
+                        player.addTransportationCard(transportationCard);
+                        //prints out which transportation card was added
+                        System.out.println(player + " added " + transportationCard + " to their hand.");
+                        // Increment the value in the playerHandMap for the drawn card color
+                        player.incrementPlayerHandValue(drawnCardColor, 1);
+                        //prints out the drawn card color
+                        System.out.println("The drawn card color is: " + drawnCardColor);
+                        //Displays the current player's hand
+                        borderPane.setBottom(display.displayPlayersHand());
 
-            }
+                        //Ends the current player's turn after they've drawn two cards
+                        //If the current players current number of transportation cards is two more than the value in the
+                        //variable currentNumTransportationCards, then end current players turn
+                        if (player.getNumTransportationCards() == currentNumTransportationCards + 2) {
+                            //Prints the current player's current number of transportation cards
+                            System.out.println(player.getName() + "'s # of transpo cards: " + currentNumTransportationCards);
+                            //Prints the current player's total number of transportation cards
+                            System.out.println(player.getName() + "'s # of transpo cards increased to: " + player.getNumTransportationCards());
+                        }
+                        }
+                    else
+                    {
+                        //Displays an alert if the player has already drawn two cards
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText(null); // No header text
+                        alert.setContentText("You have already drawn two cards this turn.");
+                        alert.showAndWait();
 
-        });
+                        //Ends the current player's turn, and starts the next player's turn by showing a pop-up message.
+                        //Creates a new TurnHandler object
+                        TurnHandler turnHandler = new TurnHandler(currentNumPlayers, currentPlayers);
+                        //Ends the current player's turn
+                        turnHandler.endTurn();
+
+                        //Moves to the second player
+                        turnCounter--;
+                        }
+                    }
+                    ;
+                });
 
         //--------------------------------------------------------------------------------\\
 
@@ -756,6 +824,7 @@ public class TicketToRide extends Application
     //Method used to set up the turns for the game
     private void SetupTurn()
     {
+
         for(int i = 0; i < currentPlayers.size(); i++)
         {
             currentPlayers.get(i).setTurnPhase(TurnHandler.DRAW_TRANSPORTATION_CARDS);
