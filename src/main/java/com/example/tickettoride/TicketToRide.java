@@ -44,6 +44,7 @@ public class TicketToRide extends Application
     //Creates a new Display object, passing the currentPlayers list to it
     Display display = new Display(currentPlayers);
 
+    //Initializes the turn counter to zero to start the game with the first player (player 1 a.k.a. player 0)
     public int turnCounter = 0;
 
     //------------------ Splash Screen Creation -----------------\\
