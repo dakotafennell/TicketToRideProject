@@ -1,10 +1,7 @@
 package com.example.tickettoride;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 
@@ -15,8 +12,6 @@ import java.io.File;
  */
 public class Board extends StackPane
 {
-    // Board display logic
-
     //Constants for display width and height
     private static final int BOARD_WIDTH = 1000;
     private static final int BOARD_HEIGHT = 800;
@@ -37,7 +32,8 @@ public class Board extends StackPane
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Failed to load image from file");
+            System.out.println(e.getMessage());
         }
         return ticketToRideImageView;
     }
