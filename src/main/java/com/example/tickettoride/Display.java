@@ -156,6 +156,9 @@ public class Display
 
         // Add both card images to the HBox for player 1
         cardImagesHBoxP1.getChildren().addAll(blueCardImageViewP1, greenCardImageViewP1, blackCardImageViewP1, pinkCardImageViewP1, redCardImageViewP1, orangeCardImageViewP1, rainbowCardImageViewP1);
+
+        // Add both card images to the HBox for player 2
+        cardImagesHBoxP2.getChildren().addAll(blueCardImageViewP2, greenCardImageViewP2, blackCardImageViewP2, pinkCardImageViewP2, redCardImageViewP2, orangeCardImageViewP2, rainbowCardImageViewP2);
         /*
 
         //Array of card image paths
@@ -198,12 +201,9 @@ public class Display
             }
         }
 
-        // Add both card images to the HBox for player 2
-        cardImagesHBoxP2.getChildren().addAll(blueCardImageViewP2, greenCardImageViewP2, blackCardImageViewP2, pinkCardImageViewP2, redCardImageViewP2, orangeCardImageViewP2, rainbowCardImageViewP2);
-
         // Add the HBox with card images to the bottom of the borderPane
         VBox cardImagesVBox = new VBox(5);
-        cardImagesVBox.getChildren().addAll(player1Label, cardImagesHBoxP1,valueImageHBoxP1,valueImageHBoxP2, player2Label, cardImagesHBoxP2);
+        cardImagesVBox.getChildren().addAll(player1Label, cardImagesHBoxP1, valueImageHBoxP1,valueImageHBoxP2, player2Label, cardImagesHBoxP2);
         return cardImagesVBox;
     }
 

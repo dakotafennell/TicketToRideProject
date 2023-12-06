@@ -58,8 +58,8 @@ public class TurnHandler
         if (!drawnCards.isEmpty())
         {
             player.addTranspoCardsToHand((ArrayList<TransportationCard>) drawnCards);
-            // You might want to update UI or perform other actions based on the drawn cards
-            System.out.println(player.getName() + " drew " + numCards + " transportation cards.");
+            //Prints out the player's name and what cards they drew
+            //System.out.println(player.getName() + " drew " + numCards + " transportation cards.");
         }
     }
 
@@ -70,8 +70,7 @@ public class TurnHandler
         {
             //Adds the drawn cards to the player's hand
             player.addDestToHand((ArrayList<DestinationCard>) drawnCards);
-            // You might want to update UI or perform other actions based on the drawn cards
-            System.out.println(player.getName() + " drew " + numCards + " destination cards.");
+            //System.out.println(player.getName() + " drew " + numCards + " destination cards.");
         }
     }
 

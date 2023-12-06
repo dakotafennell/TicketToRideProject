@@ -110,23 +110,23 @@ public class RandomImages
         Random random = new Random();
         // Get a random card index
         //prints out the length of the card image paths
-        System.out.println("The length of the card image paths is: " + CARDIMAGEPATHS.length);
+        //System.out.println("The length of the card image paths is: " + CARDIMAGEPATHS.length);
         int cardIndex = random.nextInt(CARDIMAGEPATHS.length - 1);
         //prints out the index of the card
-        System.out.println("The card index is: " + cardIndex);
+        //System.out.println("The card index is: " + cardIndex);
         // Get the selected card image path
         String selectedCardImagePath = CARDIMAGEPATHS[cardIndex];
         //prints out the selected card image path
-        System.out.println("The selected card image path is: " + selectedCardImagePath);
+        //System.out.println("The selected card image path is: " + selectedCardImagePath);
 
         //sets the card color to the color of the card image
         cardColor = colors[cardIndex];
         //prints out the index of the card color
-        System.out.println("The card color index is: " + cardIndex);
+        //System.out.println("The card color index is: " + cardIndex);
         //Prints out the card color index hex code as a string
-        System.out.println("The card color index hex code is: " + colorHexCodes[cardIndex]);
+        //System.out.println("The card color index hex code is: " + colorHexCodes[cardIndex]);
         //prints out the color of the card
-        System.out.println("The card color is: " + cardColor);
+        //System.out.println("The card color is: " + cardColor);
 
         // Load the image using ClassLoader
         final int imageWidth = 1000;
@@ -143,11 +143,11 @@ public class RandomImages
             //System.out.println("The selected card image is: " + selectedCardImage);
 
             //Prints out the new pair
-            System.out.println("The new pair is: " + new Pair<>(selectedCardImage, cardColor));
+            //System.out.println("The new pair is: " + new Pair<>(selectedCardImage, cardColor));
 
             // Reset cardIndex to 0
             cardIndex = 0;
-            System.out.println("The card index ended at: " + cardIndex);
+            //System.out.println("The card index ended at: " + cardIndex);
             return new Pair<>(selectedCardImage, cardColor).getKey();
         }
         catch (NullPointerException e)
