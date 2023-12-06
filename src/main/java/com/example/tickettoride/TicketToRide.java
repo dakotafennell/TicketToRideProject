@@ -685,14 +685,14 @@ public class TicketToRide extends Application
     //Handles the logic for when the player draws a transportation card
     private void handleCardDraw(Player currentPlayer, int clickCounter, ImageView cardImage, TransportationCard transportationCard, BorderPane borderPane, HighlightRoutes highlightRoutes, StackPane imageContainer)
     {
-        // Update the ImageView with the new card image
+        //Updates the ImageView with the new card image
         cardImage.setImage(randomImages.selectRandomTransportationCard());
 
         Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and we all hate it. it broke everything, order of operations matters
 
         //Adds the drawn card to the player's hand
         currentPlayer.addTransportationCard(transportationCard);
-        // Increment the value in the playerHandMap for the drawn card color
+        //Increments the value in the playerHandMap for the drawn card color
         currentPlayer.incrementPlayerHandValue(drawnCardColor, 1);
 
         //Displays the current player's hand
@@ -700,23 +700,19 @@ public class TicketToRide extends Application
 
         //Increments the player's clickCounter
         clickCounter++;
-        // Check if the maximum cards per turn is reached
-        if (clickCounter == MAX_CARDS_PER_TURN) {
+
+        //Checks if the maximum cards per turn is reached
+        if (clickCounter == MAX_CARDS_PER_TURN)
+        {
             handleMaxCardsDrawn(highlightRoutes, imageContainer, currentPlayer);
 
-            //prints out the current player's click counter before resetting it
-            //System.out.println(currentPlayer.getName() + "'s click counter before reset is: " + clickCounterMap.get(currentPlayer));
-            // Resets the clickCounter for the current player
+            //Resets the clickCounter for the current player
             clickCounterMap.put(currentPlayer, 0);
-            //prints out the current player's click counter
-            //System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
         }
         else
         {
-            // Updates the click counter in the map
+            //Updates the click counter in the map
             clickCounterMap.put(currentPlayer, clickCounter);
-            //prints out the current player's click counter
-            //System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
         }
     }
 
@@ -725,8 +721,6 @@ public class TicketToRide extends Application
     {
         //Displays an alert if the player has already drawn two cards
         twoMaxCardsDrawnAlert();
-        //Prints out the current player's turn counter
-        //System.out.println("Player " + (turnCounter % currentPlayers.size()) + "'s turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before decrementing it
         if (turnCounter == 0)
         {
             //Moves to the second player
