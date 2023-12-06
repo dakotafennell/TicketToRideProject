@@ -764,7 +764,7 @@ public class TicketToRide extends Application
 
     private void DisplayCurrentPlayersTurn()
     {
-        //gets the position of the current player in the list, and stores it in i for use in the for loop
+        //gets the position of the current player in the list, and stores it in i
         int i = turnCounter;
 
         //Creates a new alert to display which player's turn it is.
