@@ -99,26 +99,34 @@ public class Player
         }
     }
 
+    //sets the map of the players hand
+    public void setPlayerHandMap(Map<Color, Integer> playerHandMap)
+    {
+        this.playerHandMap = playerHandMap;
+    }
+
+    //gets the map of the players hand
     public Map<Color, Integer> getPlayerHandMap()
     {
         return playerHandMap;
     }
-    public void setPlayerCardAmount(Color color, int value) {
-        playerHandMap.put(color, value);
-    }
 
     //Change count values of the respective players cards
-    public void incrementPlayerHandValue(Color color, int value) {
+    public void incrementPlayerHandValue(Color color, int value)
+    {
         int currentValue = playerHandMap.getOrDefault(color, 0);
         //prints out the current value of the card
-        System.out.println("The current value of the card is: " + currentValue);
+        //System.out.println("The current value of the card is: " + currentValue);
         int newValue = currentValue + value;
         playerHandMap.put(color, newValue);
 
         //prints out what was put in the map
-        System.out.println("The value of the card put in the map is: " + playerHandMap.get(color));
+        //System.out.println("The value of the card put in the map is: " + playerHandMap.get(color));
     }
 
+    public void setPlayerCardAmount(Color color, int value) {
+        playerHandMap.put(color, value);
+    }
 //------------------------------ Get/Sets -----------------------------\\
     public String getName()
     {

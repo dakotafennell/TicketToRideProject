@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * HighlightRoutes class
@@ -126,6 +129,144 @@ public class HighlightRoutes
             ChelseaToGreenwichVillageRed, LowerEastSideToBrooklyn, ChinatownToBrooklynRed,
             ChinatownToBrooklynOrange, WallStreetToBrooklynBlue, WallStreetToBrooklynBlack, ChelseaToSoho
     };
+
+    //Sets up a hashmap of all the one block blue routes
+    public Map<Rectangle, int> oneBlockBlueRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the one block green routes
+    public Map<Rectangle, int> oneBlockGreenRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the one block black routes
+    public Map<Rectangle, int> oneBlockBlackRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the one block pink routes
+    public Map<Rectangle, int> oneBlockPinkRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the one block red routes
+    public Map<Rectangle, int> oneBlockRedRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the one block orange routes
+    public Map<Rectangle, int> oneBlockOrangeRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the one block taxi (white) routes
+    public Map<Rectangle, int> oneBlockWhiteRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the two block blue routes
+    public Map<Rectangle, int> twoBlockBlueRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the two block green routes
+    public Map<Rectangle, int> twoBlockGreenRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the two block black routes
+    public Map<Rectangle, int> twoBlockBlackRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the two block pink routes
+    public Map<Rectangle, int> twoBlockPinkRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the two block red routes
+    public Map<Rectangle, int> twoBlockRedRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the two block orange routes
+    public Map<Rectangle, int> twoBlockOrangeRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the two block taxi (white) routes
+    public Map<Rectangle, int> twoBlockWhiteRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the three block blue routes
+    public Map<Rectangle, int> threeBlockBlueRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the three block green routes
+    public Map<Rectangle, int> threeBlockGreenRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the three block black routes
+    public Map<Rectangle, int> threeBlockBlackRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the three block pink routes
+    public Map<Rectangle, int> threeBlockPinkRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the three block red routes
+    public Map<Rectangle, int> threeBlockRedRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the three block orange routes
+    public Map<Rectangle, int> threeBlockOrangeRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the three block taxi (white) routes
+    public Map<Rectangle, int> threeBlockWhiteRoutes = new LinkedHashMap<Rectangle, int>();
+    //Sets up a hashmap of all the four block blue routes (only one, pink)
+    public Map<Rectangle, int> fourBlockPinkRoutes = new LinkedHashMap<Rectangle, int>();
+
+    /*
+    public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, ORANGECARD, TAXICARD};
+     */
+    //Puts the rectangles into their respective hashmaps
+    public void SetUpRectangleMaps()
+    {
+        //One block blue routes
+        oneBlockBlueRoutes.put(ChinatownToLowerEastSide, 1);
+        oneBlockBlueRoutes.put(EmpireStateBuildingToGramercyParkBlue, 1);
+
+        //One block green routes
+        oneBlockGreenRoutes.put(ChinatownToWallStreetGreen, 1);
+
+        //One block black routes
+        oneBlockBlackRoutes.put(EastVillageToLowerEastSide, 1);
+
+        //One block pink routes
+        oneBlockPinkRoutes.put(ChinatownToWallStreetPink, 1);
+        oneBlockPinkRoutes.put(TimesSquareToEmpireStateBuildingPink, 1);
+
+        //One block red routes
+        oneBlockRedRoutes.put(EmpireStateBuildingToGramercyParkRed, 1);
+
+        //One block orange routes
+        oneBlockOrangeRoutes.put(TimesSquareToEmpireStateBuildingOrange, 1);
+
+        //One block taxi (white) routes
+        oneBlockWhiteRoutes.put(MidtownWestToTimesSquare, 1);
+
+        //Two block blue routes
+        twoBlockBlueRoutes.put(GreenwichVillageToEastVillage, 2);
+        twoBlockBlueRoutes.put(LincolnCenterToTimesSquareBlue, 2);
+        twoBlockBlueRoutes.put(MidtownWestToChelsea, 2);
+
+        //Two block green routes
+        twoBlockGreenRoutes.put(LincolnCenterToTimesSquareGreen, 2);
+        twoBlockGreenRoutes.put(MidtownWestToEmpireStateBuilding, 2);
+
+        //Two block black routes
+        twoBlockBlackRoutes.put(CentralParkToTimesSquareBlack, 2);
+        twoBlockBlackRoutes.put(EmpireStateBuildingToUnitedNations, 2);
+        twoBlockBlackRoutes.put(GramercyParkToGreenwichVillageBlack, 2);
+
+        //Two block pink routes
+        twoBlockPinkRoutes.put(GramercyParkToGreenwichVillagePink, 2);
+
+        //Two block red routes
+        twoBlockRedRoutes.put(CentralParkToTimesSquareRed, 2);
+        twoBlockRedRoutes.put(LincolnCenterToMidtownWest, 2);
+
+        //Two block orange routes
+        twoBlockOrangeRoutes.put(ChelseaToGramercyPark, 2);
+        twoBlockOrangeRoutes.put(GreenwichVillageToSoho, 2);
+        twoBlockOrangeRoutes.put(LincolnCenterToCentralPark, 2);
+
+        //Two block taxi (white) routes
+        twoBlockWhiteRoutes.put(ChelseaToEmpireStateBuildingGrey0, 2);
+        twoBlockWhiteRoutes.put(ChelseaToEmpireStateBuildingGrey1, 2);
+        twoBlockWhiteRoutes.put(GramercyParkToEastVillage, 2);
+        twoBlockWhiteRoutes.put(GreenwichVillageToChinatownGrey0, 2);
+        twoBlockWhiteRoutes.put(GreenwichVillageToChinatownGrey1, 2);
+        twoBlockWhiteRoutes.put(GreenwichVillageToLowerEastSide, 2);
+        twoBlockWhiteRoutes.put(SohoToWallStreet, 2);
+        twoBlockWhiteRoutes.put(TimesSquareToUnitedNations, 2);
+
+        //Three block blue routes
+        threeBlockBlueRoutes.put(WallStreetToBrooklynBlue, 3);
+
+        //Three block green routes
+        threeBlockGreenRoutes.put(ChelseaToGreenwichVillageGreen, 3);
+        threeBlockGreenRoutes.put(UnitedNationsToGramercyPark, 3);
+
+        //Three block black routes
+        threeBlockBlackRoutes.put(WallStreetToBrooklynBlack, 3);
+
+        //Three block pink routes
+        threeBlockPinkRoutes.put(CentralParkToUnitedNations, 3);
+
+        //Three block red routes
+        threeBlockRedRoutes.put(ChelseaToGreenwichVillageRed, 3);
+        threeBlockRedRoutes.put(ChinatownToBrooklynRed, 3);
+
+        //Three block orange routes
+        threeBlockOrangeRoutes.put(ChinatownToBrooklynOrange, 3);
+
+        //Three block taxi (white) routes
+        threeBlockWhiteRoutes.put(LowerEastSideToBrooklyn, 3);
+
+        //Four block blue routes (only one, pink)
+        fourBlockPinkRoutes.put(ChelseaToSoho, 4);
+    }
+
 
     //--------------------------- Display ----------------------------------\\
     public Pane highlightRectangles(Pane overlay)
@@ -331,10 +472,35 @@ public class HighlightRoutes
         }
     }
 
+    /*
+    //gets the map of the players hand
+    public Map<Color, Integer> getPlayerHandMap()
+    {
+        return playerHandMap;
+    }
+
+    //Change count values of the respective players cards
+    public void incrementPlayerHandValue(Color color, int value)
+    {
+        int currentValue = playerHandMap.getOrDefault(color, 0);
+        //prints out the current value of the card
+        //System.out.println("The current value of the card is: " + currentValue);
+        int newValue = currentValue + value;
+        playerHandMap.put(color, newValue);
+
+        //prints out what was put in the map
+        //System.out.println("The value of the card put in the map is: " + playerHandMap.get(color));
+    }
+     */
+
     //Method to display the specific rectangles
     //based on the player's current number of transportation cards of a specific color
     public void DisplaySpecificRectangles()
     {
+        //Creates a new player object
+        Player currentPlayer = new Player();
+        //Gets the current player's hand
+        Map<Color, Integer> playerHandMap = currentPlayer.getPlayerHandMap();
 
     }
 

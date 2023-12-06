@@ -801,11 +801,9 @@ public class TicketToRide extends Application
                     //adds the selected card to the current player's list of destination cards
                     currentPlayers.get(0).addDestinationCard(destinationCard);
                     //Remove card from pile visually
-
                 }
             );
         });
-
 
         // Add Button and ImageView to Right Side
         VBox rightVBox = new VBox(); //Create a VBox for layout
@@ -824,8 +822,6 @@ public class TicketToRide extends Application
         textOutput.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         textOutput.setEditable(false);
         textOutput.setScrollTop(5);
-
-
 
         //Creates the player name's display VBox using a method from the Display class
         VBox playerVBox = display.getPlayerInfoVBox();

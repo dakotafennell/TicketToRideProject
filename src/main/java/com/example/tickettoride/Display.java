@@ -159,16 +159,6 @@ public class Display
 
         // Add both card images to the HBox for player 2
         cardImagesHBoxP2.getChildren().addAll(blueCardImageViewP2, greenCardImageViewP2, blackCardImageViewP2, pinkCardImageViewP2, redCardImageViewP2, orangeCardImageViewP2, rainbowCardImageViewP2);
-        /*
-
-        //Array of card image paths
-        public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, ORANGECARD, TAXICARD};
-        //Color hex codes
-        public static final String[] colorHexCodes = {
-                "#0000FF BLUE", "#008000 GREEN", "#000000 BLACK", "#FFC0CB PINK", "#FF0000 RED", "#FFA500 ORANGE", "#FFFFFF WHITE"
-        };
-
-         */
 
         //---------------------------- gets the current players ---------------------------\\
         ObservableList<Player> currentPlayers = getPlayers();
