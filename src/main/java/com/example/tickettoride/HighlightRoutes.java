@@ -130,6 +130,7 @@ public class HighlightRoutes
             ChinatownToBrooklynOrange, WallStreetToBrooklynBlue, WallStreetToBrooklynBlack, ChelseaToSoho
     };
 
+    /*
     //Sets up a hashmap of all the one block blue routes
     public Map<Rectangle, int> oneBlockBlueRoutes = new LinkedHashMap<Rectangle, int>();
     //Sets up a hashmap of all the one block green routes
@@ -175,16 +176,21 @@ public class HighlightRoutes
     //Sets up a hashmap of all the four block blue routes (only one, pink)
     public Map<Rectangle, int> fourBlockPinkRoutes = new LinkedHashMap<Rectangle, int>();
 
-    /*
+    private Player currentPlayer;
+    private Map<Color, Map<Rectangle, Integer>> colorRoutesMap;
+
+
     public static final String[] CARDIMAGEPATHS = {BLUECARD, GREENCARD, BLACKCARD, PINKCARD, REDCARD, ORANGECARD, TAXICARD};
-     */
+
     //Puts the rectangles into their respective hashmaps
+
     public void SetUpRectangleMaps()
     {
         //Gets the current player
         Player currentPlayer = new Player();
         //Gets the current player's hand
         Map<Color, Integer> playerHandMap = currentPlayer.getPlayerHandMap();
+
         //displays the blue routes based on if the player's hand has enough blue cards
         for (Map.Entry<Color, Integer> entry : playerHandMap.entrySet())
         {
@@ -229,9 +235,11 @@ public class HighlightRoutes
                 }
             }
         }
+
         //One block blue routes
         oneBlockBlueRoutes.put(ChinatownToLowerEastSide, 1);
         oneBlockBlueRoutes.put(EmpireStateBuildingToGramercyParkBlue, 1);
+
         //Displays the one block blue routes if the player has enough blue cards
         for (Map.Entry<Rectangle, int> entry : oneBlockBlueRoutes.entrySet())
         {
@@ -251,6 +259,7 @@ public class HighlightRoutes
 
         //One block green routes
         oneBlockGreenRoutes.put(ChinatownToWallStreetGreen, 1);
+
         //Displays the one block green routes if the current player has enough green cards
         for (Map.Entry<Rectangle, int> entry : oneBlockGreenRoutes.entrySet())
         {
@@ -270,6 +279,7 @@ public class HighlightRoutes
 
         //One block black routes
         oneBlockBlackRoutes.put(EastVillageToLowerEastSide, 1);
+
         //Displays the one block black routes if the current player has enough black cards
         for (Map.Entry<Rectangle, int> entry : oneBlockBlackRoutes.entrySet())
         {
@@ -363,6 +373,26 @@ public class HighlightRoutes
         fourBlockPinkRoutes.put(ChelseaToSoho, 4);
     }
 
+    public void updateRoutesVisibility()
+    {
+        for (Map.Entry<Color, Map<Rectangle, Integer>> entry : colorRoutesMap.entrySet())
+        {
+            Color color = entry.getKey();
+            Map<Rectangle, Integer> routes = entry.getValue();
+
+            boolean hasEnoughCards = currentPlayer.getPlayerHandMap().getOrDefault(color, 0) >= 1;
+
+            for (Map.Entry<Rectangle, Integer> routeEntry : routes.entrySet()) {
+                Rectangle route = routeEntry.getKey();
+                int requiredCards = routeEntry.getValue();
+
+                // Set visibility based on the player's hand
+                route.setVisible(hasEnoughCards && currentPlayer.getPlayerHandMap().getOrDefault(color, 0) >= requiredCards);
+            }
+        }
+    }
+     */
+
     //--------------------------- Display ----------------------------------\\
     public Pane highlightRectangles(Pane overlay)
     {
@@ -430,84 +460,6 @@ public class HighlightRoutes
 
             //Rotation positioning for all two block routes
             int[] twoBlockRectangleRotations = {90, 62, 62, 1, -70, -70, -2, 75, 26, -32, -36, -36, -4, -78, -78, 51, 0, -60, 75, 75, 38, 61};
-
-            /*
-            For loop for each transportation card the player has, checks if the player has enough cards (two cards of
-            the same color) to place a route. If they do, then highlight the route. If they don't, then don't highlight
-            that route */
-            for (int i = 0; i < 2; i++)
-            {
-                //Checks if the player has enough cards to place a route
-                if (i == 0)
-                {
-                    //If the player has enough cards, then highlight the route
-                    for (Rectangle rectangle : twoBlockRoutes)
-                    {
-                        //Sets the rectangle fill to yellow
-                        rectangle.setFill(Color.YELLOW);
-                        rectangle.setEffect(glow);
-                        rectangle.setEffect(colorAdjust);
-                    }
-                }
-                //If the player does not have enough cards, then don't highlight the route
-                else
-                {
-                    for (Rectangle rectangle : twoBlockRoutes)
-                    {
-                        //Sets the rectangle fill to yellow
-                        rectangle.setFill(Color.TRANSPARENT);
-                        rectangle.setEffect(glow);
-                        rectangle.setEffect(colorAdjust);
-                    }
-                }
-            }
-
-            //For loop for each transportation card the player has, checks if the player has enough cards (three cards of
-            //the same color) to place a route. If they do, then highlight the route. If they don't, then don't highlight
-            //that route
-            for (int i = 0; i < 3; i++)
-            {
-                //Checks if the player has enough cards to place a route
-                if (i == 0)
-                {
-                    //If the player has enough cards, then highlight the route
-                    for (Rectangle rectangle : threeBlockRoutes)
-                    {
-                        //Sets the rectangle fill to yellow
-                        rectangle.setFill(Color.YELLOW);
-                        rectangle.setEffect(glow);
-                        rectangle.setEffect(colorAdjust);
-                    }
-                }
-                //If the player does not have enough cards, then don't highlight the route
-                else
-                {
-                    for (Rectangle rectangle : threeBlockRoutes)
-                    {
-                        //Sets the rectangle fill to yellow
-                        rectangle.setFill(Color.TRANSPARENT);
-                        rectangle.setEffect(glow);
-                        rectangle.setEffect(colorAdjust);
-                    }
-                }
-            }
-
-            //For loop for each transportation card the player has, checks if the player has enough cards (four cards of
-            //the same color) to place a route. If they do, then highlight the route. If they don't, then don't highlight
-            //that route
-            for (int i = 0; i < 4; i++) {
-                //Checks if the player has enough cards to place a route
-                if (i == 0) {
-                    //If the player has enough cards, then highlight the route
-                    for (Rectangle rectangle : fourBlockRoutes)
-                    {
-                        //Sets the rectangle fill to yellow
-                        rectangle.setFill(Color.YELLOW);
-                        rectangle.setEffect(glow);
-                        rectangle.setEffect(colorAdjust);
-                    }
-                }
-            }
 
             //Two block route rotations
             LincolnCenterToMidtownWest.setRotate(90);
