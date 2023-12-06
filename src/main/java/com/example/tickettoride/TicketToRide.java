@@ -550,13 +550,13 @@ public class TicketToRide extends Application
             System.out.println("Shits broke");
         }
 
+        //-------------------- Event handler for drawing transportation cards ----------------------\\
         //Creates the event to handle the player drawing transportation cards
         btnRandomCard.setOnAction(event ->
         {
             //Gets the current player
             Player currentPlayer = currentPlayers.get(turnCounter % currentPlayers.size());
-            //Prints out the currentPlayer's name
-            System.out.println("The current player is: " + currentPlayer.getName());
+
             //gets or initializes the click counter for the current player
             int clickCounter = clickCounterMap.getOrDefault(currentPlayer, 0);
 
@@ -568,6 +568,7 @@ public class TicketToRide extends Application
                 DisplayCurrentPlayersTurn();
             }
         });
+        //----------------- End of event handler for drawing transportation cards -------------------\\
 
         //--------------------------------------------------------------------------------\\
         //Create Button to select random card from destination deck
@@ -704,18 +705,18 @@ public class TicketToRide extends Application
             handleMaxCardsDrawn(highlightRoutes, imageContainer, currentPlayer);
 
             //prints out the current player's click counter before resetting it
-            System.out.println(currentPlayer.getName() + "'s click counter before reset is: " + clickCounterMap.get(currentPlayer));
+            //System.out.println(currentPlayer.getName() + "'s click counter before reset is: " + clickCounterMap.get(currentPlayer));
             // Resets the clickCounter for the current player
             clickCounterMap.put(currentPlayer, 0);
             //prints out the current player's click counter
-            System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
+            //System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
         }
         else
         {
             // Updates the click counter in the map
             clickCounterMap.put(currentPlayer, clickCounter);
             //prints out the current player's click counter
-            System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
+            //System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
         }
     }
 
@@ -725,18 +726,16 @@ public class TicketToRide extends Application
         //Displays an alert if the player has already drawn two cards
         twoMaxCardsDrawnAlert();
         //Prints out the current player's turn counter
-        System.out.println("Player " + (turnCounter % currentPlayers.size()) + "'s turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before decrementing it
+        //System.out.println("Player " + (turnCounter % currentPlayers.size()) + "'s turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before decrementing it
         if (turnCounter == 0)
         {
             //Moves to the second player
             turnCounter++;
-            System.out.println("Player 1's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after
         }
         else
         {
             //Moves to the first player
             turnCounter--;
-            System.out.println("Player 2's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after
         }
         DisplayCurrentPlayersTurn();
         //Updates the board game map for the next player
@@ -744,8 +743,6 @@ public class TicketToRide extends Application
 
         //resets the current players click counter to zero
         clickCounterMap.put(currentPlayer, 0);
-        //Prints out the current player's click counter
-        System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
         try
         {
             //Removes the old highlighted rectangles from the image container
@@ -778,14 +775,7 @@ public class TicketToRide extends Application
 
         //Creates a new alert to display which player's turn it is.
         Alert playerTurnInfo = new Alert(Alert.AlertType.INFORMATION);
-        if (i == 0)
-        {
-            playerTurnInfo.setTitle("Player 1's Turn");
-        }
-        else
-        {
-            playerTurnInfo.setTitle("Player 2's Turn");
-        }
+        playerTurnInfo.setTitle("Player " + (i + 1) + "'s Turn");
         playerTurnInfo.setHeaderText(null); // No header text
         playerTurnInfo.setContentText("It is " + currentPlayers.get(i).getName() + "'s turn.");
         playerTurnInfo.showAndWait();
