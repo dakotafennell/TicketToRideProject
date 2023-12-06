@@ -331,6 +331,13 @@ public class HighlightRoutes
         }
     }
 
+    //Method to display the specific rectangles
+    //based on the player's current number of transportation cards of a specific color
+    public void DisplaySpecificRectangles()
+    {
+
+    }
+
     //Method to create keyframes to animate the rectangles and play the animation
     private void routeAnimationKeyFrames(ColorAdjust colorAdjust, Timeline timeline)
     {

@@ -623,16 +623,14 @@ public class TicketToRide extends Application
                             //Displays an alert if the player has already drawn two cards
                             Alert alert = new Alert(Alert.AlertType.WARNING);
                             alert.setTitle("Warning");
-                            alert.setHeaderText(null); // No header text
-                            alert.setContentText("You have already drawn two cards this turn.");
+                            alert.setHeaderText("You cannot draw any more cards"); // No header text
+                            alert.setContentText("You've already drawn two cards this turn.");
                             alert.showAndWait();
                             System.out.println("Player 1's turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before incrementing it
-                            //resets the current players click counter to zero
-                            clickCounterMap.put(currentPlayer, 0);
-                            //Prints out the current player's click counter
-                            System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
                             //Moves to the second player
                             turnCounter++;
+                            DisplayCurrentPlayersTurn();
+                            System.out.println("Player 1's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after incrementing it
                         }
                     }
                     else
@@ -650,6 +648,7 @@ public class TicketToRide extends Application
                         System.out.println("Player 1's turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before incrementing it
                         //Moves to the second player
                         turnCounter++;
+                        DisplayCurrentPlayersTurn();
                         System.out.println("Player 1's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after incrementing it
                     }
                 }
@@ -709,12 +708,13 @@ public class TicketToRide extends Application
                             //Displays an alert if the player has already drawn two cards
                             Alert alert = new Alert(Alert.AlertType.WARNING);
                             alert.setTitle("Warning");
-                            alert.setHeaderText(null); // No header text
-                            alert.setContentText("You have already drawn two cards this turn.");
+                            alert.setHeaderText("You cannot draw any more cards"); // No header text
+                            alert.setContentText("You've already drawn two cards this turn.");
                             alert.showAndWait();
                             System.out.println("Player 2's turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before decrementing it
                             //Moves to the second player
                             turnCounter--;
+                            DisplayCurrentPlayersTurn();
                             System.out.println("Player 2's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after
                             //resets the current players click counter to zero
                             clickCounterMap.put(currentPlayer, 0);
@@ -733,6 +733,7 @@ public class TicketToRide extends Application
                         System.out.println("Player 2's turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before decrementing it
                         //Moves to the second player
                         turnCounter--;
+                        DisplayCurrentPlayersTurn();
                         System.out.println("Player 2's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after decrementing it
                         //resets the current players click counter to zero
                         clickCounterMap.put(currentPlayer, 0);
@@ -873,25 +874,28 @@ public class TicketToRide extends Application
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+        DisplayCurrentPlayersTurn();
     }
 
-
-    //Method used to set up the turns for the game
-    private void SetupTurn()
+    private void DisplayCurrentPlayersTurn()
     {
+        //gets the position of the current player in the list, and stores it in i for use in the for loop
+        int i = turnCounter;
 
-        for(int i = 0; i < currentPlayers.size(); i++)
+        //Creates a new alert to display which player's turn it is.
+        Alert playerTurnInfo = new Alert(Alert.AlertType.INFORMATION);
+        if (i == 0)
         {
-            currentPlayers.get(i).setTurnPhase(TurnHandler.DRAW_TRANSPORTATION_CARDS);
-            if (currentPlayers.get(i).getNumGamePieces() < 3)
-            {
-                //End the game
-                TurnHandler turnHandler = new TurnHandler(currentNumPlayers, currentPlayers);
-                turnHandler.endGame();
-            }
+            playerTurnInfo.setTitle("Player 1's Turn");
         }
+        else
+        {
+            playerTurnInfo.setTitle("Player 2's Turn");
+        }
+        playerTurnInfo.setHeaderText(null); // No header text
+        playerTurnInfo.setContentText("It is " + currentPlayers.get(i).getName() + "'s turn.");
+        playerTurnInfo.showAndWait();
     }
-
 
     //Separate method for creating a player object
     private Player createPlayer(String playerName, Color color)
