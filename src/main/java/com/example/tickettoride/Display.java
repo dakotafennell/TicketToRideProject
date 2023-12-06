@@ -10,12 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.util.Map;
 import java.util.Objects;
-
 
 public class Display
 {

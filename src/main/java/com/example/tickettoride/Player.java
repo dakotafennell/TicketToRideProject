@@ -25,16 +25,6 @@ public class Player
     private int numGamePieces;
     RandomImages randomImages = new RandomImages();
     private List<TransportationCard> transportationCards;
-    public static String[][] cards = {
-            {"Color.BLUE", "0"},
-            {"Color.GREEN", "0"},
-            {"Color.BLACK", "0"},
-            {"Color.PINK", "0"},
-            {"Color.RED", "0"},
-            {"Color.ORANGE", "0"},
-            {"Color.WHITE", "0"}
-    };
-
     private List<DestinationCard> destinationCards;
     private Color playerColor;
 
@@ -48,8 +38,8 @@ public class Player
         this.numTransportationCards = 0;
         this.numDestinationCards = 0;
         this.numGamePieces = 0;
-        this.transportationCards = new ArrayList<TransportationCard>();
-        this.destinationCards = new ArrayList<DestinationCard>();
+        this.transportationCards = new ArrayList<>();
+        this.destinationCards = new ArrayList<>();
         this.playerColor = Color.WHITE;
         playerHandMap.put(Color.BLUE, 0);
         playerHandMap.put(Color.GREEN, 0);
@@ -79,8 +69,8 @@ public class Player
         this.numTransportationCards = numTransportationCards;
         this.numDestinationCards = numDestinationCards;
         this.numGamePieces = numGamePieces;
-        this.transportationCards = new ArrayList<TransportationCard>();
-        this.destinationCards = new ArrayList<DestinationCard>();
+        this.transportationCards = new ArrayList<>();
+        this.destinationCards = new ArrayList<>();
         this.playerColor = playerColor;
         playerHandMap.put(Color.BLUE, 0);
         playerHandMap.put(Color.GREEN, 0);

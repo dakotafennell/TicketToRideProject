@@ -158,7 +158,7 @@ public class TicketToRide extends Application
         //imageURL of table.png
         String imageUrl = Objects.requireNonNull(getClass().getResource("/com/example/tickettoride/Table.png")).toExternalForm();
 
-        // Creates a label with the game title
+        //Creates a label with the game title
         Label titleLabel = getLabel();
 
         //Create labels for Authors
@@ -338,7 +338,8 @@ public class TicketToRide extends Application
         playerSelectStage.show();
     }
 
-    private static Label getLabel() {
+    private static Label getLabel()
+    {
         Label titleLabel = new Label(TITLE);
         titleLabel.setTextFill(Color.BLACK);
         /* Sets the style of the titleLabel with a background color and 60% opacity with rounded corners, a black border
@@ -552,180 +553,19 @@ public class TicketToRide extends Application
         //Creates the event to handle the player drawing transportation cards
         btnRandomCard.setOnAction(event ->
         {
-            //if the starting turn counter is 1 gets the first player in the list
-            if (turnCounter == 0)
+            //Gets the current player
+            Player currentPlayer = currentPlayers.get(turnCounter % currentPlayers.size());
+            //Prints out the currentPlayer's name
+            System.out.println("The current player is: " + currentPlayer.getName());
+            //gets or initializes the click counter for the current player
+            int clickCounter = clickCounterMap.getOrDefault(currentPlayer, 0);
+
+            handleCardDraw(currentPlayer, clickCounter, cardImage, transportationCard, borderPane, highlightRoutes, imageContainer);
+
+            if (clickCounter == MAX_CARDS_PER_TURN)
             {
-                //Gets the current player
-                Player currentPlayer = currentPlayers.get(0);
-                //gets or initializes the click counter for the current player
-                int clickCounter = clickCounterMap.getOrDefault(currentPlayer, 0);
-
-                //Increments the clickCounter by one
-                clickCounter++;
-
-                //Updates the click counter in the map
-                clickCounterMap.put(currentPlayer, clickCounter);
-                //Prints out the currentPlayer's name
-                System.out.println("The current player is: " + currentPlayer.getName());
-                if (clickCounter <= 2)
-                {
-                    // Update the ImageView with the new card image
-                    cardImage.setImage(randomImages.selectRandomTransportationCard());
-
-                    Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and we all hate it. it broke everything, order of operations matters
-
-                    Player player = currentPlayers.get(0);
-
-                    player.addTransportationCard(transportationCard);
-
-                    // Increment the value in the playerHandMap for the drawn card color
-                    player.incrementPlayerHandValue(drawnCardColor, 1);
-
-                    //Displays the current player's hand
-                    borderPane.setBottom(display.displayPlayersHand());
-                    if (clickCounter == 2)
-                    {
-                        //Displays an alert if the player has already drawn two cards
-                        Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setTitle("Warning");
-                        alert.setHeaderText("You cannot draw any more cards"); // No header text
-                        alert.setContentText("You've already drawn two cards this turn.");
-                        alert.showAndWait();
-                        System.out.println("Player 1's turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before incrementing it
-                        //Moves to the second player
-                        turnCounter++;
-                        DisplayCurrentPlayersTurn();
-                        try
-                        {
-                            //Removes the old highlighted rectangles from the image container
-                            imageContainer.getChildren().remove(highlightRoutes.highlightRectangles(imageContainer));
-                            //Adds the new highlighted rectangles to the image container
-                            imageContainer.getChildren().add(highlightRoutes.highlightRectangles(imageContainer));
-                        }
-                        catch (Exception e)
-                        {
-                            System.out.println("The image container is null.");
-                            System.out.println("Shits broke");
-                        }
-                        System.out.println("Player 1's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after incrementing it
-                    }
-                }
-                else
-                {
-                    //resets the current players click counter to zero
-                    clickCounterMap.put(currentPlayer, 0);
-                    //Prints out the current player's click counter
-                    System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
-
-                    System.out.println("Player 1's turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before incrementing it
-                    //Moves to the second player
-                    turnCounter++;
-                    DisplayCurrentPlayersTurn();
-                    try
-                    {
-                        //Removes the old highlighted rectangles from the image container
-                        imageContainer.getChildren().remove(highlightRoutes.highlightRectangles(imageContainer));
-                        //Adds the new highlighted rectangles to the image container
-                        imageContainer.getChildren().add(highlightRoutes.highlightRectangles(imageContainer));
-                    }
-                    catch (Exception e)
-                    {
-                        System.out.println("The image container is null.");
-                        System.out.println("Shits broke");
-                    }
-                    System.out.println("Player 1's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after incrementing it
-                }
-            }
-            else
-            {
-                //Gets player 2
-                Player currentPlayer = currentPlayers.get(1);
-                //gets or initializes the click counter for the current player
-                int clickCounter = clickCounterMap.getOrDefault(currentPlayer, 0);
-
-                //Increments the clickCounter by one
-                clickCounter++;
-
-                //Updates the click counter in the map
-                clickCounterMap.put(currentPlayer, clickCounter);
-                //Prints out the currentPlayer's name
-                System.out.println("The current player is: " + currentPlayer.getName());
-                if (clickCounter <= 2)
-                {
-                    // Update the ImageView with the new card image
-                    cardImage.setImage(randomImages.selectRandomTransportationCard());
-
-                    Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and we all hate it. it broke everything, order of operations matters
-
-                    Player player = currentPlayers.get(1);
-
-                    player.addTransportationCard(transportationCard);
-
-                    // Increment the value in the playerHandMap for the drawn card color
-                    player.incrementPlayerHandValue(drawnCardColor, 1);
-
-                    //Displays the current player's hand
-                    borderPane.setBottom(display.displayPlayersHand());
-
-                    if (clickCounter == 2)
-                    {
-                        //Displays an alert if the player has already drawn two cards
-                        Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setTitle("Warning");
-                        alert.setHeaderText("You cannot draw any more cards"); // No header text
-                        alert.setContentText("You've already drawn two cards this turn.");
-                        alert.showAndWait();
-                        System.out.println("Player 2's turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before decrementing it
-                        //Moves to the second player
-                        turnCounter--;
-                        DisplayCurrentPlayersTurn();
-                        //Updates the board game map for the next player
-                        highlightRoutes.highlightRectangles(imageContainer);
-                        System.out.println("Player 2's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after
-                        //resets the current players click counter to zero
-                        clickCounterMap.put(currentPlayer, 0);
-                        //Prints out the current player's click counter
-                        System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
-                        try
-                        {
-                            //Removes the old highlighted rectangles from the image container
-                            imageContainer.getChildren().remove(highlightRoutes.highlightRectangles(imageContainer));
-                            //Adds the new highlighted rectangles to the image container
-                            imageContainer.getChildren().add(highlightRoutes.highlightRectangles(imageContainer));
-                        }
-                        catch (Exception e)
-                        {
-                            System.out.println("The image container is null.");
-                            System.out.println("Shits broke");
-                        }
-                    }
-                }
-                else
-                {
-                    System.out.println("Player 2's turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before decrementing it
-                    //Moves to the second player
-                    turnCounter--;
-                    DisplayCurrentPlayersTurn();
-                    try
-                    {
-                        //Removes the old highlighted rectangles from the image container
-                        imageContainer.getChildren().remove(highlightRoutes.highlightRectangles(imageContainer));
-                        //Adds the new highlighted rectangles to the image container
-                        imageContainer.getChildren().add(highlightRoutes.highlightRectangles(imageContainer));
-                    }
-                    catch (Exception e)
-                    {
-                        System.out.println("The image container is null.");
-                        System.out.println("Shits broke");
-                    }
-                    System.out.println("Player 2's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after decrementing it
-                    //resets the current players click counter to zero
-                    clickCounterMap.put(currentPlayer, 0);
-                    //Prints out the current player's click counter
-                    System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
-
-                }
-
+                handleMaxCardsDrawn(highlightRoutes, imageContainer, currentPlayer);
+                DisplayCurrentPlayersTurn();
             }
         });
 
@@ -839,6 +679,96 @@ public class TicketToRide extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
         DisplayCurrentPlayersTurn();
+    }
+
+    //Handles the logic for when the player draws a transportation card
+    private void handleCardDraw(Player currentPlayer, int clickCounter, ImageView cardImage, TransportationCard transportationCard, BorderPane borderPane, HighlightRoutes highlightRoutes, StackPane imageContainer)
+    {
+        // Update the ImageView with the new card image
+        cardImage.setImage(randomImages.selectRandomTransportationCard());
+
+        Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and we all hate it. it broke everything, order of operations matters
+
+        //Adds the drawn card to the player's hand
+        currentPlayer.addTransportationCard(transportationCard);
+        // Increment the value in the playerHandMap for the drawn card color
+        currentPlayer.incrementPlayerHandValue(drawnCardColor, 1);
+
+        //Displays the current player's hand
+        borderPane.setBottom(display.displayPlayersHand());
+
+        //Increments the player's clickCounter
+        clickCounter++;
+        // Check if the maximum cards per turn is reached
+        if (clickCounter == MAX_CARDS_PER_TURN) {
+            handleMaxCardsDrawn(highlightRoutes, imageContainer, currentPlayer);
+
+            //prints out the current player's click counter before resetting it
+            System.out.println(currentPlayer.getName() + "'s click counter before reset is: " + clickCounterMap.get(currentPlayer));
+            // Resets the clickCounter for the current player
+            clickCounterMap.put(currentPlayer, 0);
+            //prints out the current player's click counter
+            System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
+        }
+        else
+        {
+            // Updates the click counter in the map
+            clickCounterMap.put(currentPlayer, clickCounter);
+            //prints out the current player's click counter
+            System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
+        }
+    }
+
+    //Handles the logic for when the player has drawn the maximum number of cards per turn (2)
+    private void handleMaxCardsDrawn(HighlightRoutes highlightRoutes, StackPane imageContainer, Player currentPlayer)
+    {
+        //Displays an alert if the player has already drawn two cards
+        twoMaxCardsDrawnAlert();
+        //Prints out the current player's turn counter
+        System.out.println("Player " + (turnCounter % currentPlayers.size()) + "'s turn counter before decrement: " + turnCounter); //Prints out the turnCounter value before decrementing it
+        if (turnCounter == 0)
+        {
+            //Moves to the second player
+            turnCounter++;
+            System.out.println("Player 1's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after
+        }
+        else
+        {
+            //Moves to the first player
+            turnCounter--;
+            System.out.println("Player 2's turn counter after decrement: " + turnCounter); //Prints out the turnCounter value after
+        }
+        DisplayCurrentPlayersTurn();
+        //Updates the board game map for the next player
+        highlightRoutes.highlightRectangles(imageContainer);
+
+        //resets the current players click counter to zero
+        clickCounterMap.put(currentPlayer, 0);
+        //Prints out the current player's click counter
+        System.out.println("The current player's click counter is: " + clickCounterMap.get(currentPlayer));
+        try
+        {
+            //Removes the old highlighted rectangles from the image container
+            imageContainer.getChildren().remove(highlightRoutes.highlightRectangles(imageContainer));
+            //Adds the new highlighted rectangles to the image container
+            imageContainer.getChildren().add(highlightRoutes.highlightRectangles(imageContainer));
+        }
+        catch (Exception e)
+        {
+            System.out.println("The image container is null.");
+            System.out.println("Shits broke");
+        }
+    }
+
+    //Displays an alert telling the player they cannot draw any more cards
+    private static void twoMaxCardsDrawnAlert()
+    {
+        //Displays an alert if the player has already drawn two cards
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText("Turn complete");
+        alert.setContentText("You cannot draw any more cards");
+        alert.showAndWait();
     }
 
     private void DisplayCurrentPlayersTurn()
