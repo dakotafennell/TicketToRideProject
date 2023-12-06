@@ -599,7 +599,7 @@ public class TicketToRide extends Application
                         //prints out which image was chosen
                         //System.out.println("The selected card image is: " + cardImage.getImage());
 
-                        Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and broke everything, order of operations matters
+                        Color drawnCardColor = randomImages.selectRandomTransportationCardColor(); //this line sucks and we all hate it. it broke everything, order of operations matters
                         //gets the color of the drawn card
                         //System.out.println("The drawn card color is: " + drawnCardColor);
                         Player player = currentPlayers.get(0);
