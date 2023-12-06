@@ -181,15 +181,111 @@ public class HighlightRoutes
     //Puts the rectangles into their respective hashmaps
     public void SetUpRectangleMaps()
     {
+        //Gets the current player
+        Player currentPlayer = new Player();
+        //Gets the current player's hand
+        Map<Color, Integer> playerHandMap = currentPlayer.getPlayerHandMap();
+        //displays the blue routes based on if the player's hand has enough blue cards
+        for (Map.Entry<Color, Integer> entry : playerHandMap.entrySet())
+        {
+            //If the player has enough blue cards, then display the blue routes
+            if (entry.getKey() == Color.BLUE && entry.getValue() >= 1)
+            {
+                //Displays the blue routes
+                for (Map.Entry<Rectangle, int> entry2 : oneBlockBlueRoutes.entrySet())
+                {
+                    //Displays the one block blue routes
+                    entry2.getKey().setVisible(true);
+                }
+                for (Map.Entry<Rectangle, int> entry2 : twoBlockBlueRoutes.entrySet())
+                {
+                    //Displays the two block blue routes
+                    entry2.getKey().setVisible(true);
+                }
+                for (Map.Entry<Rectangle, int> entry2 : threeBlockBlueRoutes.entrySet())
+                {
+                    //Displays the three block blue routes
+                    entry2.getKey().setVisible(true);
+                }
+            }
+            //If the player does not have enough blue cards, then don't display the blue routes
+            else
+            {
+                //Don't display the blue routes
+                for (Map.Entry<Rectangle, int> entry2 : oneBlockBlueRoutes.entrySet())
+                {
+                    //Don't display the one block blue routes
+                    entry2.getKey().setVisible(false);
+                }
+                for (Map.Entry<Rectangle, int> entry2 : twoBlockBlueRoutes.entrySet())
+                {
+                    //Don't display the two block blue routes
+                    entry2.getKey().setVisible(false);
+                }
+                for (Map.Entry<Rectangle, int> entry2 : threeBlockBlueRoutes.entrySet())
+                {
+                    //Don't display the three block blue routes
+                    entry2.getKey().setVisible(false);
+                }
+            }
+        }
         //One block blue routes
         oneBlockBlueRoutes.put(ChinatownToLowerEastSide, 1);
         oneBlockBlueRoutes.put(EmpireStateBuildingToGramercyParkBlue, 1);
+        //Displays the one block blue routes if the player has enough blue cards
+        for (Map.Entry<Rectangle, int> entry : oneBlockBlueRoutes.entrySet())
+        {
+            //If the player has enough blue cards, then display the one block blue routes
+            if (entry.getValue() == 1)
+            {
+                //Displays the one block blue routes
+                entry.getKey().setVisible(true);
+            }
+            //If the player does not have enough blue cards, then don't display the one block blue routes
+            else
+            {
+                //Don't display the one block blue routes
+                entry.getKey().setVisible(false);
+            }
+        }
 
         //One block green routes
         oneBlockGreenRoutes.put(ChinatownToWallStreetGreen, 1);
+        //Displays the one block green routes if the current player has enough green cards
+        for (Map.Entry<Rectangle, int> entry : oneBlockGreenRoutes.entrySet())
+        {
+            //If the player has enough green cards, then display the one block green routes
+            if (entry.getValue() == 1)
+            {
+                //Displays the one block green routes
+                entry.getKey().setVisible(true);
+            }
+            //If the player does not have enough green cards, then don't display the one block green routes
+            else
+            {
+                //Don't display the one block green routes
+                entry.getKey().setVisible(false);
+            }
+        }
 
         //One block black routes
         oneBlockBlackRoutes.put(EastVillageToLowerEastSide, 1);
+        //Displays the one block black routes if the current player has enough black cards
+        for (Map.Entry<Rectangle, int> entry : oneBlockBlackRoutes.entrySet())
+        {
+            //If the player has enough black cards, then display the one block black routes
+            if (entry.getValue() == 1)
+            {
+                //Displays the one block black routes
+                entry.getKey().setVisible(true);
+            }
+            //If the player does not have enough black cards, then don't display the one block black routes
+            else
+            {
+                //Don't display the one block black routes
+                entry.getKey().setVisible(false);
+            }
+        }
 
         //One block pink routes
         oneBlockPinkRoutes.put(ChinatownToWallStreetPink, 1);
@@ -266,7 +362,6 @@ public class HighlightRoutes
         //Four block blue routes (only one, pink)
         fourBlockPinkRoutes.put(ChelseaToSoho, 4);
     }
-
 
     //--------------------------- Display ----------------------------------\\
     public Pane highlightRectangles(Pane overlay)
